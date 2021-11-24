@@ -1,0 +1,124 @@
+{
+  "serverInfo": {
+    "controllerVersion": "10.4.18.3",
+    "serverID": "efa01.dc.vvs.de_",
+    "virtDir": "vvsefaall",
+    "serverTime": "2021-11-02T08:47:26",
+    "calcTime": 5.348
+  },
+  "version": "10.2.10.139",
+  "timestamp": "2021-11-02T07:47:26Z",
+  "infos": {
+    "current": [
+      {
+        "type": "lineInfo",
+        "id": "52690",
+        "version": 2,
+        "priority": "high",
+        "timestamps": {
+          "creation": "2021-11-02T06:48:29Z",
+          "availability": {
+            "from": "2021-11-02T06:38:00Z",
+            "to": "2021-11-02T08:00:00Z"
+          },
+          "validity": [
+            {
+              "from": "2021-11-02T06:38:00Z",
+              "to": "2021-11-02T08:00:00Z"
+            }
+          ]
+        },
+        "urlText": "Bad Cannstatt Wilhelmsplatz - Neugereut: Streckenunterbrechung wegen eines Verkehrsunfalls",
+        "url": "https://ems.vvs.de/ems.comm.addinfo-info_link?event=94a8290072f44979a5c4db8695adc688&device=60551f5633ff432eac9572c79a1c7f87&mt=html",
+        "content": "Wegen eines Verkehrsunfalls ist die Strecke der Stadtbahnlinien U19, U2 zwischen den Haltestellen Bad Cannstatt Wilhelmsplatz und Neugereut unterbrochen. \n\nDie Stadtbahnlinie U19 wird eingestellt.\nDauer: Voraussichtlich bis 09:00 Uhr. \nWir melden es, wenn die Strecke wieder frei ist.",
+        "subtitle": "Bad Cannstatt Wilhelmsplatz - Neugereut: Streckenunterbrechung wegen eines Verkehrsunfalls",
+        "title": "Linien U19, U2",
+        "properties": {
+          "providerCode": "SSB",
+          "publisher": "EMS",
+          "disruption": "lines",
+          "htmlText": "Wegen eines Verkehrsunfalls ist die Strecke der Stadtbahnlinien U19, U2 zwischen den Haltestellen Bad Cannstatt Wilhelmsplatz und Neugereut unterbrochen. <br>\n\n<br>\n<p>Die Stadtbahnlinie U19 wird eingestellt.</p>\n<br>\nDauer: Voraussichtlich bis 09:00 Uhr. Wir melden es, wenn die Strecke wieder frei ist.",
+          "smsText": "Linien U19, U2",
+          "homepageAction": "bannerInfo",
+          "location": "Gnesener Straße"
+        },
+        "affected": {
+          "lines": [
+            {
+              "id": "vvs:20002: :R:",
+              "destination": {
+                "name": "Neugereut",
+                "type": "stop"
+              },
+              "name": "Stadtbahn U2",
+              "number": "U2",
+              "iconId": 0,
+              "product": {
+                "class": 3,
+                "iconId": 1
+              },
+              "operator": {
+                "id": "01",
+                "name": "SSB"
+              }
+            },
+            {
+              "id": "vvs:20019: :R:",
+              "destination": {
+                "name": "Neugereut",
+                "type": "stop"
+              },
+              "name": "Stadtbahn U19",
+              "number": "U19",
+              "iconId": 0,
+              "product": {
+                "class": 3,
+                "iconId": 1
+              },
+              "operator": {
+                "id": "01",
+                "name": "SSB"
+              }
+            },
+            {
+              "id": "vvs:20002: :H:",
+              "destination": {
+                "name": "Hölderlinplatz",
+                "type": "stop"
+              },
+              "name": "Stadtbahn U2",
+              "number": "U2",
+              "iconId": 0,
+              "product": {
+                "class": 3,
+                "iconId": 1
+              },
+              "operator": {
+                "id": "01",
+                "name": "SSB"
+              }
+            },
+            {
+              "id": "vvs:20019: :H:",
+              "destination": {
+                "name": "NeckarPark (Stadion)",
+                "type": "stop"
+              },
+              "name": "Stadtbahn U19",
+              "number": "U19",
+              "iconId": 0,
+              "product": {
+                "class": 3,
+                "iconId": 1
+              },
+              "operator": {
+                "id": "01",
+                "name": "SSB"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
