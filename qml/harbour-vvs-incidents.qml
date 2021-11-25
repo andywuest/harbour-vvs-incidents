@@ -20,6 +20,9 @@ import Sailfish.Silica 1.0
 import "pages"
 
 ApplicationWindow {
+
+    property var latestIncidents: ({})
+
     initialPage: Component {
         OverviewPage {
         }

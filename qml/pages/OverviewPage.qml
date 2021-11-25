@@ -26,6 +26,7 @@ import "../components/thirdparty"
 Page {
     id: page
 
+    property bool networkError: false
     property bool loaded : false
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
@@ -49,8 +50,8 @@ Page {
     function getIncidentsResultHandler(result) {
       Functions.log("result : " + result);
 
-      var jsonResult = JSON.parse(result.toString())
-      var currentIncidents = jsonResult["currentIncidents"];
+      latestIncidents = JSON.parse(result.toString())
+      var currentIncidents = latestIncidents["currentIncidents"];
       Functions.log("json result from market data backend was: " + result)
       for (var i = 0; i < currentIncidents.length; i++)   {
           var incident = currentIncidents[i];
@@ -58,25 +59,19 @@ Page {
           Functions.log("added incident " + incident.title);
       }
 
-//          var loadedMarketData = Database.loadMarketDataBy('' + marketData.extRefId)
-//          if (loadedMarketData) {
-//              // copy id / typeId
-//              marketData.id = loadedMarketData.id;
-//              marketData.typeId = loadedMarketData.typeId;
-//              // persist
-//              Database.persistMarketdata(marketData)
-//          }
-//      }
-//      reloadAllMarketData()
-
-
+      networkError = false;
       loaded = true;
     }
 
     function errorResultHandler(result) {
         console.log("result error : " + result)
         // marketDataUpdateProblemNotification.show(result)
+        networkError = true;
         loaded = true;
+    }
+
+    function isIncidentPresent() {
+        return (latestIncidents && latestIncidents.currentIncidents && latestIncidents.currentIncidents.length > 0);
     }
 
     function reloadAllIncidents() {
@@ -94,6 +89,8 @@ Page {
     // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         id: pageFlickable
+        width: parent.width
+        height: parent.height
         anchors.fill: parent
 
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
@@ -122,6 +119,29 @@ Page {
                 id: incidentsHeader
                 //: OverviewPage page header
                 title: qsTr("Incidents")
+            }
+
+            // TODO create component from it
+            Column {
+                id: noIncidentsColumn
+
+                x: Theme.horizontalPageMargin
+                width: parent.width - 2 * x
+                height: parent.height
+                spacing: Theme.paddingSmall
+
+                visible: (!isIncidentPresent() && loaded && !networkError)
+
+                Label {
+                    topPadding: Theme.paddingLarge
+                    horizontalAlignment: Text.AlignHCenter
+                    x: Theme.horizontalPageMargin
+                    width: parent.width - 2 * x
+
+                    wrapMode: Text.Wrap
+                    textFormat: Text.RichText
+                    text: qsTr("Currently there are no incidents to report.")
+                }
             }
 
             SilicaListView {

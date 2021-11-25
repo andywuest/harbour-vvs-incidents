@@ -15,8 +15,7 @@ function log(message) {
 }
 
 function resolveIconForLines(affectedLines) {
-    var i= 0;
-    for (i = 0; i < affectedLines.lines.length; i++) {
+    for (var i = 0; i < affectedLines.lines.length; i++) {
         if (affectedLines.lines[i].name.indexOf("Bus") !== -1) {
             return "bus"
         }
@@ -25,9 +24,8 @@ function resolveIconForLines(affectedLines) {
 }
 
 function getListOfAffectedLines(affectedLines) {
-    var i= 0;
     var results = [];
-    for (i = 0; i < affectedLines.lines.length; i++) {
+    for (var i = 0; i < affectedLines.lines.length; i++) {
         var lineNumber = affectedLines.lines[i].number;
         if (results.indexOf(lineNumber) === -1) {
             results.push(lineNumber)
