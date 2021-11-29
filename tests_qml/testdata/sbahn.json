@@ -1,0 +1,42 @@
+{
+   "affected": {
+      "lines": [
+         {
+            "id": "vvs:10002: :R:",
+            "destination": {
+               "name": "Schorndorf",
+               "type": "stop"
+            },
+            "name": "S-Bahn S2",
+            "number": "S2",
+            "iconId": 0,
+            "product": {
+               "class": 1,
+               "iconId": 2
+            },
+            "operator": {
+               "id": "10",
+               "name": "DB"
+            }
+         },
+         {
+            "id": "vvs:10002: :H:",
+            "destination": {
+               "name": "Filderstadt",
+               "type": "stop"
+            },
+            "name": "S-Bahn S2",
+            "number": "S2",
+            "iconId": 0,
+            "product": {
+               "class": 1,
+               "iconId": 2
+            },
+            "operator": {
+               "id": "10",
+               "name": "DB"
+            }
+         }
+      ]
+   }
+}

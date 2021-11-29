@@ -16,11 +16,20 @@ function log(message) {
 
 function resolveIconForLines(affectedLines) {
     for (var i = 0; i < affectedLines.lines.length; i++) {
-        if (affectedLines.lines[i].name.indexOf("Bus") !== -1) {
+        var lineName = affectedLines.lines[i].name;
+        if (containsSubstring(lineName, "Bus")) {
             return "bus"
+        } else if (containsSubstring(lineName, "Zahnradbahn")) {
+            return "zacke"
+        } else if (containsSubstring(lineName, "S-Bahn")) {
+            return "sbahn"
         }
     }
     return "???";
+}
+
+function containsSubstring(string, subString) {
+    return string.indexOf(subString) !== -1;
 }
 
 function getListOfAffectedLines(affectedLines) {

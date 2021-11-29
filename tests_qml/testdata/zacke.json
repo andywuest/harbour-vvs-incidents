@@ -1,0 +1,42 @@
+{
+   "affected": {
+      "lines": [
+         {
+            "id": "vvs:21010: :H:",
+            "destination": {
+               "name": "Degerloch",
+               "type": "stop"
+            },
+            "name": "Zahnradbahn 10",
+            "number": "10",
+            "iconId": 0,
+            "product": {
+               "class": 3,
+               "iconId": 11
+            },
+            "operator": {
+               "id": "01",
+               "name": "SSB"
+            }
+         },
+         {
+            "id": "vvs:21010: :R:",
+            "destination": {
+               "name": "Marienplatz",
+               "type": "stop"
+            },
+            "name": "Zahnradbahn 10",
+            "number": "10",
+            "iconId": 0,
+            "product": {
+               "class": 3,
+               "iconId": 11
+            },
+            "operator": {
+               "id": "01",
+               "name": "SSB"
+            }
+         }
+      ]
+   }
+}
