@@ -1,0 +1,42 @@
+{
+   "affected": {
+      "lines": [
+         {
+            "id": "vvs:11064: :H:",
+            "destination": {
+               "name": "Kirchheim (T)",
+               "type": "stop"
+            },
+            "name": "R-Bahn RB64",
+            "number": "RB64",
+            "iconId": 0,
+            "product": {
+               "class": 0,
+               "iconId": 6
+            },
+            "operator": {
+               "id": "10",
+               "name": "DB"
+            }
+         },
+         {
+            "id": "vvs:11064: :R:",
+            "destination": {
+               "name": "Oberlenningen",
+               "type": "stop"
+            },
+            "name": "R-Bahn RB64",
+            "number": "RB64",
+            "iconId": 0,
+            "product": {
+               "class": 0,
+               "iconId": 6
+            },
+            "operator": {
+               "id": "10",
+               "name": "DB"
+            }
+         }
+      ]
+   }
+}

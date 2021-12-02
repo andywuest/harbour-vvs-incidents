@@ -23,6 +23,8 @@ function resolveIconForLines(affectedLines) {
             return "zacke"
         } else if (containsSubstring(lineName, "S-Bahn")) {
             return "sbahn"
+        } else if (containsSubstring(lineName, "R-Bahn")) {
+            return "rbahn"
         }
     }
     return "???";

@@ -35,14 +35,14 @@ BackendStuttgart::~BackendStuttgart() {
 
 void BackendStuttgart::getIncidents() {
   qDebug() << "BackendStuttgart::searchName";
-  QNetworkReply *reply = executeGetRequest(QUrl("https://api.jsonbin.io/b/619944150ddbee6f8b0f4e93")); // bus viele
-  // QNetworkReply *reply = executeGetRequest(QUrl("https://api.jsonbin.io/b/619e946462ed886f91542d82")); // einzeln
+  //QNetworkReply *reply = executeGetRequest(QUrl("https://api.jsonbin.io/b/619944150ddbee6f8b0f4e93")); // bus viele
+  //QNetworkReply *reply = executeGetRequest(QUrl("https://api.jsonbin.io/b/619e946462ed886f91542d82")); // einzeln
 
 
 
 
   // https://jsonbin.io/619944150ddbee6f8b0f4e93
-//  QNetworkReply *reply = executeGetRequest(QUrl("https://www3.vvs.de/mngvvs/XML_ADDINFO_REQUEST?AIXMLReduction=removeSourceSystem&SpEncId=0&coordOutputFormat=EPSG:4326&filterMessageSubtype=disruption:lines&filterMessageSubtype=disruption:stops&filterPublicationStatus=current&filterShowLineList=0&filterShowPlaceList=0&filterShowStopList=0&outputFormat=rapidJSON&serverInfo=1&version=10.2.10.139"));
+  QNetworkReply *reply = executeGetRequest(QUrl("https://www3.vvs.de/mngvvs/XML_ADDINFO_REQUEST?AIXMLReduction=removeSourceSystem&SpEncId=0&coordOutputFormat=EPSG:4326&filterMessageSubtype=disruption:lines&filterMessageSubtype=disruption:stops&filterPublicationStatus=current&filterShowLineList=0&filterShowPlaceList=0&filterShowStopList=0&outputFormat=rapidJSON&serverInfo=1&version=10.2.10.139"));
 
   connectErrorSlot(reply);
   connect(reply, SIGNAL(finished()), this, SLOT(handleGetIncidentsFinished()));

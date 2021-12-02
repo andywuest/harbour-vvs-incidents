@@ -8,6 +8,7 @@ TestCase {
     name: "Function Tests"
 
     property var sbahnData: ({})
+    property var rbahnData: ({})
     property var zackeData: ({})
 
     function loadData(source, callback) {
@@ -25,16 +26,19 @@ TestCase {
     function init_data() {
         console.log("reading data")
         loadData("./testdata/sbahn.json", function(jsonData) { sbahnData = jsonData; });
+        loadData("./testdata/rbahn.json", function(jsonData) { rbahnData = jsonData; });
         loadData("./testdata/zacke.json", function(jsonData) { zackeData = jsonData; });
     }
 
     function test_functions_getListOfAffectedLines() {
         compare("S2", Functions.getListOfAffectedLines(sbahnData.affected))
+        compare("RB64", Functions.getListOfAffectedLines(rbahnData.affected))
         compare("10", Functions.getListOfAffectedLines(zackeData.affected))
     }
 
     function test_functions_resolveIconForLines() {
         compare("sbahn", Functions.resolveIconForLines(sbahnData.affected))
+        compare("rbahn", Functions.resolveIconForLines(rbahnData.affected))
         compare("zacke", Functions.resolveIconForLines(zackeData.affected))
     }
 }

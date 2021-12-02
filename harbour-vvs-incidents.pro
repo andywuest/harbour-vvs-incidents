@@ -17,11 +17,16 @@ CONFIG += sailfishapp
 SOURCES += src/harbour-vvs-incidents.cpp \
     src/incidents.cpp
 
+HEADERS += \
+    src/incidents.h
+
 DEFINES += VERSION_NUMBER=\\\"$$(VERSION_NUMBER)\\\"
 
 DISTFILES += qml/harbour-vvs-incidents.qml \
+    qml/components/thirdparty/LabelText.qml \
     qml/components/thirdparty/LoadingIndicator.qml \
     qml/cover/CoverPage.qml \
+    qml/pages/AboutPage.qml \
     qml/pages/DetailsPage.qml \
     qml/pages/OverviewPage.qml \
     qml/pages/SecondPage.qml \
@@ -30,6 +35,7 @@ DISTFILES += qml/harbour-vvs-incidents.qml \
     qml/icons/vvs_bus.svg \
     qml/icons/vvs_sbahn.svg \
     qml/icons/vvs_ubahn.svg \
+    qml/icons/vvs_zacke.svg \
     rpm/harbour-vvs-incidents.changes.in \
     rpm/harbour-vvs-incidents.changes.run.in \
     rpm/harbour-vvs-incidents.spec \
@@ -49,8 +55,7 @@ CONFIG += sailfishapp_i18n
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-vvs-incidents-de.ts
 
-HEADERS += \
-    src/incidents.h
+
 
 
 include(harbour-vvs-incidents.pri)
