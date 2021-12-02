@@ -3,7 +3,7 @@ name: VVS Incidents build
 on:
   push:
     branches:
-      - master
+      - main
     tags:
       - '*'
 
