@@ -35,6 +35,7 @@ DISTFILES += qml/harbour-vvs-incidents.qml \
     qml/icons/vvs_bus.svg \
     qml/icons/vvs_sbahn.svg \
     qml/icons/vvs_ubahn.svg \
+    qml/icons/vvs_rbahn.svg \
     qml/icons/vvs_zacke.svg \
     rpm/harbour-vvs-incidents.changes.in \
     rpm/harbour-vvs-incidents.changes.run.in \
@@ -54,8 +55,5 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-vvs-incidents-de.ts
-
-
-
 
 include(harbour-vvs-incidents.pri)
