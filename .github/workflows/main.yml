@@ -34,7 +34,7 @@ jobs:
         id: build_aarch64
         uses: coderus/github-sfos-build@master
         with:
-          release: 4.0.1.45
+          release: 4.2.0.21
           arch: aarch64
 
       - name: Upload build result
