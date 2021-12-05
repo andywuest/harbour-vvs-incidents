@@ -36,6 +36,7 @@ A simple application to view VVS traffic incidents for Stuttgart using Sailfish 
 
 %build
 # >> build pre
+export VERSION_NUMBER=%{version}
 # << build pre
 
 %qmake5 
