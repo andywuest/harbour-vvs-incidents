@@ -76,15 +76,22 @@ QString BackendStuttgart::processSearchResult(QByteArray searchReply) {
     foreach (const QJsonValue &currentEntry, currentArray) {
       QJsonObject currentObject = currentEntry.toObject();
       QJsonObject timestamps = currentObject["timestamps"].toObject();
+      QJsonObject availability = timestamps["availability"].toObject();
+
       QString creationTimestamp = timestamps["creation"].toString();
+      QString fromTimestamp = availability["from"].toString();
+      QString toTimestamp = availability["to"].toString();
 
       qDebug()<< "title: " << currentObject["title"];
       qDebug()<< "timestamp: " << creationTimestamp;
       qDebug()<< "timestamp (con): " << convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone());
       qDebug()<< "timestamp (format): " << convertToDatabaseDateTimeFormat(convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone()));
-
+      qDebug()<< "from (format): " << convertToDatabaseDateTimeFormat(convertTimestampToLocalTimestamp(fromTimestamp, QTimeZone::systemTimeZone()));
+      qDebug()<< "to (format): " << convertToDatabaseDateTimeFormat(convertTimestampToLocalTimestamp(toTimestamp, QTimeZone::systemTimeZone()));
 
       currentObject.insert("_timestampFormatted", convertToDatabaseDateTimeFormat(convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone())));
+      currentObject.insert("_fromFormatted", convertToDateFormat(convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone())));
+      currentObject.insert("_toFormatted", convertToDateFormat(convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone())));
 
       resultArray.push_back(currentObject);
     }
@@ -140,3 +147,10 @@ QDateTime BackendStuttgart::convertTimestampToLocalTimestamp(const QString &utcD
 QString BackendStuttgart::convertToDatabaseDateTimeFormat(const QDateTime &time) {
     return time.toString("yyyy-MM-dd") + " " + time.toString("hh:mm:ss");
 }
+
+QString BackendStuttgart::convertToDateFormat(const QDateTime &time) {
+    return time.toString("dd.MM.yyyy");
+}
+
+
+

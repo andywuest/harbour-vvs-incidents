@@ -42,8 +42,10 @@ void BackendStuttgartTests::testBackendStuttgartProcessSearchResult() {
   QCOMPARE(incidentsEntry["subtitle"],
            "Bad Cannstatt Wilhelmsplatz - Neugereut: Streckenunterbrechung "
            "wegen eines Verkehrsunfalls");
+  QCOMPARE(incidentsEntry["_fromFormatted"], "02.11.2021");
+  QCOMPARE(incidentsEntry["_toFormatted"], "02.11.2021");
 
-  //    qDebug() << parsedResult;
+//   qDebug() << parsedResult;
 }
 
 QByteArray BackendStuttgartTests::readFileData(const QString &fileName) {
