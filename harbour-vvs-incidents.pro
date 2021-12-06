@@ -25,6 +25,8 @@ DEFINES += VERSION_NUMBER=\\\"$$(VERSION_NUMBER)\\\"
 DISTFILES += qml/harbour-vvs-incidents.qml \
     qml/components/thirdparty/LabelText.qml \
     qml/components/thirdparty/LoadingIndicator.qml \
+    qml/components/thirdparty/AppNotification.qml \
+    qml/components/thirdparty/AppNotificationItem.qml \
     qml/cover/CoverPage.qml \
     qml/pages/AboutPage.qml \
     qml/pages/DetailsPage.qml \

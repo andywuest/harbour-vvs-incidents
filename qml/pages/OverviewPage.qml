@@ -64,8 +64,8 @@ Page {
     }
 
     function errorResultHandler(result) {
-        console.log("result error : " + result)
-        // marketDataUpdateProblemNotification.show(result)
+        Functions.log("[OverviewPage] - result error : " + result);
+        incidentUpdateNotification.show(result)
         networkError = true;
         loaded = true;
     }
@@ -84,6 +84,10 @@ Page {
         loaded = false;
 
         Functions.getDataBackend(Constants.BACKEND_STUTTGART).getIncidents()
+    }
+
+    AppNotification {
+        id: incidentUpdateNotification
     }
 
     // To enable PullDownMenu, place our content in a SilicaFlickable
@@ -186,7 +190,8 @@ Page {
                                 id: stockQuoteColumn
                                 width: parent.width // - (2 * Theme.horizontalPageMargin)
                                 // x: Theme.horizontalPageMargin
-                                height: firstRow.height + changeValuesRow.height + secondRow.height
+                                height: /*firstRow.height + */ changeValuesRow.height + secondRow.height
+                                + thirdRow.height
                                 /* + secondRow.height*/
                                         //+ changeValuesRow.height
                                         //+ (watchlistSettings.showPerformanceRow ? performanceRow.height : 0)
@@ -194,9 +199,11 @@ Page {
                                 anchors.verticalCenter: parent.verticalCenter
 
                                 Row {
+                                    // TODO remove first row
                                     id: firstRow
                                     width: parent.width
                                     height: Theme.fontSizeSmall + Theme.paddingMedium
+                                    visible: false
 
                                     Label {
                                         id: stockQuoteName
@@ -234,14 +241,21 @@ Page {
                                        source: "../icons/" + "vvs_" + Functions.resolveIconForLines(affected) + ".svg"
                                        height: secondRow.height
                                        width: secondRow.height
+                                       // fillMode: Image.PreserveAspectCrop
+                                       fillMode: Image.PreserveAspectFit
                                        anchors.verticalCenter: parent.verticalCenter
+                                    }
+
+                                    Label {
+                                        id: marginLabel
+                                        width: Theme.paddingSmall
                                     }
 
                                     Label {
                                         id: secondStockQuoteName
                                         // width: parent.width * 8 / 10
                                         height: parent.height
-                                        width: secondRow.width - rowIcon.width
+                                        width: secondRow.width - rowIcon.width - marginLabel.width
                                         text: Functions.getListOfAffectedLines(affected)
                                         truncationMode: TruncationMode.Fade// TODO check for very long texts
                                         // elide: Text.ElideRight
@@ -249,11 +263,43 @@ Page {
                                         font.pixelSize: Theme.fontSizeSmall
                                         font.bold: true
                                         horizontalAlignment: Text.AlignLeft
+                                        verticalAlignment: Text.AlignVCenter
                                     }
 
 //                                    Text {
 //                                        id: secondStockQuoteChange
 //                                        // width: parent.width * 2 / 10
+//                                        height: parent.height
+//                                        text: "value1"
+//                                            //Functions.renderPrice(price, currencySymbol);
+//                                        color: Theme.highlightColor
+//                                        font.pixelSize: Theme.fontSizeSmall
+//                                        font.bold: true
+//                                        horizontalAlignment: Text.AlignRight
+//                                    }
+                                }
+
+                                Row {
+                                    id: thirdRow
+                                    width: parent.width
+                                    height: Theme.fontSizeExtraSmall + Theme.paddingSmall
+
+                                    Label {
+                                        id: validityLabel
+                                        width: parent.width
+                                        height: parent.height
+                                        text: qsTr("On %1 until %2 ").arg(_fromFormatted).arg(_toFormatted)
+                                        truncationMode: TruncationMode.Fade// TODO check for very long texts
+                                        // elide: Text.ElideRight
+                                        color: Theme.primaryColor
+                                        font.pixelSize: Theme.fontSizeExtraSmall
+                                        font.bold: true
+                                        horizontalAlignment: Text.AlignLeft
+                                    }
+
+//                                    Text {
+//                                        id: stockQuoteChange
+//                                        width: parent.width * 2 / 10
 //                                        height: parent.height
 //                                        text: "value1"
 //                                            //Functions.renderPrice(price, currencySymbol);
