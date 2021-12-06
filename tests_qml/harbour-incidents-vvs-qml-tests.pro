@@ -4,6 +4,7 @@ TEMPLATE = app
 
 DISTFILES += \
     testdata/rbahn.json \
+    testdata/ubahn_multiple.json \
     testdata/zacke.json \
     tst_functions.qml
 

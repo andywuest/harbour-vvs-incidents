@@ -1,0 +1,78 @@
+{
+   "affected": {
+      "lines": [
+         {
+            "id": "vvs:20007: :R:",
+            "destination": {
+               "name": "Eugensplatz",
+               "type": "stop"
+            },
+            "name": "Stadtbahn U7",
+            "number": "U7",
+            "iconId": 0,
+            "product": {
+               "class": 3,
+               "iconId": 1
+            },
+            "operator": {
+               "id": "01",
+               "name": "SSB"
+            }
+         },
+         {
+            "id": "vvs:20015: :R:",
+            "destination": {
+               "name": "Stammheim",
+               "type": "stop"
+            },
+            "name": "Stadtbahn U15",
+            "number": "U15",
+            "iconId": 0,
+            "product": {
+               "class": 3,
+               "iconId": 1
+            },
+            "operator": {
+               "id": "01",
+               "name": "SSB"
+            }
+         },
+         {
+            "id": "vvs:20007: :H:",
+            "destination": {
+               "name": "Nellingen Ostfildern",
+               "type": "stop"
+            },
+            "name": "Stadtbahn U7",
+            "number": "U7",
+            "iconId": 0,
+            "product": {
+               "class": 3,
+               "iconId": 1
+            },
+            "operator": {
+               "id": "01",
+               "name": "SSB"
+            }
+         },
+         {
+            "id": "vvs:20015: :H:",
+            "destination": {
+               "name": "Heumaden",
+               "type": "stop"
+            },
+            "name": "Stadtbahn U15",
+            "number": "U15",
+            "iconId": 0,
+            "product": {
+               "class": 3,
+               "iconId": 1
+            },
+            "operator": {
+               "id": "01",
+               "name": "SSB"
+            }
+         }
+      ]
+   }
+}
