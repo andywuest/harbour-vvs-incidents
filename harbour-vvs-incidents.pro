@@ -31,7 +31,6 @@ DISTFILES += qml/harbour-vvs-incidents.qml \
     qml/pages/AboutPage.qml \
     qml/pages/DetailsPage.qml \
     qml/pages/OverviewPage.qml \
-    qml/pages/SecondPage.qml \
     qml/js/functions.js \
     qml/js/constants.js \
     qml/icons/vvs_bus.svg \

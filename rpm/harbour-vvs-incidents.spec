@@ -9,7 +9,7 @@ Name:       harbour-vvs-incidents
 # << macros
 
 Summary:    Sailfish OS Application for viewing VVS Incidents
-Version:    0.0.2
+Version:    0.0.3
 Release:    1
 Group:      Qt/Qt
 License:    LICENSE
