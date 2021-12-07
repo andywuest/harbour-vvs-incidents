@@ -45,4 +45,11 @@ TestCase {
         compare("rbahn", Functions.resolveIconForLines(rbahnData.affected))
         compare("zacke", Functions.resolveIconForLines(zackeData.affected))
     }
+
+    function test_functions_createAvailabilityLabel() {
+        compare(Functions.createAvailabilityLabel("11.12.2021", "11.12.2021"), "On 11.12.2021");
+        compare(Functions.createAvailabilityLabel("11.12.2021", ""), "From 11.12.2021 until further notice");
+        compare(Functions.createAvailabilityLabel("11.12.2021", "26.12.2021"), "From 11.12.2021 until 26.12.2021");
+    }
+
 }

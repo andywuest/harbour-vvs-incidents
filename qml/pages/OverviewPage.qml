@@ -28,6 +28,7 @@ Page {
 
     property bool networkError: false
     property bool loaded : false
+    property date lastUpdate
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.All
@@ -58,6 +59,8 @@ Page {
           incidentsModel.append(incident);
           Functions.log("added incident " + incident.title);
       }
+
+      lastUpdate = new Date();
 
       networkError = false;
       loaded = true;
@@ -124,6 +127,7 @@ Page {
                 id: incidentsHeader
                 //: OverviewPage page header
                 title: qsTr("Incidents")
+                description: lastUpdate ? Format.formatDate(lastUpdate, Format.DurationElapsed) : "-"
             }
 
             // TODO create component from it
@@ -288,7 +292,8 @@ Page {
                                         id: validityLabel
                                         width: parent.width
                                         height: parent.height
-                                        text: qsTr("On %1 until %2 ").arg(_fromFormatted).arg(_toFormatted)
+                                        text: Functions.createAvailabilityLabel(_fromFormatted, _toFormatted)
+                                            // qsTr("On %1 until %2 ").arg(_fromFormatted).arg(_toFormatted)
                                         truncationMode: TruncationMode.Fade// TODO check for very long texts
                                         // elide: Text.ElideRight
                                         color: Theme.primaryColor
@@ -363,16 +368,15 @@ Page {
     Component.onCompleted: {
         connectSlots();
         reloadAllIncidents();
-//        loaded = true;
     }
 
     Component.onDestruction: {
-//        Functions.log("disconnecting signal");
+        Functions.log("disconnecting signal");
         disconnectSlots();
     }
 
     LoadingIndicator {
-        id: stocksLoadingIndicator
+        id: incidentsLoadingIndicator
         visible: !loaded
         Behavior on opacity {
             NumberAnimation {

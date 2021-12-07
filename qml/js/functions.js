@@ -47,3 +47,16 @@ function getListOfAffectedLines(affectedLines) {
     log("list of affected lines : " + results);
     return results.join(', ');
 }
+
+function createAvailabilityLabel(from, to) {
+    var label = "";
+    if (from === to) {
+        label = qsTr("On %1").arg(from)   // "Am %1"
+    } else if (to === "")   {
+        label = qsTr("From %1 until further notice").arg(from)  // "Vom %1 bis auf Weiteres"
+    }  else if (from !== to) {
+        label = qsTr("From %1 until %2").arg(from).arg(to) // TODO fixme
+    }
+    return label;
+}
+
