@@ -89,6 +89,10 @@ Page {
         Functions.getDataBackend(Constants.BACKEND_STUTTGART).getIncidents()
     }
 
+    function getLastUpdateString() {
+        return qsTr("Last update: %1").arg(lastUpdate ? Format.formatDate(lastUpdate, Format.DurationElapsed) : "-");
+    }
+
     AppNotification {
         id: incidentUpdateNotification
     }
@@ -123,11 +127,22 @@ Page {
             width: parent.width
             spacing: Theme.paddingMedium
 
+            Timer {
+                id: lastUpdateUpdater
+                interval: 60000
+                running: true
+                repeat: true
+                onTriggered: {
+                    Functions.log("[OverviewPage] - updating last update string ")
+                    incidentsHeader.description = getLastUpdateString();
+                }
+            }
+
             PageHeader {
                 id: incidentsHeader
                 //: OverviewPage page header
                 title: qsTr("Incidents")
-                description: lastUpdate ? Format.formatDate(lastUpdate, Format.DurationElapsed) : "-"
+                description: getLastUpdateString();
             }
 
             // TODO create component from it

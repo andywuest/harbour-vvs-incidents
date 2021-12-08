@@ -85,11 +85,11 @@ QString BackendStuttgart::processSearchResult(QByteArray searchReply) {
       qDebug()<< "title: " << currentObject["title"];
       qDebug()<< "timestamp: " << creationTimestamp;
       qDebug()<< "timestamp (con): " << convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone());
-      qDebug()<< "timestamp (format): " << convertToDatabaseDateTimeFormat(convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone()));
-      qDebug()<< "from (format): " << convertToDatabaseDateTimeFormat(convertTimestampToLocalTimestamp(fromTimestamp, QTimeZone::systemTimeZone()));
-      qDebug()<< "to (format): " << convertToDatabaseDateTimeFormat(convertTimestampToLocalTimestamp(toTimestamp, QTimeZone::systemTimeZone()));
+      qDebug()<< "timestamp (format): " << convertToDateTimeFormat(convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone()));
+      qDebug()<< "from (format): " << convertToDateTimeFormat(convertTimestampToLocalTimestamp(fromTimestamp, QTimeZone::systemTimeZone()));
+      qDebug()<< "to (format): " << convertToDateTimeFormat(convertTimestampToLocalTimestamp(toTimestamp, QTimeZone::systemTimeZone()));
 
-      currentObject.insert("_timestampFormatted", convertToDatabaseDateTimeFormat(convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone())));
+      currentObject.insert("_timestampFormatted", convertToDateTimeFormat(convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone())));
       currentObject.insert("_fromFormatted", convertToDateFormat(convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone())));
       currentObject.insert("_toFormatted", convertToDateFormat(convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone())));
 
@@ -144,12 +144,16 @@ QDateTime BackendStuttgart::convertTimestampToLocalTimestamp(const QString &utcD
     return localDateTime;
 }
 
-QString BackendStuttgart::convertToDatabaseDateTimeFormat(const QDateTime &time) {
-    return time.toString("yyyy-MM-dd") + " " + time.toString("hh:mm:ss");
+QString BackendStuttgart::convertToDateTimeFormat(const QDateTime &time) {
+    return time.toString("dd.MM.yyyy") + " " + time.toString("hh:mm:ss");
 }
 
-QString BackendStuttgart::convertToDateFormat(const QDateTime &time) {
-    return time.toString("dd.MM.yyyy");
+QString BackendStuttgart::convertToDateFormat(const QDateTime &dateTime) {
+    // if date is too far in the future -> return blank string
+    if (dateTime.date().year() > 2100) {
+        return QString("");
+    }
+    return dateTime.toString("dd.MM.yyyy");
 }
 
 

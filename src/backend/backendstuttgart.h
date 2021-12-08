@@ -40,7 +40,7 @@ private slots:
 protected:
   QString processSearchResult(QByteArray searchReply);
   QDateTime convertTimestampToLocalTimestamp(const QString &utcDateTimeString, QTimeZone timeZone);
-  QString convertToDatabaseDateTimeFormat(const QDateTime &time);
+  QString convertToDateTimeFormat(const QDateTime &time);
   QString convertToDateFormat(const QDateTime &time);
 
 
