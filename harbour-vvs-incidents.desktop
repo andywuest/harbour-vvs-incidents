@@ -10,3 +10,5 @@ Name=VVS Incidents
 # Remember to comment out the following line, if you do not want to use
 # a different app name in German locale (de).
 # Name[de]=harbour-vvs-incidents
+Name[de]=VVS Störungen
+Name[en]=VVS Incidents

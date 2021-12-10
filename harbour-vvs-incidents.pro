@@ -23,6 +23,7 @@ HEADERS += \
 DEFINES += VERSION_NUMBER=\\\"$$(VERSION_NUMBER)\\\"
 
 DISTFILES += qml/harbour-vvs-incidents.qml \
+    qml/components/IconLabelRow.qml \
     qml/components/thirdparty/LabelText.qml \
     qml/components/thirdparty/LoadingIndicator.qml \
     qml/components/thirdparty/AppNotification.qml \
@@ -55,6 +56,7 @@ CONFIG += sailfishapp_i18n
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/harbour-vvs-incidents-de.ts
+TRANSLATIONS += translations/harbour-vvs-incidents-de.ts \
+    translations/harbour-vvs-incidents-en.ts
 
 include(harbour-vvs-incidents.pri)

@@ -21,6 +21,7 @@ import Sailfish.Silica 1.0
 import "../js/constants.js" as Constants
 import "../js/functions.js" as Functions
 
+import "../components"
 import "../components/thirdparty"
 
 Page {
@@ -209,97 +210,22 @@ Page {
                                 id: stockQuoteColumn
                                 width: parent.width // - (2 * Theme.horizontalPageMargin)
                                 // x: Theme.horizontalPageMargin
-                                height: /*firstRow.height + */ changeValuesRow.height + secondRow.height
-                                + thirdRow.height
+                                height: /*firstRow.height + */ changeValuesRow.height + iconLabelRow.height
+                                + availabiltyRow.height
                                 /* + secondRow.height*/
                                         //+ changeValuesRow.height
                                         //+ (watchlistSettings.showPerformanceRow ? performanceRow.height : 0)
 
                                 anchors.verticalCenter: parent.verticalCenter
 
-                                Row {
-                                    // TODO remove first row
-                                    id: firstRow
-                                    width: parent.width
-                                    height: Theme.fontSizeSmall + Theme.paddingMedium
-                                    visible: false
-
-                                    Label {
-                                        id: stockQuoteName
-                                        width: parent.width * 8 / 10
-                                        height: parent.height
-                                        text: title
-                                        truncationMode: TruncationMode.Fade// TODO check for very long texts
-                                        // elide: Text.ElideRight
-                                        color: Theme.primaryColor
-                                        font.pixelSize: Theme.fontSizeSmall
-                                        font.bold: true
-                                        horizontalAlignment: Text.AlignLeft
-                                    }
-
-                                    Text {
-                                        id: stockQuoteChange
-                                        width: parent.width * 2 / 10
-                                        height: parent.height
-                                        text: "value1"
-                                            //Functions.renderPrice(price, currencySymbol);
-                                        color: Theme.highlightColor
-                                        font.pixelSize: Theme.fontSizeSmall
-                                        font.bold: true
-                                        horizontalAlignment: Text.AlignRight
-                                    }
+                                IconLabelRow {
+                                    id: iconLabelRow
+                                    lineType: Functions.resolveIconForLines(affected)
+                                    affectedLines: Functions.getListOfAffectedLines(affected)
                                 }
 
                                 Row {
-                                    id: secondRow
-                                    width: parent.width
-                                    height: Theme.fontSizeSmall + Theme.paddingMedium
-
-                                    Image {
-                                       id: rowIcon
-                                       source: "../icons/" + "vvs_" + Functions.resolveIconForLines(affected) + ".svg"
-                                       height: secondRow.height
-                                       width: secondRow.height
-                                       // fillMode: Image.PreserveAspectCrop
-                                       fillMode: Image.PreserveAspectFit
-                                       anchors.verticalCenter: parent.verticalCenter
-                                    }
-
-                                    Label {
-                                        id: marginLabel
-                                        width: Theme.paddingSmall
-                                    }
-
-                                    Label {
-                                        id: secondStockQuoteName
-                                        // width: parent.width * 8 / 10
-                                        height: parent.height
-                                        width: secondRow.width - rowIcon.width - marginLabel.width
-                                        text: Functions.getListOfAffectedLines(affected)
-                                        truncationMode: TruncationMode.Fade// TODO check for very long texts
-                                        // elide: Text.ElideRight
-                                        color: Theme.primaryColor
-                                        font.pixelSize: Theme.fontSizeSmall
-                                        font.bold: true
-                                        horizontalAlignment: Text.AlignLeft
-                                        verticalAlignment: Text.AlignVCenter
-                                    }
-
-//                                    Text {
-//                                        id: secondStockQuoteChange
-//                                        // width: parent.width * 2 / 10
-//                                        height: parent.height
-//                                        text: "value1"
-//                                            //Functions.renderPrice(price, currencySymbol);
-//                                        color: Theme.highlightColor
-//                                        font.pixelSize: Theme.fontSizeSmall
-//                                        font.bold: true
-//                                        horizontalAlignment: Text.AlignRight
-//                                    }
-                                }
-
-                                Row {
-                                    id: thirdRow
+                                    id: availabiltyRow
                                     width: parent.width
                                     height: Theme.fontSizeExtraSmall + Theme.paddingSmall
 
@@ -316,20 +242,7 @@ Page {
                                         font.bold: true
                                         horizontalAlignment: Text.AlignLeft
                                     }
-
-//                                    Text {
-//                                        id: stockQuoteChange
-//                                        width: parent.width * 2 / 10
-//                                        height: parent.height
-//                                        text: "value1"
-//                                            //Functions.renderPrice(price, currencySymbol);
-//                                        color: Theme.highlightColor
-//                                        font.pixelSize: Theme.fontSizeSmall
-//                                        font.bold: true
-//                                        horizontalAlignment: Text.AlignRight
-//                                    }
                                 }
-
 
                                 Row {
                                     id: changeValuesRow

@@ -51,11 +51,11 @@ function getListOfAffectedLines(affectedLines) {
 function createAvailabilityLabel(from, to) {
     var label = "";
     if (from === to) {
-        label = qsTr("On %1").arg(from)   // "Am %1"
+        label = qsTr("On %1").arg(from);
     } else if (to === "")   {
-        label = qsTr("From %1 until further notice").arg(from)  // "Vom %1 bis auf Weiteres"
+        label = qsTr("From %1 until further notice").arg(from);
     }  else if (from !== to) {
-        label = qsTr("From %1 until %2").arg(from).arg(to) // TODO fixme
+        label = qsTr("From %1 until %2").arg(from).arg(to);
     }
     return label;
 }

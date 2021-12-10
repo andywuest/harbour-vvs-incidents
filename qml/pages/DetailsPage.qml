@@ -18,6 +18,8 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
 
+import "../components"
+
 import "../js/functions.js" as Functions
 
 Page {
@@ -47,33 +49,9 @@ Page {
                 title: qsTr("Details")
             }
 
-            Row {
-                id: lineRow
-                width: parent.width
-                height: Theme.fontSizeSmall + Theme.paddingMedium
-
-                Image {
-                   id: rowIcon
-                   source: "../icons/" + "vvs_" + Functions.resolveIconForLines(incident.affected) + ".svg"
-                   height: lineRow.height
-                   width: lineRow.height
-                   anchors.verticalCenter: parent.verticalCenter
-                }
-
-                Label {
-                    id: lineLabel
-                    // width: parent.width * 8 / 10
-                    height: parent.height
-                    width: lineRow.width - rowIcon.width
-                    text: Functions.getListOfAffectedLines(incident.affected)
-                    truncationMode: TruncationMode.Fade// TODO check for very long texts
-                    // elide: Text.ElideRight
-                    color: Theme.primaryColor
-                    font.pixelSize: Theme.fontSizeSmall
-                    font.bold: true
-                    horizontalAlignment: Text.AlignLeft
-                }
-
+            IconLabelRow {
+                lineType: Functions.resolveIconForLines(incident.affected)
+                affectedLines: Functions.getListOfAffectedLines(incident.affected)
             }
 
 //            Label {
