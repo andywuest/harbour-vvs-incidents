@@ -2,3 +2,4 @@
 *.o
 .idea
 build-harbour-incidents*
+*results.xml
