@@ -23,6 +23,7 @@ HEADERS += \
 DEFINES += VERSION_NUMBER=\\\"$$(VERSION_NUMBER)\\\"
 
 DISTFILES += qml/harbour-vvs-incidents.qml \
+    qml/components/CoverLoadingColumn.qml \
     qml/components/IconLabelRow.qml \
     qml/components/thirdparty/LabelText.qml \
     qml/components/thirdparty/LoadingIndicator.qml \
