@@ -25,69 +25,35 @@ import "../components"
 import "../components/thirdparty"
 
 Page {
-    id: page
+    id: overviewPage
 
-    property bool networkError: false
-    property bool loaded : false
+    property bool loading : false
+    property bool errorOccured: false
+    property bool incidentPresent: false
     property date lastUpdate
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
     allowedOrientations: Orientation.All
 
-    function connectSlots() {
-        console.log("connect - slots");
-        var backend = Functions.getDataBackend(Constants.BACKEND_STUTTGART);
-        console.log("[OverviewPage] - connect slot " + backend);
-        backend.getIncidentsResultAvailable.connect(getIncidentsResultHandler);
-        backend.requestError.connect(errorResultHandler);
-    }
-
-    function disconnectSlots() {
-        console.log("disconnect - slots");
-        var backend = Functions.getDataBackend(Constants.BACKEND_STUTTGART);
-        backend.getIncidentsResultAvailable.disconnect(getIncidentsResultHandler);
-        backend.requestError.disconnect(errorResultHandler);
-    }
-
-    function getIncidentsResultHandler(result) {
-      Functions.log("result : " + result);
-
-      latestIncidents = JSON.parse(result.toString())
-      var currentIncidents = latestIncidents["currentIncidents"];
-      Functions.log("json result from market data backend was: " + result)
-      for (var i = 0; i < currentIncidents.length; i++)   {
-          var incident = currentIncidents[i];
-          incidentsModel.append(incident);
-          Functions.log("added incident " + incident.title);
-      }
-
-      lastUpdate = new Date();
-
-      networkError = false;
-      loaded = true;
-    }
-
-    function errorResultHandler(result) {
-        Functions.log("[OverviewPage] - result error : " + result);
-        incidentUpdateNotification.show(result)
-        networkError = true;
-        loaded = true;
-    }
-
-    function isIncidentPresent() {
-        return (latestIncidents && latestIncidents.currentIncidents && latestIncidents.currentIncidents.length > 0);
-    }
-
-    function reloadAllIncidents() {
-        Functions.log("[OverviewPage] - reloadAllIncidents");
-        disconnectSlots();
-        connectSlots();
-
+    function incidentDataChanged(result, error, date) {
+        Functions.log("[OverviewPage] - data has changed, error " + error + ", date : " + date)
+        errorOccured = (error !== "");
+        lastUpdate = new Date();
         incidentsModel.clear()
+        incidentPresent = false;
 
-        loaded = false;
+        if (!errorOccured) {
+            incidentPresent = (result.currentIncidents.length > 0);
+            for (var i = 0; i < result.currentIncidents.length; i++)   {
+                var incident = result.currentIncidents[i];
+                incidentsModel.append(incident);
+                Functions.log("[OverviewPage] added incident " + incident.title);
+            }
+        } else {
+            incidentUpdateNotification.show(error)
+        }
 
-        Functions.getDataBackend(Constants.BACKEND_STUTTGART).getIncidents()
+        loading = false;
     }
 
     function getLastUpdateString() {
@@ -114,7 +80,11 @@ Page {
             }
             MenuItem {
                 text: qsTr("Reload Incidents")
-                onClicked: reloadAllIncidents();
+                onClicked: {
+                    loading = true;
+                    errorOccured = false;
+                    app.reloadAllIncidents();
+                }
             }
         }
 
@@ -155,7 +125,7 @@ Page {
                 height: parent.height
                 spacing: Theme.paddingSmall
 
-                visible: (!isIncidentPresent() && loaded && !networkError)
+                visible: (!incidentPresent && !loading && !errorOccured)
 
                 Label {
                     topPadding: Theme.paddingLarge
@@ -294,23 +264,19 @@ Page {
     }
 
     Component.onCompleted: {
-        connectSlots();
-        reloadAllIncidents();
-    }
-
-    Component.onDestruction: {
-        Functions.log("disconnecting signal");
-        disconnectSlots();
+        app.incidentDataChanged.connect(incidentDataChanged)
+        loading = true;
+        app.reloadAllIncidents();
     }
 
     LoadingIndicator {
         id: incidentsLoadingIndicator
-        visible: !loaded
+        visible: loading
         Behavior on opacity {
             NumberAnimation {
             }
         }
-        opacity: loaded ? 0 : 1
+        opacity: loading ? 1 : 0
         height: parent.height
         width: parent.width
     }

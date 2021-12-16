@@ -26,74 +26,34 @@ import "../components/thirdparty"
 
 CoverBackground {
     id: coverPage
-    property bool networkError: false
+    property bool errorOccured: false
     property bool loading : false
-    property date lastUpdate
 
-    function connectSlots() {
-        console.log("connect - slots");
-        var backend = Functions.getDataBackend(Constants.BACKEND_STUTTGART);
-        console.log("[CoverPage] - connect slot " + backend);
-        backend.getIncidentsResultAvailable.connect(getIncidentsResultHandler);
-        backend.requestError.connect(errorResultHandler);
-    }
+    function incidentDataChanged(result, error, date) {
+        Functions.log("[CoverPage] - data has changed, error " + error + ", date : " + date)
+        coverPage.errorOccured = (error !== "");
 
-    function disconnectSlots() {
-        console.log("disconnect - slots");
-        var backend = Functions.getDataBackend(Constants.BACKEND_STUTTGART);
-        backend.getIncidentsResultAvailable.disconnect(getIncidentsResultHandler);
-        backend.requestError.disconnect(errorResultHandler);
-    }
-
-    function getIncidentsResultHandler(result) {
-      Functions.log("result : " + result);
-
-      latestIncidents = JSON.parse(result.toString())
-      var currentIncidents = latestIncidents["currentIncidents"];
-      var resultString = "";
-      Functions.log("[CoverPage] - json result from market data backend was: " + result)
-      for (var i = 0; i < currentIncidents.length; i++)   {
-          var incident = currentIncidents[i];
-          if (resultString !== "") {
-              resultString += ", ";
+        if (!coverPage.errorOccured) {
+          var resultString = "";
+          // Functions.log("[CoverPage] - json result from market data backend was: " + result)
+          for (var i = 0; i < result.currentIncidents.length; i++)   {
+              var incident = result.currentIncidents[i];
+              if (resultString !== "") {
+                  resultString += ", ";
+              }
+              resultString += Functions.getListOfAffectedLines(incident.affected)
           }
-          resultString += Functions.getListOfAffectedLines(incident.affected)
-      }
+            Functions.log("[CoverPage] - result string : " + resultString)
+            if (resultString === "") {
+                incidentLines.text = qsTr("No incidents");
+            } else {
+                incidentLines.text = resultString
+            }
+        } else {
+            label.text = qsTr("Error occured")
+        }
 
-      Functions.log("[CoverPage] - affected lines : " + resultString);
-
-      if (resultString === "") {
-          incidentLines.text = qsTr("No incidents");
-      } else {
-          incidentLines.text = resultString
-      }
-
-      lastUpdate = new Date();
-
-      networkError = false;
-      loading = false;
-    }
-
-    function errorResultHandler(result) {
-        Functions.log("[CoverPage] - result error : " + result);
-        incidentUpdateNotification.show(result)
-        label.text = qsTr("Error occured")
-        networkError = true;
-        loading = false;
-    }
-
-    function isIncidentPresent() {
-        return (latestIncidents && latestIncidents.currentIncidents && latestIncidents.currentIncidents.length > 0);
-    }
-
-    function reloadAllIncidents() {
-        Functions.log("[CoverPage] - reloadAllIncidents");
-        disconnectSlots();
-        connectSlots();
-
-        loading = true;
-
-        Functions.getDataBackend(Constants.BACKEND_STUTTGART).getIncidents()
+        coverPage.loading = false;
     }
 
     CoverLoadingColumn {
@@ -152,8 +112,9 @@ CoverBackground {
             y: Theme.paddingLarge
             x: Theme.paddingMedium
             width: parent.width - 2 * Theme.paddingMedium
+            visible: !coverPage.errorOccured
 
-            text: "Incidents for the lines:"
+            text: qsTr("Incidents for the lines:")
             anchors.horizontalCenter: parent.horizontalCenter
             maximumLineCount:  2
             wrapMode: Text.WordWrap
@@ -165,6 +126,7 @@ CoverBackground {
             x: Theme.paddingMedium
             y: Theme.paddingLarge
             width: parent.width - 2 * Theme.paddingMedium
+            visible: !coverPage.errorOccured
 
             text: ""
             anchors.topMargin: Theme.paddingLarge
@@ -173,21 +135,20 @@ CoverBackground {
             wrapMode: Text.WordWrap
             font.pixelSize: Theme.fontSizeExtraSmall
         }
+
+            Label {
+                id: label
+                visible: coverPage.errorOccured
+
+                anchors.centerIn: parent
+                text: ""
+                textFormat: Text.RichText
+                wrapMode: Text.Wrap
+                // visible: !coverPage.loading
+                opacity: coverPage.loading ? 0 : 1
+            }
+
     }
-
-
-
-
-
-//    Label {
-//        id: label
-//        anchors.centerIn: parent
-//        text: ""
-//        textFormat: Text.RichText
-//        wrapMode: Text.Wrap
-//        visible: !coverPage.loading
-//        opacity: coverPage.loading ? 0 : 1
-//    }
 
     CoverActionList {
         id: coverAction
@@ -195,19 +156,15 @@ CoverBackground {
         CoverAction {
             iconSource: "image://theme/icon-cover-refresh"
             onTriggered: {
-                reloadAllIncidents();
+                coverPage.loading = true;
+                coverPage.errorOccured = false;
+                app.reloadAllIncidents();
             }
         }
     }
 
     Component.onCompleted: {
-        connectSlots();
-        reloadAllIncidents();
-    }
-
-    Component.onDestruction: {
-        Functions.log("disconnecting signal");
-        disconnectSlots();
+        app.incidentDataChanged.connect(incidentDataChanged)
     }
 
     OpacityRampEffect {

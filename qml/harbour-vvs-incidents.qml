@@ -17,16 +17,61 @@
  */
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+
 import "pages"
+import "cover"
+
+import "js/constants.js" as Constants
+import "js/functions.js" as Functions
 
 ApplicationWindow {
+    id: app
 
-    property var latestIncidents: ({})
+    signal incidentDataChanged(var incidentData, string error, date lastUpdate)
 
-    initialPage: Component {
+    function reloadAllIncidents() {
+        Functions.log("[ApplicationWindow] - reloadAllIncidents");
+        var backend = Functions.getDataBackend(Constants.BACKEND_STUTTGART);
+        disconnectSlots(backend);
+        connectSlots(backend);
+        backend.getIncidents()
+    }
+
+    function connectSlots(backend) {
+        Functions.log("[ApplicationWindow] - connect slot " + backend);
+        backend.getIncidentsResultAvailable.connect(getIncidentsResultHandler);
+        backend.requestError.connect(errorResultHandler);
+    }
+
+    function disconnectSlots(backend) {
+        Functions.log("[ApplicationWindow] disconnect - slots");
+        backend.getIncidentsResultAvailable.disconnect(getIncidentsResultHandler);
+        backend.requestError.disconnect(errorResultHandler);
+    }
+
+    function getIncidentsResultHandler(result) {
+      Functions.log("[ApplicationWindow] result : " + result);
+      incidentDataChanged(JSON.parse(result.toString()), "", new Date());
+    }
+
+    function errorResultHandler(result) {
+        Functions.log("[ApplicationWindow] - result error : " + result);
+        incidentDataChanged({}, result, new Date());
+    }
+
+    Component {
+        id: overviewPage
         OverviewPage {
         }
     }
-    cover: Qt.resolvedUrl("cover/CoverPage.qml")
+
+    Component {
+        id: coverPage
+        CoverPage {
+        }
+    }
+
+    initialPage: overviewPage
+    cover: coverPage
     allowedOrientations: defaultAllowedOrientations
 }
