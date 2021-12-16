@@ -50,20 +50,28 @@ AboutPage title - about text title</extracomment>
     </message>
 </context>
 <context>
+    <name>CoverLoadingColumn</name>
+    <message>
+        <location filename="../qml/components/CoverLoadingColumn.qml" line="18"/>
+        <source>Loading...</source>
+        <translation type="unfinished">Lade...</translation>
+    </message>
+</context>
+<context>
     <name>CoverPage</name>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="65"/>
+        <location filename="../qml/cover/CoverPage.qml" line="48"/>
         <source>No incidents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="67"/>
-        <source>Incidents for the following lines : %1</source>
+        <location filename="../qml/cover/CoverPage.qml" line="53"/>
+        <source>Error occured</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="79"/>
-        <source>Error occured</source>
+        <location filename="../qml/cover/CoverPage.qml" line="117"/>
+        <source>Incidents for the lines:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -87,29 +95,29 @@ AboutPage title - about text title</extracomment>
 <context>
     <name>OverviewPage</name>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="94"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="60"/>
         <source>Last update: %1</source>
         <translation>Letzte Aktualisierung: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="112"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="78"/>
         <source>About</source>
         <extracomment>Overview Page about</extracomment>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="116"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="82"/>
         <source>Reload Incidents</source>
         <translation>Störungen neu laden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="145"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="115"/>
         <source>Incidents</source>
         <extracomment>OverviewPage page header</extracomment>
         <translation>Störungen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="168"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="138"/>
         <source>Currently there are no incidents to report.</source>
         <translation type="unfinished"></translation>
     </message>
