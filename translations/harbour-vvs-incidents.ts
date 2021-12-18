@@ -60,18 +60,8 @@ AboutPage title - about text title</extracomment>
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="48"/>
-        <source>No incidents</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/cover/CoverPage.qml" line="53"/>
-        <source>Error occured</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/cover/CoverPage.qml" line="117"/>
-        <source>Incidents for the lines:</source>
+        <location filename="../qml/cover/CoverPage.qml" line="87"/>
+        <source>Incidents</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
