@@ -76,6 +76,7 @@ CoverBackground {
         opacity: coverPage.loading ? 0 : 1
 
         anchors.fill: parent
+        anchors.topMargin: Theme.paddingMedium
 
         model: ListModel {
             id: coverModel
