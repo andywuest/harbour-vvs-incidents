@@ -29,9 +29,16 @@ ApplicationWindow {
 
     signal incidentDataChanged(var incidentData, string error, date lastUpdate)
 
+    function getDataBackend(backendId) {
+        if (Constants.BACKEND_STUTTGART === backendId) {
+            Functions.log("[ApplicationWindow] - backend is : " + backendStuttgart);
+            return backendStuttgart;
+        }
+    }
+
     function reloadAllIncidents() {
         Functions.log("[ApplicationWindow] - reloadAllIncidents");
-        var backend = Functions.getDataBackend(Constants.BACKEND_STUTTGART);
+        var backend = getDataBackend(Constants.BACKEND_STUTTGART);
         disconnectSlots(backend);
         connectSlots(backend);
         backend.getIncidents()

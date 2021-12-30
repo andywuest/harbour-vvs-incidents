@@ -42,6 +42,8 @@ Page {
         incidentsModel.clear()
         incidentPresent = false;
 
+        incidentsHeader.description = getLastUpdateString();
+
         if (!errorOccured) {
             incidentPresent = (result.currentIncidents.length > 0);
             for (var i = 0; i < result.currentIncidents.length; i++)   {

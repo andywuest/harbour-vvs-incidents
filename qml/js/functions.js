@@ -1,12 +1,6 @@
+.pragma library
 
 Qt.include('constants.js');
-
-function getDataBackend(backendId) {
-    if (BACKEND_STUTTGART === backendId) {
-        console.log("backend stuttgart : " + backendStuttgart)
-        return backendStuttgart;
-    }
-}
 
 function log(message) {
     if (loggingEnabled && message) {
