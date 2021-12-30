@@ -32,7 +32,6 @@ AbstractBackend::~AbstractBackend() {
 QNetworkReply *AbstractBackend::executeGetRequest(const QUrl &url) {
   qDebug() << "AbstractDataBackend::executeGetRequest " << url;
   QNetworkRequest request(url);
-//  request.setHeader(QNetworkRequest::ContentTypeHeader, MIME_TYPE_JSON);
   request.setHeader(QNetworkRequest::UserAgentHeader, USER_AGENT);
 
   return manager->get(request);
