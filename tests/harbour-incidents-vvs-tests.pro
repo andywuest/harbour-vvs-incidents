@@ -12,7 +12,7 @@ HEADERS += \
 INCLUDEPATH += ../
 include(../harbour-vvs-incidents.pri)
 
-TARGET = BackendStuttgartTest
+TARGET = BackendStuttgartTests
 
 DISTFILES += \
     testdata/incidents_bus.json \
