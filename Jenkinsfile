@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout VVS Incidents') {
             steps {
-                git branch: 'master',
+                git branch: 'main',
                         url: 'https://github.com/andywuest/harbour-vvs-incidents.git'
             }
         }
