@@ -60,7 +60,7 @@ AboutPage title - about text title</extracomment>
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="87"/>
+        <location filename="../qml/cover/CoverPage.qml" line="88"/>
         <source>Incidents</source>
         <translation>Störungen</translation>
     </message>
@@ -85,29 +85,29 @@ AboutPage title - about text title</extracomment>
 <context>
     <name>OverviewPage</name>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="60"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="62"/>
         <source>Last update: %1</source>
         <translation>Letzte Aktualisierung: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="78"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="80"/>
         <source>About</source>
         <extracomment>Overview Page about</extracomment>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="82"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="84"/>
         <source>Reload Incidents</source>
         <translation>Störungen neu laden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="115"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="117"/>
         <source>Incidents</source>
         <extracomment>OverviewPage page header</extracomment>
         <translation>Störungen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="138"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="140"/>
         <source>Currently there are no incidents to report.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -115,17 +115,17 @@ AboutPage title - about text title</extracomment>
 <context>
     <name>functions</name>
     <message>
-        <location filename="../qml/js/functions.js" line="54"/>
+        <location filename="../qml/js/functions.js" line="48"/>
         <source>On %1</source>
         <translation>Am %1</translation>
     </message>
     <message>
-        <location filename="../qml/js/functions.js" line="56"/>
+        <location filename="../qml/js/functions.js" line="50"/>
         <source>From %1 until further notice</source>
         <translation>Vom %1 bis auf Weiteres</translation>
     </message>
     <message>
-        <location filename="../qml/js/functions.js" line="58"/>
+        <location filename="../qml/js/functions.js" line="52"/>
         <source>From %1 until %2</source>
         <translation>Vom %1 bis %2</translation>
     </message>
