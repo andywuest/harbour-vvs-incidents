@@ -16,6 +16,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 #include "backendstuttgart.h"
+#include "../constants.h"
 
 #include <QDebug>
 #include <QJsonArray>
@@ -35,14 +36,17 @@ BackendStuttgart::~BackendStuttgart() {
 
 void BackendStuttgart::getIncidents() {
   qDebug() << "BackendStuttgart::searchName";
-  //QNetworkReply *reply = executeGetRequest(QUrl("https://api.jsonbin.io/b/619944150ddbee6f8b0f4e93")); // bus viele
-  //QNetworkReply *reply = executeGetRequest(QUrl("https://api.jsonbin.io/b/619e946462ed886f91542d82")); // einzeln
+  // QNetworkReply *reply =
+  // executeGetRequest(QUrl("https://api.jsonbin.io/b/619944150ddbee6f8b0f4e93"));
+  // // bus viele
+  // QNetworkReply *reply =
+  // executeGetRequest(QUrl("https://api.jsonbin.io/b/619e946462ed886f91542d82"));
+  // // einzeln
+//   QNetworkReply *reply =
+//   executeGetRequest(QUrl("https://api.jsonbin.io/b/61db37872362237a3a35140c"));
+//   // zacke
 
-
-
-
-  // https://jsonbin.io/619944150ddbee6f8b0f4e93
-  QNetworkReply *reply = executeGetRequest(QUrl("https://www3.vvs.de/mngvvs/XML_ADDINFO_REQUEST?AIXMLReduction=removeSourceSystem&SpEncId=0&coordOutputFormat=EPSG:4326&filterMessageSubtype=disruption:lines&filterMessageSubtype=disruption:stops&filterPublicationStatus=current&filterShowLineList=0&filterShowPlaceList=0&filterShowStopList=0&outputFormat=rapidJSON&serverInfo=1&version=10.2.10.139"));
+  QNetworkReply *reply = executeGetRequest(QUrl(INCIDENTS_VVS_URL));
 
   connectErrorSlot(reply);
   connect(reply, SIGNAL(finished()), this, SLOT(handleGetIncidentsFinished()));
@@ -82,45 +86,35 @@ QString BackendStuttgart::processSearchResult(QByteArray searchReply) {
       QString fromTimestamp = availability["from"].toString();
       QString toTimestamp = availability["to"].toString();
 
-      qDebug()<< "title: " << currentObject["title"];
-      qDebug()<< "timestamp: " << creationTimestamp;
-      qDebug()<< "timestamp (con): " << convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone());
-      qDebug()<< "timestamp (format): " << convertToDateTimeFormat(convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone()));
-      qDebug()<< "from (format): " << convertToDateTimeFormat(convertTimestampToLocalTimestamp(fromTimestamp, QTimeZone::systemTimeZone()));
-      qDebug()<< "to (format): " << convertToDateTimeFormat(convertTimestampToLocalTimestamp(toTimestamp, QTimeZone::systemTimeZone()));
+      qDebug() << "title: " << currentObject["title"];
+      qDebug() << "timestamp: " << creationTimestamp;
+      qDebug() << "timestamp (con): "
+               << convertTimestampToLocalTimestamp(creationTimestamp,
+                                                   QTimeZone::systemTimeZone());
+      qDebug() << "timestamp (format): "
+               << convertToDateTimeFormat(convertTimestampToLocalTimestamp(
+                      creationTimestamp, QTimeZone::systemTimeZone()));
+      qDebug() << "from (format): "
+               << convertToDateTimeFormat(convertTimestampToLocalTimestamp(
+                      fromTimestamp, QTimeZone::systemTimeZone()));
+      qDebug() << "to (format): "
+               << convertToDateTimeFormat(convertTimestampToLocalTimestamp(
+                      toTimestamp, QTimeZone::systemTimeZone()));
 
-      currentObject.insert("_timestampFormatted", convertToDateTimeFormat(convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone())));
-      currentObject.insert("_fromFormatted", convertToDateFormat(convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone())));
-      currentObject.insert("_toFormatted", convertToDateFormat(convertTimestampToLocalTimestamp(creationTimestamp, QTimeZone::systemTimeZone())));
+      const QTimeZone timezone = QTimeZone::systemTimeZone();
+
+      currentObject.insert(
+          "_timestampFormatted",
+          convertToDateTimeFormat(convertTimestampToLocalTimestamp(creationTimestamp, timezone)));
+      currentObject.insert(
+          "_fromFormatted",
+          convertToDateFormat(convertTimestampToLocalTimestamp(fromTimestamp, timezone)));
+      currentObject.insert(
+          "_toFormatted",
+          convertToDateFormat(convertTimestampToLocalTimestamp(toTimestamp, timezone)));
 
       resultArray.push_back(currentObject);
     }
-
-    //        foreach (const QJsonValue &newsEntry, newsItemArray) {
-    //            QJsonObject newsObject = newsEntry.toObject();
-    //            QString headline = newsObject["headline"].toString();
-    //            QString content = newsObject["content"].toString();
-    //            QString source = newsObject["id"].toString();
-    //            QString url = QString::null;                          // not
-    //            supported QString dateTime =
-    //            newsObject["newsDate"].toString(); // TODO parsen in richtiges
-    //            datetime
-
-    //            QJsonObject resultObject;
-
-    //            resultObject.insert("headline", headline);
-    //            resultObject.insert("content", filterContent(content));
-    //            resultObject.insert("source", source);
-    //            resultObject.insert("url", url);
-    //            resultObject.insert("dateTime",
-    //                                IngDibaUtils::convertTimestampToLocalTimestamp(dateTime,
-    //                                QTimeZone::systemTimeZone())
-    //                                    .toString());
-
-    //            // TODO evtl. html tags filtern -  Link-Tags entfernen <a>
-
-    //            resultArray.push_back(resultObject);
-    //        }
   }
 
   // response objects
@@ -136,25 +130,23 @@ QString BackendStuttgart::processSearchResult(QByteArray searchReply) {
 }
 
 // TODO copied from watchlist
-QDateTime BackendStuttgart::convertTimestampToLocalTimestamp(const QString &utcDateTimeString, QTimeZone timeZone) {
-    QDateTime dt = QDateTime::fromString(utcDateTimeString, Qt::ISODate);
-    dt.setTimeZone(timeZone);
-    qDebug() << "dt : " << dt << "using timezone : " << timeZone;
-    QDateTime localDateTime = dt.toLocalTime();
-    return localDateTime;
+QDateTime BackendStuttgart::convertTimestampToLocalTimestamp(
+    const QString &utcDateTimeString, const QTimeZone &timeZone) {
+  QDateTime dt = QDateTime::fromString(utcDateTimeString, Qt::ISODate);
+  dt.setTimeZone(timeZone);
+  qDebug() << "dt : " << dt << "using timezone : " << timeZone;
+  QDateTime localDateTime = dt.toLocalTime();
+  return localDateTime;
 }
 
 QString BackendStuttgart::convertToDateTimeFormat(const QDateTime &time) {
-    return time.toString("dd.MM.yyyy") + " " + time.toString("hh:mm:ss");
+  return time.toString("dd.MM.yyyy") + " " + time.toString("hh:mm:ss");
 }
 
 QString BackendStuttgart::convertToDateFormat(const QDateTime &dateTime) {
-    // if date is too far in the future -> return blank string
-    if (dateTime.date().year() > 2100) {
-        return QString("");
-    }
-    return dateTime.toString("dd.MM.yyyy");
+  // if date is too far in the future -> return blank string
+  if (dateTime.date().year() > 2100) {
+    return QString("");
+  }
+  return dateTime.toString("dd.MM.yyyy");
 }
-
-
-

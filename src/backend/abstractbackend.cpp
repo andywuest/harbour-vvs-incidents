@@ -30,7 +30,7 @@ AbstractBackend::~AbstractBackend() {
 }
 
 QNetworkReply *AbstractBackend::executeGetRequest(const QUrl &url) {
-  qDebug() << "AbstractDataBackend::executeGetRequest " << url;
+  qDebug() << "AbstractBackend::executeGetRequest " << url;
   QNetworkRequest request(url);
   request.setHeader(QNetworkRequest::UserAgentHeader, USER_AGENT);
 
@@ -43,8 +43,8 @@ void AbstractBackend::connectErrorSlot(QNetworkReply *reply) {
           static_cast<void (QNetworkReply::*)(QNetworkReply::NetworkError)>(
               &QNetworkReply::error),
           [=](QNetworkReply::NetworkError error) {
-            // TODO test reply->deleteLater();
-            qWarning() << "AbstractDataBackend::handleRequestError:"
+            reply->deleteLater();
+            qWarning() << "AbstractBackend::connectErrorSlot:"
                        << static_cast<int>(error) << reply->errorString()
                        << reply->readAll();
             emit requestError(

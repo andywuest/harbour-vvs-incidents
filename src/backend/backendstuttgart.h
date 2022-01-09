@@ -39,10 +39,10 @@ private slots:
 
 protected:
   QString processSearchResult(QByteArray searchReply);
-  QDateTime convertTimestampToLocalTimestamp(const QString &utcDateTimeString, QTimeZone timeZone);
+  QDateTime convertTimestampToLocalTimestamp(const QString &utcDateTimeString,
+                                             const QTimeZone &timeZone);
   QString convertToDateTimeFormat(const QDateTime &time);
   QString convertToDateFormat(const QDateTime &time);
-
 
 #ifdef UNIT_TEST
   friend class BackendStuttgartTests; // to test non public methods
