@@ -60,7 +60,7 @@ AboutPage title - about text title</extracomment>
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="88"/>
+        <location filename="../qml/cover/CoverPage.qml" line="90"/>
         <source>Incidents</source>
         <translation>Störungen</translation>
     </message>

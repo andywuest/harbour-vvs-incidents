@@ -4,11 +4,10 @@ X-Nemo-Application-Type=silica-qt5
 Icon=harbour-vvs-incidents
 Exec=harbour-vvs-incidents
 Name=VVS Incidents
-# translation example:
-# your app name in German locale (de)
-#
-# Remember to comment out the following line, if you do not want to use
-# a different app name in German locale (de).
-# Name[de]=harbour-vvs-incidents
 Name[de]=VVS Störungen
 Name[en]=VVS Incidents
+
+[X-Sailjail]
+OrganizationName=de.andreas-wuest-it-consulting
+ApplicationName=vvs-incidents
+Permissions=Internet

@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.6
 import QtTest 1.2
 
 import "../qml/js/functions.js" as Functions

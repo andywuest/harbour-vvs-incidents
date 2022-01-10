@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 
 import "../js/constants.js" as Constants
@@ -76,7 +76,7 @@ CoverBackground {
         opacity: coverPage.loading ? 0 : 1
 
         anchors.fill: parent
-        anchors.topMargin: Theme.paddingMedium
+        // anchors.topMargin: Theme.paddingMedium
 
         model: ListModel {
             id: coverModel
@@ -85,6 +85,8 @@ CoverBackground {
         header: Text {
             id: labelTitle
             width: parent.width
+            topPadding: Theme.paddingLarge
+            bottomPadding: Theme.paddingMedium
             text: qsTr("Incidents")
             color: Theme.primaryColor
             font.bold: true
