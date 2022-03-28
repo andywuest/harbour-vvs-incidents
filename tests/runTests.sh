@@ -1,14 +1,12 @@
 #/bin/bash
 
-rm *.o
-rm Makefile
-rm moc_*
+# execute with workaround with tap - because junit cannot be generated directly with the used version
 
-qmake 
+find . -name "*.o" -exec rm  {} \;
+find . -name "*.tap" -exec rm  {} \;
+find . -name "moc_*" -exec rm  {} \;
+find . -name "Makefile" -exec rm  {} \;
+
+qmake -o Makefile harbour-incidents-vvs-tests.pro
 make
-
-ls -l
-pwd
-
-./BackendStuttgartTests -o cppresults.xml,xml
-
+env LC_ALL=de_DE.UTF-8 LC_NUMERIC=de_DE.utf8 ./BackendStuttgartTests -o xmlresults.tap,tap
