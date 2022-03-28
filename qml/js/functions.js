@@ -13,6 +13,8 @@ function resolveIconForLines(affectedLines) {
         var lineName = affectedLines.lines[i].name;
         if (containsSubstring(lineName, "Bus")) {
             return "bus"
+        } else if (containsSubstring(lineName, "Nachtbus")) {
+            return "bus"
         } else if (containsSubstring(lineName, "Zahnradbahn")) {
             return "zacke"
         } else if (containsSubstring(lineName, "S-Bahn")) {

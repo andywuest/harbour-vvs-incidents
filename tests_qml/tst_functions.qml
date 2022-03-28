@@ -11,6 +11,7 @@ TestCase {
     property var rbahnData: ({})
     property var ubahnMultipleData: ({})
     property var zackeData: ({})
+    property var nachtbusData: ({})
 
     function loadData(source, callback) {
         var xhr = new XMLHttpRequest;
@@ -30,6 +31,7 @@ TestCase {
         loadData("./testdata/rbahn.json", function(jsonData) { rbahnData = jsonData; });
         loadData("./testdata/ubahn_multiple.json", function(jsonData) { ubahnMultipleData = jsonData; });
         loadData("./testdata/zacke.json", function(jsonData) { zackeData = jsonData; });
+        loadData("./testdata/nachtbus.json", function(jsonData) { nachtbusData = jsonData; });
     }
 
     function test_functions_getListOfAffectedLines() {
@@ -37,6 +39,7 @@ TestCase {
         compare("U7, U15", Functions.getListOfAffectedLines(ubahnMultipleData.affected))
         compare("RB64", Functions.getListOfAffectedLines(rbahnData.affected))
         compare("10", Functions.getListOfAffectedLines(zackeData.affected))
+        compare("N97", Functions.getListOfAffectedLines(nachtbusData.affected))
     }
 
     function test_functions_resolveIconForLines() {
@@ -44,6 +47,7 @@ TestCase {
         compare("ubahn", Functions.resolveIconForLines(ubahnMultipleData.affected))
         compare("rbahn", Functions.resolveIconForLines(rbahnData.affected))
         compare("zacke", Functions.resolveIconForLines(zackeData.affected))
+        compare("bus", Functions.resolveIconForLines(nachtbusData.affected))
     }
 
     function test_functions_createAvailabilityLabel() {

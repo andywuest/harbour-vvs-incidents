@@ -1,0 +1,44 @@
+{
+  "affected": {
+    "lines": [
+      {
+        "id": "vvs:34097: :H:",
+        "destination": {
+          "name": "Böhmenkirch Rathaus",
+          "type": "stop"
+        },
+        "name": "Nachtbus N97",
+        "number": "N97",
+        "description": "Göppingen ZOB - Süßen - Donzdorf - Böhmenkirch",
+        "iconId": 6,
+        "product": {
+          "class": 5,
+          "iconId": 3
+        },
+        "operator": {
+          "id": "20",
+          "name": "DB Regio Bus"
+        }
+      },
+      {
+        "id": "vvs:34097: :R:",
+        "destination": {
+          "name": "Göppingen ZOB",
+          "type": "stop"
+        },
+        "name": "Nachtbus N97",
+        "number": "N97",
+        "description": "Böhmenkirch - Donzdorf - Süßen - Göppingen ZOB",
+        "iconId": 6,
+        "product": {
+          "class": 5,
+          "iconId": 3
+        },
+        "operator": {
+          "id": "20",
+          "name": "DB Regio Bus"
+        }
+      }
+    ]
+  }
+}
