@@ -1,2 +1,23 @@
-# harbour-vvs-incidents
-SailfishOS Application to display VVS Incidents for Stuttgart
+# VVS Incidents
+SailfishOS Application to display VVS Incidents for the Stuttgart area.
+
+## Author
+Andreas Wüst [andreas.wuest.freelancer@gmail.com](mailto:andreas.wuest.freelancer@gmail.com)
+
+## Screenshots
+
+![Overview](/screenshots/homepage/small_overview.png?raw=true "Overview")
+![Details](/screenshots/homepage/small_details.png?raw=true "Details")
+
+## Build
+Simply clone this repository.
+
+## License
+Licensed under GNU GPLv3
+
+## Translations
+
+Watchlist was translated to several languages. Thanks to all contributors!
+- German: me :-)
+
+
