@@ -23,139 +23,104 @@ import "../components/thirdparty"
 Page {
     id: aboutPage
 
+    allowedOrientations: Orientation.All
+
     SilicaFlickable {
         id: aboutPageFlickable
         anchors.fill: parent
-        contentHeight: aboutColumn.height
+        contentHeight: column.height
 
         Column {
+            id: column
+            width:parent.width
+            spacing: Theme.paddingLarge
+
             PageHeader {
-                //: AboutPage title - header
+                //: AboutPage - Header
                 title: qsTr("About VVS Incidents")
             }
 
-            id: aboutColumn
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-            height: childrenRect.height
-
-            LabelText {
-                anchors {
-                    left: parent.left
-                    margins: Theme.paddingLarge
-                }
-                //: AboutPage title - about text title
-                label: qsTr("About VVS Incidents")
-                //: AboutPage text - about text
-                // TODO fixme
-                text: qsTr("Application shows public transportation incidents in the area of Stuttgart/Germany. VVS Incidents is open source and licensed under the GPL v3.")
-                separator: true
+            Image {
+                id: logo
+                source: "/usr/share/icons/hicolor/172x172/apps/harbour-vvs-incidents.png"
+                smooth: true
+                height: width
+                width: parent.width / 2
+                sourceSize.width: 512
+                sourceSize.height: 512
+                anchors.horizontalCenter: parent.horizontalCenter
+                opacity: 0.7
             }
 
-            LabelText {
-                anchors {
-                    left: parent.left
-                    margins: Theme.paddingLarge
-                }
-                //: AboutPage version label
-                label: qsTr("Version")
+            Label {
+                width: parent.width
+                x : Theme.horizontalPageMargin
+                font.pixelSize: Theme.fontSizeExtraLarge
+                color: Theme.secondaryHighlightColor
+
+                //: AboutPage - Name
+                text: qsTr("VVS Incidents")
+            }
+
+            Label {
+                width: parent.width
+                x : Theme.horizontalPageMargin
                 text: applicationVersion
-                separator: true
             }
 
-            BackgroundItem {
-                id: clickableUrlAuthor
-                contentHeight: labelAuthor.height
-                height: contentHeight
-                width: aboutPageFlickable.width
-                anchors {
-                    left: parent.left
-                }
-
-                LabelText {
-                    id: labelAuthor
-                    anchors {
-                        left: parent.left
-                        margins: Theme.paddingLarge
-                    }
-                    //: AboutPage author label
-                    label: qsTr("Author")
-                    text: "Andreas Wüst"
-                    separator: true
-                    color: clickableUrlAuthor.highlighted ? Theme.highlightColor : Theme.primaryColor
-                }
+            Item {
+                height: Theme.paddingMedium
+                width: 1
             }
 
-            LabelText {
-                anchors {
-                    left: parent.left
-                    margins: Theme.paddingLarge
-                }
-                //: AboutPage translators label
-                label: qsTr("Translators")
-                text: "-"
-                separator: true
-            }
-
-            LabelText {
-                anchors {
-                    left: parent.left
-                    margins: Theme.paddingLarge
-                }
-                //: AboutPage contributors label
-                label: qsTr("Contributors")
-                text: "-"
-                separator: true
+            AboutDescription {
+                //: AboutPage text - about text
+                description: qsTr("Application shows public transportation incidents in the area of Stuttgart/Germany. VVS Incidents is open source and licensed under the GPL v3.")
             }
 
             /*
-            BackgroundItem {
-                id: clickableUrlIcons
-                contentHeight: iconLabelUrl.height
-                height: contentHeight
-                width: aboutPageFlickable.width
-                anchors {
-                    left: parent.left
-                }
+            SectionHeader {
+                //: AboutPage - Translations
+                text: qsTr("Translations")
+            }
 
-                LabelText {
-                    id: iconLabelUrl
-                    anchors {
-                        left: parent.left
-                        margins: Theme.paddingLarge
-                    }
-                    //: AboutPage icon source label
-                    label: qsTr("Icons")
-                    text: "Icons made by Freepik from Free vector icons - SVG, PSD, PNG, EPS & Icon Font - Thousands of free icons"
-                    color: clickableUrlSourceCode.highlighted ? Theme.highlightColor : Theme.primaryColor
-                }
-                onClicked: Qt.openUrlExternally("http://www.flaticon.com")
+            AboutDescription {
+                //: AboutPage - translations
+                description: ""
             }
             */
 
-            BackgroundItem {
-                id: clickableUrlSourceCode
-                contentHeight: labelUrl.height
-                height: contentHeight
-                width: aboutPageFlickable.width
-                anchors {
-                    left: parent.left
-                }
+            SectionHeader {
+                id: sectionHeaderSources
+                //: AboutPage - sources
+                text: qsTr("Sources")
+            }
 
-                LabelText {
-                    id: labelUrl
-                    anchors {
-                        left: parent.left
-                        margins: Theme.paddingLarge
-                    }
-                    //: AboutPage about source label
-                    label: qsTr("Source code")
-                    text: "https://github.com/andywuest/harbour-vvs-incidents"
-                    color: clickableUrlSourceCode.highlighted ? Theme.highlightColor : Theme.primaryColor
-                }
-                onClicked: Qt.openUrlExternally(labelUrl.text)
+            AboutIconLabel {
+                iconSource: "icons/github.svg"
+                label: "https://github.com/andywuest/harbour-vvs-incidents"
+                targetUrl: "https://github.com/andywuest/harbour-vvs-incidents"
+            }
+
+            SectionHeader {
+                //: AboutPage - Donations
+                text: qsTr("Donations")
+            }
+
+            AboutDescription {
+                //: AboutPage - donations info
+                description: qsTr("If you like my work why not buy me a beer?")
+            }
+
+            AboutIconLabel {
+                iconSource: "icons/paypal.svg"
+                label: qsTr("Donate with PayPal")
+                targetUrl: "https://www.paypal.com/paypalme/andywuest"
+            }
+
+            Item {
+                width: 1
+                height: Theme.paddingSmall
             }
         }
     }
