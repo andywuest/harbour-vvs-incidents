@@ -9,10 +9,7 @@
 # the git-change-log command provided with Sailfish OS SDK), create a
 # harbour-vvs-incidents.changes.run script to let mb2 run the required commands for you.
 
-# * date Author's Name <author's email> version-release
-# - Summary of changes
+* 31.08.2023 Andreas Wüst <andreas.wuest.freelancer@gmail.com> 0.0.6
 
-* Sun Apr 13 2014 Jack Tar <jack.tar@example.com> 0.0.1-1
-- Scrubbed the deck
-- Hoisted the sails
+- new About page
 
