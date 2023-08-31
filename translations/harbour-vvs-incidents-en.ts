@@ -4,48 +4,44 @@
 <context>
     <name>AboutPage</name>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="34"/>
-        <location filename="../qml/pages/AboutPage.qml" line="50"/>
+        <location filename="../qml/pages/AboutPage.qml" line="40"/>
         <source>About VVS Incidents</source>
-        <extracomment>AboutPage title - header
-----------
-AboutPage title - about text title</extracomment>
+        <extracomment>AboutPage - Header</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="53"/>
+        <location filename="../qml/pages/AboutPage.qml" line="62"/>
+        <source>VVS Incidents</source>
+        <extracomment>AboutPage - Name</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="78"/>
         <source>Application shows public transportation incidents in the area of Stuttgart/Germany. VVS Incidents is open source and licensed under the GPL v3.</source>
         <extracomment>AboutPage text - about text</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="63"/>
-        <source>Version</source>
-        <extracomment>AboutPage version label</extracomment>
+        <location filename="../qml/pages/AboutPage.qml" line="96"/>
+        <source>Sources</source>
+        <extracomment>AboutPage - sources</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="84"/>
-        <source>Author</source>
-        <extracomment>AboutPage author label</extracomment>
+        <location filename="../qml/pages/AboutPage.qml" line="107"/>
+        <source>Donations</source>
+        <extracomment>AboutPage - Donations</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="97"/>
-        <source>Translators</source>
-        <extracomment>AboutPage translators label</extracomment>
+        <location filename="../qml/pages/AboutPage.qml" line="112"/>
+        <source>If you like my work why not buy me a beer?</source>
+        <extracomment>AboutPage - donations info</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="108"/>
-        <source>Contributors</source>
-        <extracomment>AboutPage contributors label</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/AboutPage.qml" line="154"/>
-        <source>Source code</source>
-        <extracomment>AboutPage about source label</extracomment>
+        <location filename="../qml/pages/AboutPage.qml" line="117"/>
+        <source>Donate with PayPal</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -115,17 +111,17 @@ AboutPage title - about text title</extracomment>
 <context>
     <name>functions</name>
     <message>
-        <location filename="../qml/js/functions.js" line="48"/>
+        <location filename="../qml/js/functions.js" line="50"/>
         <source>On %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/js/functions.js" line="50"/>
+        <location filename="../qml/js/functions.js" line="52"/>
         <source>From %1 until further notice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/js/functions.js" line="52"/>
+        <location filename="../qml/js/functions.js" line="54"/>
         <source>From %1 until %2</source>
         <translation type="unfinished"></translation>
     </message>
