@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 17.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.1"
+   x="0px"
+   y="0px"
+   width="86px"
+   height="86px"
+   viewBox="0 0 86 86"
+   enable-background="new 0 0 86 86"
+   xml:space="preserve"
+   id="svg551"
+   sodipodi:docname="vvs.svg"
+   inkscape:version="1.2.2 (1:1.2.2+202212051552+b0a8486541)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs555" /><sodipodi:namedview
+   id="namedview553"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   showgrid="false"
+   inkscape:zoom="3.8808651"
+   inkscape:cx="42.258619"
+   inkscape:cy="43.16048"
+   inkscape:window-width="1920"
+   inkscape:window-height="1172"
+   inkscape:window-x="1920"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<g
+   id="Layer_2"
+   display="none">
+</g>
+<g
+   id="Layer_1">
+	<radialGradient
+   id="SVGID_1_"
+   cx="43"
+   cy="43"
+   r="34.7634"
+   gradientUnits="userSpaceOnUse">
+		<stop
+   offset="0"
+   style="stop-color:#FFFFFF"
+   id="stop529" />
+		<stop
+   offset="1"
+   style="stop-color:#FFFFFF;stop-opacity:0"
+   id="stop531" />
+	</radialGradient>
+	<circle
+   fill="url(#SVGID_1_)"
+   cx="43"
+   cy="43"
+   r="34.763"
+   id="circle534" />
+	<linearGradient
+   id="SVGID_2_"
+   gradientUnits="userSpaceOnUse"
+   x1="0.7169"
+   y1="85.2831"
+   x2="85.2831"
+   y2="0.7169">
+		<stop
+   offset="0"
+   style="stop-color:#CBCBCB"
+   id="stop536" />
+		<stop
+   offset="1"
+   style="stop-color:#FFFFFF"
+   id="stop538" />
+	</linearGradient>
+	<path
+   opacity="0.8"
+   fill="url(#SVGID_2_)"
+   d="M84.277,0.3H43C19.417,0.3,0.3,19.418,0.3,43v41.277c0,0.786,0.637,1.423,1.423,1.423   H43c23.583,0,42.7-19.118,42.7-42.7V1.723C85.7,0.937,85.063,0.3,84.277,0.3z"
+   id="path541" /><g
+   transform="matrix(0.79161165,0,0,0.79161165,-318.05366,-50.046398)"
+   id="g2305"><polygon
+     points="521.64,67.86 524.7,57.78 529.74,57.78 524.34,72.36 518.4,72.36 512.82,57.78 518.76,57.78 "
+     transform="translate(-70.400506,64.800465)"
+     style="fill:#000000;fill-rule:nonzero;stroke:none;stroke-width:0.28;stroke-linecap:butt;stroke-linejoin:bevel"
+     id="polygon39" /><polygon
+     points="540.54,67.86 543.6,57.78 548.64,57.78 543.24,72.36 537.3,72.36 531.72,57.78 537.48,57.78 "
+     transform="translate(-70.400506,64.800465)"
+     style="fill:#000000;fill-rule:nonzero;stroke:none;stroke-width:0.28;stroke-linecap:butt;stroke-linejoin:bevel"
+     id="polygon41" /><path
+     d="m 484.35949,132.30047 c 0,0.35999 0,0.9 0.36,1.44 0.18,0.35999 0.54,0.9 1.44,0.9 1.26,0 1.8,-0.9 1.8,-1.62 0,-0.9 -0.9,-1.26 -2.16,-1.62 l -2.88,-0.72 c -0.9,-0.36 -3.6,-1.08001 -3.6,-3.96 0,-1.44001 0.72,-2.7 1.8,-3.42 1.26,-0.9 3.06,-1.26 5.04,-1.26 3.24,0 6.48,0.9 6.66,5.04 h -5.04 c 0,-0.54 0,-1.08 -0.18,-1.44 -0.36,-0.54 -0.72,-0.9 -1.62,-0.9 -0.9,0 -1.62,0.36 -1.62,1.26 0,0.9 0.72,1.26 1.44,1.44 l 3.96,1.08 c 1.44,0.36 3.42,1.25999 3.42,3.96 0,5.04 -5.76,5.04 -7.02,5.04 -2.88,0 -7.2,-0.54 -7.2,-5.22 z"
+     style="fill:#000000;fill-rule:nonzero;stroke:none;stroke-width:0.28;stroke-linecap:butt;stroke-linejoin:bevel"
+     id="path43" /><path
+     d="m 419.01949,117.54047 c 0,19.44 15.84,35.1 35.28,35.1 4.5,0 8.82,-0.9 13.14,-2.52 l -2.7,-6.3 c -3.24,1.26 -6.84,1.98 -10.44,1.98 -15.66,0 -28.44,-12.6 -28.44,-28.26 0,-15.48001 12.78,-28.260005 28.44,-28.260005 15.48,0 28.26,12.779995 28.26,28.260005 v 0.36 h 6.84 v -0.36 c 0,-19.440005 -15.84,-35.100005 -35.1,-35.100005 -19.44,0 -35.28,15.66 -35.28,35.100005 z"
+     style="fill:#ff6600;fill-rule:nonzero;stroke:none;stroke-width:0.28;stroke-linecap:butt;stroke-linejoin:bevel"
+     id="path45" /></g>
+	
+		<radialGradient
+   id="SVGID_3_"
+   cx="26.9526"
+   cy="62.6673"
+   r="30.3622"
+   gradientTransform="matrix(0.9727 0 0 0.9727 11.2953 -19.0235)"
+   gradientUnits="userSpaceOnUse">
+		<stop
+   offset="0"
+   style="stop-color:#4EB4BA"
+   id="stop543" />
+		<stop
+   offset="1"
+   style="stop-color:#007DA4"
+   id="stop545" />
+	</radialGradient>
+	
+</g>
+</svg>
