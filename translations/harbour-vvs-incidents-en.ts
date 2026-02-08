@@ -81,29 +81,29 @@
 <context>
     <name>OverviewPage</name>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="63"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="64"/>
         <source>Last update: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="81"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="82"/>
         <source>About</source>
         <extracomment>Overview Page about</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="85"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="86"/>
         <source>Reload Incidents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="120"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="119"/>
         <source>Incidents</source>
         <extracomment>OverviewPage page header</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="143"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="142"/>
         <source>Currently there are no incidents to report.</source>
         <translation type="unfinished"></translation>
     </message>

@@ -48,10 +48,6 @@ ApplicationWindow {
         }
     }
 
-    Component.onCompleted: {
-        connectSlots(getDataBackend(Constants.BACKEND_STUTTGART));
-    }
-
     initialPage: overviewPage
     cover: coverPage
     allowedOrientations: defaultAllowedOrientations

@@ -55,6 +55,8 @@ Page {
             incidentUpdateNotification.show(error)
         }
 
+        // calculate visibility here, instead of in the component -> much faster
+        noIncidentsColumn.visible = (!incidentPresent && !showLoadingIndicator && !errorOccured);
         showLoadingIndicator = false;
     }
 
@@ -127,7 +129,7 @@ Page {
                 height: parent.height
                 spacing: Theme.paddingSmall
 
-                visible: (!incidentPresent && !showLoadingIndicator && !errorOccured)
+                visible: false
 
                 Label {
                     topPadding: Theme.paddingLarge
@@ -180,13 +182,8 @@ Page {
                             // TODO custom - hier noch pruefen, was an margins noch machbar, sinnvoll ist
                             Column {
                                 id: stockQuoteColumn
-                                width: parent.width // - (2 * Theme.horizontalPageMargin)
-                                // x: Theme.horizontalPageMargin
-                                height: /*firstRow.height + */ changeValuesRow.height + iconLabelRow.height
-                                + availabiltyRow.height
-                                /* + secondRow.height*/
-                                        //+ changeValuesRow.height
-                                        //+ (watchlistSettings.showPerformanceRow ? performanceRow.height : 0)
+                                width: parent.width
+                                height: changeValuesRow.height + iconLabelRow.height + availabiltyRow.height
 
                                 anchors.verticalCenter: parent.verticalCenter
 
