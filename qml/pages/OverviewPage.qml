@@ -28,8 +28,6 @@ Page {
     id: overviewPage
 
     property bool showLoadingIndicator : false
-    property bool errorOccured: false
-    property bool incidentPresent: false
     property date lastUpdate
 
     // The effective value will be restricted by ApplicationWindow.allowedOrientations
@@ -37,10 +35,10 @@ Page {
 
     function incidentDataChanged(result, error, date) {
         Functions.log("[OverviewPage] - data has changed, error " + error + ", date : " + date)
-        errorOccured = (error !== "");
+        var errorOccured = (error !== "");
+        var incidentPresent = false;
         lastUpdate = new Date();
         incidentsModel.clear()
-        incidentPresent = false;
 
         incidentsHeader.description = getLastUpdateString();
 
@@ -56,7 +54,7 @@ Page {
         }
 
         // calculate visibility here, instead of in the component -> much faster
-        noIncidentsColumn.visible = (!incidentPresent && !showLoadingIndicator && !errorOccured);
+        noIncidentsView.enabled = (!incidentPresent && !errorOccured)
         showLoadingIndicator = false;
     }
 
@@ -86,7 +84,6 @@ Page {
                 text: qsTr("Reload Incidents")
                 onClicked: {
                     showLoadingIndicator = true;
-                    errorOccured = false;
                     getDataBackend(Constants.BACKEND_STUTTGART).getIncidents();
                 }
             }
@@ -120,27 +117,9 @@ Page {
                 description: getLastUpdateString();
             }
 
-            // TODO create component from it
-            Column {
-                id: noIncidentsColumn
-
-                x: Theme.horizontalPageMargin
-                width: parent.width - 2 * x
-                height: parent.height
-                spacing: Theme.paddingSmall
-
-                visible: false
-
-                Label {
-                    topPadding: Theme.paddingLarge
-                    horizontalAlignment: Text.AlignHCenter
-                    x: Theme.horizontalPageMargin
-                    width: parent.width - 2 * x
-
-                    wrapMode: Text.Wrap
-                    textFormat: Text.RichText
-                    text: qsTr("Currently there are no incidents to report.")
-                }
+            ViewPlaceholder {
+                id: noIncidentsView
+                text: qsTr("Currently there are no incidents to report.")
             }
 
             SilicaListView {
@@ -150,6 +129,7 @@ Page {
                 width: parent.width
                 anchors.left: parent.left
                 anchors.right: parent.right
+                visible: incidentsModel.count > 0
 
                 clip: true
 
@@ -272,7 +252,7 @@ Page {
 
         onGetIncidentsResultAvailable: incidentDataChanged(JSON.parse(reply.toString()), "", new Date())
 
-        onRequestError: incidentDataChanged({}, result, new Date())
+        onRequestError: incidentDataChanged({}, errorMessage, new Date())
     }
 
 }

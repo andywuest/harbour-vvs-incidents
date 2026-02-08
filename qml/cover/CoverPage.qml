@@ -126,7 +126,7 @@ CoverBackground {
 
         onGetIncidentsResultAvailable: incidentDataChanged(JSON.parse(reply.toString()), "", new Date());
 
-        onRequestError: incidentDataChanged({}, result, new Date());
+        onRequestError: incidentDataChanged({}, errorMessage, new Date());
     }
 
 }

@@ -97,13 +97,13 @@
         <translation>Störungen neu laden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="119"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="118"/>
         <source>Incidents</source>
         <extracomment>OverviewPage page header</extracomment>
         <translation type="unfinished">Störungen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="142"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="125"/>
         <source>Currently there are no incidents to report.</source>
         <translation type="unfinished"></translation>
     </message>
