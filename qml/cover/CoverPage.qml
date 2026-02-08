@@ -28,7 +28,7 @@ import "../components/thirdparty"
 CoverBackground {
     id: coverPage
     property bool errorOccured: false
-    property bool loading: false
+    property bool showLoadingIndicator: false
 
     function incidentDataChanged(result, error, date) {
         Functions.log(
@@ -44,12 +44,12 @@ CoverBackground {
         } else {
             // label.text = qsTr("Error occured")
         }
-        loading = false
+        showLoadingIndicator = false
     }
 
     CoverLoadingColumn {
         id: coverLoadingColumn
-        visible: loading
+        visible: showLoadingIndicator
     }
 
     CoverActionList {
@@ -58,9 +58,9 @@ CoverBackground {
         CoverAction {
             iconSource: "image://theme/icon-cover-refresh"
             onTriggered: {
-                coverPage.loading = true
+                coverPage.showLoadingIndicator = true
                 coverPage.errorOccured = false
-                app.reloadAllIncidents()
+                getDataBackend(Constants.BACKEND_STUTTGART).getIncidents()
             }
         }
     }
@@ -68,12 +68,12 @@ CoverBackground {
     SilicaListView {
         id: coverListView
 
-        visible: !coverPage.loading
+        visible: !coverPage.showLoadingIndicator
         Behavior on opacity {
             NumberAnimation {
             }
         }
-        opacity: coverPage.loading ? 0 : 1
+        opacity: coverPage.showLoadingIndicator ? 0 : 1
 
         anchors.fill: parent
         // anchors.topMargin: Theme.paddingMedium
@@ -114,14 +114,19 @@ CoverBackground {
         }
     }
 
-    Component.onCompleted: {
-        app.incidentDataChanged.connect(incidentDataChanged)
-    }
-
     OpacityRampEffect {
         sourceItem: coverListView
         direction: OpacityRamp.TopToBottom
         offset: 0.6
         slope: 3.75
     }
+
+    Connections {
+        target: getDataBackend(Constants.BACKEND_STUTTGART)
+
+        onGetIncidentsResultAvailable: incidentDataChanged(JSON.parse(reply.toString()), "", new Date());
+
+        onRequestError: incidentDataChanged({}, result, new Date());
+    }
+
 }

@@ -9,9 +9,10 @@
 # the git-change-log command provided with Sailfish OS SDK), create a
 # harbour-vvs-incidents.changes.run script to let mb2 run the required commands for you.
 
-* xx.xx.2024 Andreas Wüst <andreas.wuest.freelancer@gmail.com> 0.0.7
+* 08.02.2026 Andreas Wüst <andreas.wuest.freelancer@gmail.com> 0.0.7
 
 - added new icon for the application
+- signal / slot changes
 
 * 31.08.2023 Andreas Wüst <andreas.wuest.freelancer@gmail.com> 0.0.6
 

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-import QtQuick 2.6
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 import "../js/constants.js" as Constants
@@ -27,7 +27,7 @@ import "../components/thirdparty"
 Page {
     id: overviewPage
 
-    property bool loading : false
+    property bool showLoadingIndicator : false
     property bool errorOccured: false
     property bool incidentPresent: false
     property date lastUpdate
@@ -55,7 +55,7 @@ Page {
             incidentUpdateNotification.show(error)
         }
 
-        loading = false;
+        showLoadingIndicator = false;
     }
 
     function getLastUpdateString() {
@@ -83,9 +83,9 @@ Page {
             MenuItem {
                 text: qsTr("Reload Incidents")
                 onClicked: {
-                    loading = true;
+                    showLoadingIndicator = true;
                     errorOccured = false;
-                    app.reloadAllIncidents();
+                    getDataBackend(Constants.BACKEND_STUTTGART).getIncidents();
                 }
             }
         }
@@ -127,7 +127,7 @@ Page {
                 height: parent.height
                 spacing: Theme.paddingSmall
 
-                visible: (!incidentPresent && !loading && !errorOccured)
+                visible: (!incidentPresent && !showLoadingIndicator && !errorOccured)
 
                 Label {
                     topPadding: Theme.paddingLarge
@@ -161,7 +161,7 @@ Page {
 
                     onClicked: {
                         var selectedIncident = incidentsListView.model.get(index);
-                        pageStack.push(Qt.resolvedUrl("../pages/DetailsPage.qml"), { incident: selectedIncident }) // TODO page url
+                        pageStack.push(Qt.resolvedUrl("../pages/DetailsPage.qml"), { incident: selectedIncident })
                     }
 
                     Item {
@@ -231,20 +231,8 @@ Page {
                                         font.pixelSize: Theme.fontSizeExtraSmall
                                         horizontalAlignment: Text.AlignLeft
                                     }
-
-//                                    Text {
-//                                        width: parent.width / 2
-//                                        height: parent.height
-//                                        text: "value2"
-//                                            // Functions.renderChange(price, changeRelative, '%')
-//                                        // color: Functions.determineChangeColor(changeRelative)
-//                                        font.pixelSize: Theme.fontSizeExtraSmall
-//                                        horizontalAlignment: Text.AlignRight
-//                                    }
                                 }
-
                             }
-
                         }
 
                         Separator {
@@ -265,22 +253,29 @@ Page {
         }
     }
 
-    Component.onCompleted: {
-        app.incidentDataChanged.connect(incidentDataChanged)
-        loading = true;
-        app.reloadAllIncidents();
-    }
-
     LoadingIndicator {
-        id: incidentsLoadingIndicator
-        visible: loading
+        visible: showLoadingIndicator
         Behavior on opacity {
             NumberAnimation {
             }
         }
-        opacity: loading ? 1 : 0
+        opacity: showLoadingIndicator ? 1 : 0
         height: parent.height
         width: parent.width
+    }
+
+    Component.onCompleted: {
+        Functions.log("[OverviewPage] - initial loading")
+        showLoadingIndicator = true;
+        getDataBackend(Constants.BACKEND_STUTTGART).getIncidents()
+    }
+
+    Connections {
+        target: getDataBackend(Constants.BACKEND_STUTTGART)
+
+        onGetIncidentsResultAvailable: incidentDataChanged(JSON.parse(reply.toString()), "", new Date())
+
+        onRequestError: incidentDataChanged({}, result, new Date())
     }
 
 }

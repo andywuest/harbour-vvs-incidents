@@ -36,36 +36,6 @@ ApplicationWindow {
         }
     }
 
-    function reloadAllIncidents() {
-        Functions.log("[ApplicationWindow] - reloadAllIncidents");
-        var backend = getDataBackend(Constants.BACKEND_STUTTGART);
-        disconnectSlots(backend);
-        connectSlots(backend);
-        backend.getIncidents()
-    }
-
-    function connectSlots(backend) {
-        Functions.log("[ApplicationWindow] - connect slot " + backend);
-        backend.getIncidentsResultAvailable.connect(getIncidentsResultHandler);
-        backend.requestError.connect(errorResultHandler);
-    }
-
-    function disconnectSlots(backend) {
-        Functions.log("[ApplicationWindow] disconnect - slots");
-        backend.getIncidentsResultAvailable.disconnect(getIncidentsResultHandler);
-        backend.requestError.disconnect(errorResultHandler);
-    }
-
-    function getIncidentsResultHandler(result) {
-      Functions.log("[ApplicationWindow] result : " + result);
-      incidentDataChanged(JSON.parse(result.toString()), "", new Date());
-    }
-
-    function errorResultHandler(result) {
-        Functions.log("[ApplicationWindow] - result error : " + result);
-        incidentDataChanged({}, result, new Date());
-    }
-
     Component {
         id: overviewPage
         OverviewPage {
@@ -76,6 +46,10 @@ ApplicationWindow {
         id: coverPage
         CoverPage {
         }
+    }
+
+    Component.onCompleted: {
+        connectSlots(getDataBackend(Constants.BACKEND_STUTTGART));
     }
 
     initialPage: overviewPage
