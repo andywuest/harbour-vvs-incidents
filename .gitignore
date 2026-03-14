@@ -3,3 +3,9 @@
 .idea
 build-harbour-incidents*
 *results.xml
+/test/cpp/moc_abstractbackend.cpp
+moc_*
+.qmake*
+Makefile
+VVSIncidentsTests
+*.tap

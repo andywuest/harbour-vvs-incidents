@@ -49,8 +49,9 @@ void BackendStuttgartTests::testBackendStuttgartProcessSearchResult() {
 }
 
 QByteArray BackendStuttgartTests::readFileData(const QString &fileName) {
-  QFile f("testdata/" + fileName);
+  QFile f("../cpp/data/" + fileName);
   if (!f.open(QFile::ReadOnly | QFile::Text)) {
+    qDebug() << "file not found : " << QFileInfo(f).absoluteFilePath();
     QString msg = "Testfile " + fileName + " not found!";
     return QByteArray();
   }
