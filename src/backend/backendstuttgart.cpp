@@ -23,6 +23,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QUrl>
+#include <QRegularExpression>
 
 BackendStuttgart::BackendStuttgart(QNetworkAccessManager *manager,
                                    QObject *parent)
@@ -219,4 +220,63 @@ QString BackendStuttgart::convertToDateFormat(const QDateTime &dateTime) {
     return QString("");
   }
   return dateTime.toString("dd.MM.yyyy");
+}
+
+// 1) Reduce to the <select id="linien"> ... </select> block using regex
+QString BackendStuttgart::extractLinienSelectBlock(const QString &html) const
+{
+    // Pattern that captures the inner HTML of the select
+    QRegularExpression reSelect(
+        "<select[^>]*id\\s*=\\s*\"linien\"[^>]*>([\\s\\S]*?)</select>");
+
+    reSelect.setPatternOptions(
+        QRegularExpression::CaseInsensitiveOption
+        | QRegularExpression::DotMatchesEverythingOption);
+
+    QRegularExpressionMatch m = reSelect.match(html);
+    if (!m.hasMatch())
+        return QString();
+
+    // Group 1 = content between opening and closing select
+    return m.captured(1);
+}
+
+QJsonObject BackendStuttgart::parseLinienSelectToJson(const QString &html)
+{
+    QJsonArray resultArray;
+
+    // Step 1: keep only the inner HTML of <select id="linien">
+    const QString selectInner = extractLinienSelectBlock(html);
+    if (selectInner.isEmpty()) {
+        QJsonObject root;
+        root.insert("result", resultArray);
+        return root;
+    }
+
+    // Step 2: regex over <option ...>text</option>
+    QRegularExpression reOption(
+        "<option[^>]*value\\s*=\\s*\"([^\"]*)\"[^>]*>(.*?)</option>");
+
+    reOption.setPatternOptions(
+        QRegularExpression::CaseInsensitiveOption
+        | QRegularExpression::DotMatchesEverythingOption);
+
+    QRegularExpressionMatchIterator it = reOption.globalMatch(selectInner);
+    while (it.hasNext()) {
+        QRegularExpressionMatch match = it.next();
+        QString value = match.captured(1).trimmed();
+        QString name  = match.captured(2).trimmed();
+
+        // Remove any nested tags from the visible text, if present
+        name.remove(QRegularExpression("<[^>]*>"));
+
+        QJsonObject optionObj;
+        optionObj.insert("value", value);
+        optionObj.insert("name", name);
+        resultArray.append(optionObj);
+    }
+
+    QJsonObject root;
+    root.insert("result", resultArray);
+    return root;
 }

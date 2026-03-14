@@ -24,6 +24,7 @@
 #include <QNetworkReply>
 #include <QObject>
 #include <QTimeZone>
+#include <QRegularExpression>
 
 class BackendStuttgart : public AbstractBackend {
   Q_OBJECT
@@ -46,6 +47,11 @@ protected:
                                              const QTimeZone &timeZone);
   QString convertToDateTimeFormat(const QDateTime &time);
   QString convertToDateFormat(const QDateTime &time);
+
+
+   QJsonObject parseLinienSelectToJson(const QString &html);
+  QString extractLinienSelectBlock(const QString &html) const;
+
 
 #ifdef UNIT_TEST
   friend class BackendStuttgartTests; // to test non public methods
