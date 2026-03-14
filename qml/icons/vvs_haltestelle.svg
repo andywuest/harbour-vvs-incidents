@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+        xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:cc="http://creativecommons.org/ns#"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:svg="http://www.w3.org/2000/svg"
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        viewBox="0 0 22 20">
+            <circle style="fill:#289560;" cx="10" cy="10" r="10"></circle>
+            <circle style="fill:#EFD522;" cx="10" cy="10" r="8"></circle>
+            <g>
+                <polygon style="fill:#289560;" points="6,15 6,5 8,5 8,9 12,9 12,5 14,5 14,15 12,15 12,11 8,11 8,15  "></polygon>
+            </g>
+</svg>
+
+
+<!--
+<svg class="icon icon-haltestelle" name="haltestelle"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="app/vvs.components/assets/images/icons/symbol-defs.svg#icon-haltestelle">
+<symbol id="icon-haltestelle" viewBox="0 0 20 20">
+
+
+        </symbol>
+
+</use></svg>
+-->
