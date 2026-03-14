@@ -52,6 +52,76 @@ void BackendStuttgart::getIncidents() {
   connect(reply, SIGNAL(finished()), this, SLOT(handleGetIncidentsFinished()));
 }
 
+void BackendStuttgart::searchStation(const QString &searchString) {
+    qDebug() << "BackendStuttgart::searchStation";
+
+    QNetworkReply *reply = executeGetRequest(QUrl(QString(STATIONS_VVS_URL).arg(searchString)));
+
+    connectErrorSlot(reply);
+
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+       reply->deleteLater();
+       qDebug() << "return code : "
+                << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
+                       .toString();
+
+       QByteArray searchReply = reply->readAll();
+       QString searchJson = QString(searchReply).replace(QString("func("), QString()).replace(QString(");"), QString());
+
+       qDebug() << "result : " << searchJson;
+
+       QJsonArray resultArray;
+       QJsonDocument jsonDocument = QJsonDocument::fromJson(searchJson.toUtf8());
+       if (jsonDocument.isObject()) {
+         QJsonObject rootObject = jsonDocument.object();
+         QJsonObject stopFindeObject = rootObject["stopFinder"].toObject();
+         QJsonArray pointsArray = stopFindeObject["points"].toArray();
+
+         foreach (const QJsonValue &entry, pointsArray) {
+            QJsonObject point = entry.toObject();
+            resultArray.push_back(point);
+         }
+       }
+
+       std::sort(resultArray.begin(), resultArray.end(),
+                 [](const QJsonValue &a, const QJsonValue &b) {
+                     int qualityA = a.toObject()["quality"].toString().toInt();
+                     int qualityB = b.toObject()["quality"].toString().toInt();
+
+                     if (qualityA == qualityB) {
+                         QString placeA = a.toObject()["ref"].toObject()["place"].toString();
+                         QString placeB = b.toObject()["ref"].toObject()["place"].toString();
+
+                         qDebug() << "place a : " << placeA;
+
+                        int compareResult = QString::compare(placeA, placeB, Qt::CaseInsensitive);
+                        return compareResult < 0;
+                     }
+
+                     return qualityA > qualityB;
+                 });
+
+
+       QJsonDocument resultDocument;
+       QJsonObject resultObject;
+       resultObject.insert("points", resultArray);
+       resultDocument.setObject(resultObject);
+
+       QString dataToString(resultDocument.toJson());
+
+       qDebug() << "result : " << dataToString;
+
+       emit searchStationResultAvailable(dataToString);
+     });
+}
+
+inline void swap(QJsonValueRef v1, QJsonValueRef v2)
+{
+    QJsonValue tmp(v1);
+    v1 = QJsonValue(v2);
+    v2 = tmp;
+}
+
 void BackendStuttgart::handleGetIncidentsFinished() {
   qDebug() << "BackendStuttgart::handleGetIncidentsFinished";
   QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());

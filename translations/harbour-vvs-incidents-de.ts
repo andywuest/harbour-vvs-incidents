@@ -81,47 +81,74 @@
 <context>
     <name>OverviewPage</name>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="64"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="62"/>
         <source>Last update: %1</source>
         <translation>Letzte Aktualisierung: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="82"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="80"/>
         <source>About</source>
         <extracomment>Overview Page about</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="86"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="85"/>
+        <source>Timetable notice</source>
+        <extracomment>Overview Page about</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/OverviewPage.qml" line="89"/>
         <source>Reload Incidents</source>
         <translation>Störungen neu laden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="118"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="121"/>
         <source>Incidents</source>
         <extracomment>OverviewPage page header</extracomment>
         <translation type="unfinished">Störungen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="125"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="127"/>
         <source>Currently there are no incidents to report.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StationSearchPage</name>
+    <message>
+        <location filename="../qml/pages/StationSearchPage.qml" line="93"/>
+        <source>Search Results</source>
+        <extracomment>StationSearchPage search result header</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StationSearchPage.qml" line="100"/>
+        <source>Find your Station...</source>
+        <extracomment>StationSearchPage search result input field</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StationSearchPage.qml" line="136"/>
+        <source>No results found</source>
+        <extracomment>StationSearchPage no results label</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>functions</name>
     <message>
-        <location filename="../qml/js/functions.js" line="50"/>
+        <location filename="../qml/js/functions.js" line="60"/>
         <source>On %1</source>
         <translation>Am %1</translation>
     </message>
     <message>
-        <location filename="../qml/js/functions.js" line="52"/>
+        <location filename="../qml/js/functions.js" line="62"/>
         <source>From %1 until further notice</source>
         <translation>Vom %1 bis auf Weiteres</translation>
     </message>
     <message>
-        <location filename="../qml/js/functions.js" line="54"/>
+        <location filename="../qml/js/functions.js" line="64"/>
         <source>From %1 until %2</source>
         <translation>Vom %1 bis %2</translation>
     </message>

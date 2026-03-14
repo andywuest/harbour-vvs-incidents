@@ -8,6 +8,16 @@ function log(message) {
     }
 }
 
+function resolveIconForLocation(location) {
+    if (containsSubstring(location, "street")) {
+      return "adresse";
+    } else if (containsSubstring(location, "poi")) {
+        return "poi";
+    } else if (containsSubstring(location, "stop")) {
+        return "haltestelle";
+    }
+}
+
 function resolveIconForLines(affectedLines) {
     for (var i = 0; i < affectedLines.lines.length; i++) {
         var lineName = affectedLines.lines[i].name;
@@ -56,3 +66,6 @@ function createAvailabilityLabel(from, to) {
     return label;
 }
 
+function calculateVisibleStringLength(value) {
+   return (value !== undefined) ? value.replace(/\s/g, "").length : 0;
+}

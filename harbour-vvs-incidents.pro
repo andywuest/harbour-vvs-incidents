@@ -34,6 +34,7 @@ DISTFILES += qml/harbour-vvs-incidents.qml \
     qml/pages/AboutPage.qml \
     qml/pages/DetailsPage.qml \
     qml/pages/OverviewPage.qml \
+    qml/pages/StationSearchPage.qml \
     qml/pages/icons/github.svg \
     qml/pages/icons/paypal.svg \
     qml/js/functions.js \

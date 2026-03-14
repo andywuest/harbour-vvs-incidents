@@ -19,8 +19,10 @@
 #define CONSTANTS_H
 
 const char MIME_TYPE_JSON[] = "application/json";
-const char USER_AGENT[] = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:73.0) Gecko/20100101 Firefox/73.0";
+const char USER_AGENT[] = "Mozilla/5.0 (X11; Linux x86_64; rv:146.0) Gecko/20100101 Firefox/146.0";
 
 const char INCIDENTS_VVS_URL[] = "https://www3.vvs.de/mngvvs/XML_ADDINFO_REQUEST?AIXMLReduction=removeSourceSystem&SpEncId=0&coordOutputFormat=EPSG:4326&filterMessageSubtype=disruption:lines&filterMessageSubtype=disruption:stops&filterPublicationStatus=current&filterShowLineList=0&filterShowPlaceList=0&filterShowStopList=0&outputFormat=rapidJSON&serverInfo=1&version=10.2.10.139";
+
+const char STATIONS_VVS_URL[] = "https://efa.vvs.de/vvs/XSLT_STOPFINDER_REQUEST?jsonp=func&suggest_macro=vvs&name_sf=%1";
 
 #endif // CONSTANTS_H
