@@ -48,6 +48,38 @@ void BackendStuttgartTests::testBackendStuttgartProcessSearchResult() {
   //   qDebug() << parsedResult;
 }
 
+void BackendStuttgartTests::testParseLinienSelectToJson_noSelectWithOptions() {
+  QString html = "<div>no select here</div>";
+  QJsonObject result = backendStuttgart->parseLinienSelectToJson(html);
+  QCOMPARE(result["result"].toArray().size(), 0);
+}
+
+void BackendStuttgartTests::testParseLinienSelectToJson_withOptions() {
+  QString html = R"(
+        <div>
+            <select id="linien">
+                <option value="10">Linie 10</option>
+                <option value="20">Linie 20 nach Stadtmitte</option>
+            </select>
+        </div>
+    )";
+
+  QJsonObject result = backendStuttgart->parseLinienSelectToJson(html);
+  QJsonArray array = result["result"].toArray();
+
+  QCOMPARE(array.size(), 2);
+
+  // First option
+  QJsonObject opt1 = array[0].toObject();
+  QCOMPARE(opt1["value"].toString(), QString("10"));
+  QCOMPARE(opt1["name"].toString(), QString("Linie 10"));
+
+  // Second option
+  QJsonObject opt2 = array[1].toObject();
+  QCOMPARE(opt2["value"].toString(), QString("20"));
+  QCOMPARE(opt2["name"].toString(), QString("Linie 20 nach Stadtmitte"));
+}
+
 QByteArray BackendStuttgartTests::readFileData(const QString &fileName) {
   QFile f("../cpp/data/" + fileName);
   if (!f.open(QFile::ReadOnly | QFile::Text)) {

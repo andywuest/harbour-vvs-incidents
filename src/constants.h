@@ -25,4 +25,7 @@ const char INCIDENTS_VVS_URL[] = "https://www3.vvs.de/mngvvs/XML_ADDINFO_REQUEST
 
 const char STATIONS_VVS_URL[] = "https://efa.vvs.de/vvs/XSLT_STOPFINDER_REQUEST?jsonp=func&suggest_macro=vvs&name_sf=%1";
 
+const char LINES_FOR_STATION_URL[] = "https://efa.vvs.de/vvs/XSLT_STT_REQUEST";
+const char LINES_FOR_STATION_POST_DATA[] = "language=de&type_stt=any&nameInfo_stt=%1";
+
 #endif // CONSTANTS_H

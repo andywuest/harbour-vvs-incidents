@@ -38,6 +38,9 @@ private slots:
   //    void testIngDibaUtilsConvertTimestampToLocalTimestamp();
   //    void testIngDibaBackendIsValidSecurityCategory();
   void testBackendStuttgartProcessSearchResult();
+
+  void testParseLinienSelectToJson_withOptions();
+  void testParseLinienSelectToJson_noSelectWithOptions();
 };
 
 #endif // ING_DIBA_BACKEND_TEST_H

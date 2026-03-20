@@ -20,6 +20,7 @@ Page {
         Functions.log("StationSearchPage - connecting - slots")
         var dataBackend = getDataBackend(Constants.BACKEND_STUTTGART);
         dataBackend.searchStationResultAvailable.connect(searchStationResultHandler);
+        dataBackend.getLinesForStationResultAvailable.connect(getLinesForStationResultHandler);
         dataBackend.requestError.connect(errorResultHandler);
     }
 
@@ -27,6 +28,7 @@ Page {
         Functions.log("StationSearchPage - disconnecting - slots")
         var dataBackend = getDataBackend(Constants.BACKEND_STUTTGART);
         dataBackend.searchStationResultAvailable.disconnect(searchStationResultHandler);
+        dataBackend.getLinesForStationResultAvailable.disconnect(getLinesForStationResultHandler);
         dataBackend.requestError.disconnect(errorResultHandler);
     }
 
@@ -49,6 +51,11 @@ Page {
       } else {
           noResultsColumn.visible = true
       }
+    }
+
+    function getLinesForStationResultHandler(result) {
+        var jsonResult = JSON.parse(result.toString())
+        Functions.log("json result (linesForStation) : " + result)
     }
 
     function errorResultHandler(result) {
@@ -166,7 +173,6 @@ Page {
                 delegate: ListItem {
                     id: delegate
 
-
                     Column {
                         id: resultColumn
                         width: parent.width - (2 * Theme.horizontalPageMargin)
@@ -178,22 +184,8 @@ Page {
                         IconLabelRow {
                             id: iconLabelRow
                             lineType: Functions.resolveIconForLocation(anyType)
-                            affectedLines: "" + object
+                            affectedLines: "" + (object ? object : name)
                         }
-
-//                        Label {
-//                            id: stationNameText
-//                            font.pixelSize: Theme.fontSizeSmall
-//                            color: Theme.primaryColor
-//                            text: object
-//                            textFormat: Text.StyledText
-//                            //elide: Text.ElideRight
-//                            truncationMode: TruncationMode.Fade // TODO check for very long texts
-//                            maximumLineCount: 1
-//                            width: parent.width
-//                            height: Theme.fontSizeMedium
-//                            visible: false
-//                        }
 
                         Row {
                             id: genericAdditionalInfoRow
@@ -210,32 +202,15 @@ Page {
                                 elide: Text.ElideRight
                                 maximumLineCount: 1
                             }
-//                            Text {
-//                                id: stockIsin
-//                                width: parent.width / 3
-//                                visible: false
-//                                font.pixelSize: Theme.fontSizeExtraSmall
-//                                color: Theme.secondaryColor
-//                                text: mainLoc // isin - should be available for all backends
-//                                textFormat: Text.StyledText
-//                                elide: Text.ElideRight
-//                                horizontalAlignment: Text.AlignRight
-//                                maximumLineCount: 1
-//                            }
                         }
-
                     }
-
 
                     onClicked: {
                         var selectedItem = searchResultListModel.get(index)
-                        console.log("selected index : "+ index + ", item : " + selectedItem)
-                        //var result = Database.persistStockData(selectedItem, watchlistId)
-                        //app.securityAdded(watchlistId);
-                        // stockAddedNotification.show(result);
+                        console.log("selected index : "+ index + ", item : " + selectedItem + " - stateless : " + selectedItem.stateless)
+                        getDataBackend(Constants.BACKEND_STUTTGART).getLinesForStation(selectedItem.stateless);
                     }
                 }
-
 
                 VerticalScrollDecorator {
                 }

@@ -15,6 +15,10 @@ function resolveIconForLocation(location) {
         return "poi";
     } else if (containsSubstring(location, "stop")) {
         return "haltestelle";
+    } else if (containsSubstring(location, "loc")) {
+        return "ort";
+    } else {
+        console.log("unknown type for location");
     }
 }
 

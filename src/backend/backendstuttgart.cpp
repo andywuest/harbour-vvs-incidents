@@ -22,6 +22,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QRegularExpression>
 #include <QUrl>
 
 BackendStuttgart::BackendStuttgart(QNetworkAccessManager *manager,
@@ -42,9 +43,9 @@ void BackendStuttgart::getIncidents() {
   // QNetworkReply *reply =
   // executeGetRequest(QUrl("https://api.jsonbin.io/b/619e946462ed886f91542d82"));
   // // einzeln
-//   QNetworkReply *reply =
-//   executeGetRequest(QUrl("https://api.jsonbin.io/b/61db37872362237a3a35140c"));
-//   // zacke
+  //   QNetworkReply *reply =
+  //   executeGetRequest(QUrl("https://api.jsonbin.io/b/61db37872362237a3a35140c"));
+  //   // zacke
 
   QNetworkReply *reply = executeGetRequest(QUrl(INCIDENTS_VVS_URL));
 
@@ -53,73 +54,104 @@ void BackendStuttgart::getIncidents() {
 }
 
 void BackendStuttgart::searchStation(const QString &searchString) {
-    qDebug() << "BackendStuttgart::searchStation";
+  qDebug() << "BackendStuttgart::searchStation";
 
-    QNetworkReply *reply = executeGetRequest(QUrl(QString(STATIONS_VVS_URL).arg(searchString)));
+  QNetworkReply *reply =
+      executeGetRequest(QUrl(QString(STATIONS_VVS_URL).arg(searchString)));
 
-    connectErrorSlot(reply);
+  connectErrorSlot(reply);
 
-    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
-       reply->deleteLater();
-       qDebug() << "return code : "
-                << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
-                       .toString();
+  connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+    reply->deleteLater();
+    qDebug() << "return code : "
+             << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
+                    .toString();
 
-       QByteArray searchReply = reply->readAll();
-       QString searchJson = QString(searchReply).replace(QString("func("), QString()).replace(QString(");"), QString());
+    QByteArray searchReply = reply->readAll();
+    QString searchJson = QString(searchReply)
+                             .replace(QString("func("), QString())
+                             .replace(QString(");"), QString());
 
-       qDebug() << "result : " << searchJson;
+    qDebug() << "result : " << searchJson;
 
-       QJsonArray resultArray;
-       QJsonDocument jsonDocument = QJsonDocument::fromJson(searchJson.toUtf8());
-       if (jsonDocument.isObject()) {
-         QJsonObject rootObject = jsonDocument.object();
-         QJsonObject stopFindeObject = rootObject["stopFinder"].toObject();
-         QJsonArray pointsArray = stopFindeObject["points"].toArray();
+    QJsonArray resultArray;
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(searchJson.toUtf8());
+    if (jsonDocument.isObject()) {
+      QJsonObject rootObject = jsonDocument.object();
+      QJsonObject stopFindeObject = rootObject["stopFinder"].toObject();
+      QJsonArray pointsArray = stopFindeObject["points"].toArray();
 
-         foreach (const QJsonValue &entry, pointsArray) {
-            QJsonObject point = entry.toObject();
-            resultArray.push_back(point);
-         }
-       }
+      foreach (const QJsonValue &entry, pointsArray) {
+        QJsonObject point = entry.toObject();
+        resultArray.push_back(point);
+      }
+    }
 
-       std::sort(resultArray.begin(), resultArray.end(),
-                 [](const QJsonValue &a, const QJsonValue &b) {
-                     int qualityA = a.toObject()["quality"].toString().toInt();
-                     int qualityB = b.toObject()["quality"].toString().toInt();
+    std::sort(resultArray.begin(), resultArray.end(),
+              [](const QJsonValue &a, const QJsonValue &b) {
+                int qualityA = a.toObject()["quality"].toString().toInt();
+                int qualityB = b.toObject()["quality"].toString().toInt();
 
-                     if (qualityA == qualityB) {
-                         QString placeA = a.toObject()["ref"].toObject()["place"].toString();
-                         QString placeB = b.toObject()["ref"].toObject()["place"].toString();
+                if (qualityA == qualityB) {
+                  QString placeA =
+                      a.toObject()["ref"].toObject()["place"].toString();
+                  QString placeB =
+                      b.toObject()["ref"].toObject()["place"].toString();
 
-                         qDebug() << "place a : " << placeA;
+                  qDebug() << "place a : " << placeA;
 
-                        int compareResult = QString::compare(placeA, placeB, Qt::CaseInsensitive);
-                        return compareResult < 0;
-                     }
+                  int compareResult =
+                      QString::compare(placeA, placeB, Qt::CaseInsensitive);
+                  return compareResult < 0;
+                }
 
-                     return qualityA > qualityB;
-                 });
+                return qualityA > qualityB;
+              });
 
+    QJsonDocument resultDocument;
+    QJsonObject resultObject;
+    resultObject.insert("points", resultArray);
+    resultDocument.setObject(resultObject);
 
-       QJsonDocument resultDocument;
-       QJsonObject resultObject;
-       resultObject.insert("points", resultArray);
-       resultDocument.setObject(resultObject);
+    QString dataToString(resultDocument.toJson());
 
-       QString dataToString(resultDocument.toJson());
+    qDebug() << "result : " << dataToString;
 
-       qDebug() << "result : " << dataToString;
-
-       emit searchStationResultAvailable(dataToString);
-     });
+    emit searchStationResultAvailable(dataToString);
+  });
 }
 
-inline void swap(QJsonValueRef v1, QJsonValueRef v2)
-{
-    QJsonValue tmp(v1);
-    v1 = QJsonValue(v2);
-    v2 = tmp;
+inline void swap(QJsonValueRef v1, QJsonValueRef v2) {
+  QJsonValue tmp(v1);
+  v1 = QJsonValue(v2);
+  v2 = tmp;
+}
+
+void BackendStuttgart::getLinesForStation(const QString &stationId) {
+  QUrl url = QUrl(LINES_FOR_STATION_URL);
+  QNetworkRequest request(url);
+
+  request.setHeader(QNetworkRequest::UserAgentHeader, USER_AGENT);
+
+  const QString postData = QString(LINES_FOR_STATION_POST_DATA).arg(stationId);
+
+  qDebug() << "postData: " << postData;
+
+  QNetworkReply *reply = manager->post(request, postData.toUtf8());
+
+  connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+    reply->deleteLater();
+    qDebug() << "return code : "
+             << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
+                    .toString();
+
+    QByteArray searchReply = reply->readAll();
+    QJsonDocument resultDocument;
+    resultDocument.setObject(parseLinienSelectToJson(QString(searchReply)));
+
+    QString dataToString(resultDocument.toJson());
+    emit getLinesForStationResultAvailable(dataToString);
+  });
 }
 
 void BackendStuttgart::handleGetIncidentsFinished() {
@@ -175,13 +207,14 @@ QString BackendStuttgart::processSearchResult(QByteArray searchReply) {
 
       currentObject.insert(
           "_timestampFormatted",
-          convertToDateTimeFormat(convertTimestampToLocalTimestamp(creationTimestamp, timezone)));
-      currentObject.insert(
-          "_fromFormatted",
-          convertToDateFormat(convertTimestampToLocalTimestamp(fromTimestamp, timezone)));
-      currentObject.insert(
-          "_toFormatted",
-          convertToDateFormat(convertTimestampToLocalTimestamp(toTimestamp, timezone)));
+          convertToDateTimeFormat(
+              convertTimestampToLocalTimestamp(creationTimestamp, timezone)));
+      currentObject.insert("_fromFormatted",
+                           convertToDateFormat(convertTimestampToLocalTimestamp(
+                               fromTimestamp, timezone)));
+      currentObject.insert("_toFormatted",
+                           convertToDateFormat(convertTimestampToLocalTimestamp(
+                               toTimestamp, timezone)));
 
       resultArray.push_back(currentObject);
     }
@@ -219,4 +252,59 @@ QString BackendStuttgart::convertToDateFormat(const QDateTime &dateTime) {
     return QString("");
   }
   return dateTime.toString("dd.MM.yyyy");
+}
+
+// 1) Reduce to the <select id="linien"> ... </select> block using regex
+QString BackendStuttgart::extractLinienSelectBlock(const QString &html) const {
+  // Pattern that captures the inner HTML of the select
+  QRegularExpression reSelect(
+      "<select[^>]*id\\s*=\\s*\"linien\"[^>]*>([\\s\\S]*?)</select>");
+
+  reSelect.setPatternOptions(QRegularExpression::CaseInsensitiveOption |
+                             QRegularExpression::DotMatchesEverythingOption);
+
+  QRegularExpressionMatch m = reSelect.match(html);
+  if (!m.hasMatch())
+    return QString();
+
+  // Group 1 = content between opening and closing select
+  return m.captured(1);
+}
+
+QJsonObject BackendStuttgart::parseLinienSelectToJson(const QString &html) {
+  QJsonArray resultArray;
+
+  // Step 1: keep only the inner HTML of <select id="linien">
+  const QString selectInner = extractLinienSelectBlock(html);
+  if (selectInner.isEmpty()) {
+    QJsonObject root;
+    root.insert("result", resultArray);
+    return root;
+  }
+
+  // Step 2: regex over <option ...>text</option>
+  QRegularExpression reOption(
+      "<option[^>]*value\\s*=\\s*\"([^\"]*)\"[^>]*>(.*?)</option>");
+
+  reOption.setPatternOptions(QRegularExpression::CaseInsensitiveOption |
+                             QRegularExpression::DotMatchesEverythingOption);
+
+  QRegularExpressionMatchIterator it = reOption.globalMatch(selectInner);
+  while (it.hasNext()) {
+    QRegularExpressionMatch match = it.next();
+    QString value = match.captured(1).trimmed();
+    QString name = match.captured(2).trimmed();
+
+    // Remove any nested tags from the visible text, if present
+    name.remove(QRegularExpression("<[^>]*>"));
+
+    QJsonObject optionObj;
+    optionObj.insert("value", value);
+    optionObj.insert("name", name);
+    resultArray.append(optionObj);
+  }
+
+  QJsonObject root;
+  root.insert("result", resultArray);
+  return root;
 }

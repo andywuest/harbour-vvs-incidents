@@ -23,6 +23,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QObject>
+#include <QRegularExpression>
 #include <QTimeZone>
 
 class BackendStuttgart : public AbstractBackend {
@@ -34,8 +35,10 @@ public:
 
   Q_INVOKABLE virtual void getIncidents() override;
   Q_INVOKABLE virtual void searchStation(const QString &searchString);
+  Q_INVOKABLE virtual void getLinesForStation(const QString &stationId);
 
   Q_SIGNAL void searchStationResultAvailable(const QString &reply);
+  Q_SIGNAL void getLinesForStationResultAvailable(const QString &reply);
 
 private slots:
   void handleGetIncidentsFinished();
@@ -46,6 +49,9 @@ protected:
                                              const QTimeZone &timeZone);
   QString convertToDateTimeFormat(const QDateTime &time);
   QString convertToDateFormat(const QDateTime &time);
+
+  QJsonObject parseLinienSelectToJson(const QString &html);
+  QString extractLinienSelectBlock(const QString &html) const;
 
 #ifdef UNIT_TEST
   friend class BackendStuttgartTests; // to test non public methods
