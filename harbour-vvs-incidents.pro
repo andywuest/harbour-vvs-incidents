@@ -25,6 +25,8 @@ DEFINES += VERSION_NUMBER=\\\"$$(VERSION_NUMBER)\\\"
 DISTFILES += qml/harbour-vvs-incidents.qml \
     qml/components/CoverLoadingColumn.qml \
     qml/components/IconLabelRow.qml \
+    qml/components/StationLineItem.qml \
+    qml/components/StationListItem.qml \
     qml/components/thirdparty/AboutDescription.qml \
     qml/components/thirdparty/AboutIconLabel.qml \
     qml/components/thirdparty/LoadingIndicator.qml \
@@ -34,6 +36,7 @@ DISTFILES += qml/harbour-vvs-incidents.qml \
     qml/pages/AboutPage.qml \
     qml/pages/DetailsPage.qml \
     qml/pages/OverviewPage.qml \
+    qml/pages/StationLinesPage.qml \
     qml/pages/StationSearchPage.qml \
     qml/pages/icons/github.svg \
     qml/pages/icons/paypal.svg \

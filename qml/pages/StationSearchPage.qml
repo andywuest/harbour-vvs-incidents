@@ -2,9 +2,6 @@ import QtQuick 2.2
 import QtQuick.LocalStorage 2.0
 import Sailfish.Silica 1.0
 
-// QTBUG-34418
-import "."
-
 import "../js/constants.js" as Constants
 import "../js/functions.js" as Functions
 
@@ -56,6 +53,13 @@ Page {
     function getLinesForStationResultHandler(result) {
         var jsonResult = JSON.parse(result.toString())
         Functions.log("json result (linesForStation) : " + result)
+
+        if (jsonResult && jsonResult.result && jsonResult.result.length > 0) {
+            console.log("results : " + jsonResult.result.length)
+            pageStack.push(Qt.resolvedUrl("StationLinesPage.qml"), {
+                               stationLineList: jsonResult
+                           })
+        }
     }
 
     function errorResultHandler(result) {
@@ -170,41 +174,7 @@ Page {
                     id: searchResultListModel
                 }
 
-                delegate: ListItem {
-                    id: delegate
-
-                    Column {
-                        id: resultColumn
-                        width: parent.width - (2 * Theme.horizontalPageMargin)
-                        height: iconLabelRow.height
-                                + genericAdditionalInfoRow.height
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.horizontalCenter: parent.horizontalCenter
-
-                        IconLabelRow {
-                            id: iconLabelRow
-                            lineType: Functions.resolveIconForLocation(anyType)
-                            affectedLines: "" + (object ? object : name)
-                        }
-
-                        Row {
-                            id: genericAdditionalInfoRow
-                            height: Theme.fontSizeMedium
-                            width: parent.width
-
-                            Text {
-                                id: stockSource
-                                width: parent.width * 3 / 3
-                                font.pixelSize: Theme.fontSizeExtraSmall
-                                color: Theme.secondaryColor
-                                text: ref.place
-                                textFormat: Text.StyledText
-                                elide: Text.ElideRight
-                                maximumLineCount: 1
-                            }
-                        }
-                    }
-
+                delegate: StationListItem {
                     onClicked: {
                         var selectedItem = searchResultListModel.get(index)
                         console.log("selected index : "+ index + ", item : " + selectedItem + " - stateless : " + selectedItem.stateless)

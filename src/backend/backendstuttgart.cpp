@@ -295,12 +295,22 @@ QJsonObject BackendStuttgart::parseLinienSelectToJson(const QString &html) {
     QString value = match.captured(1).trimmed();
     QString name = match.captured(2).trimmed();
 
+    QString line = name.mid(0, name.indexOf("-"));
+    name = name.mid(name.indexOf("-") + 2, name.length());
+
     // Remove any nested tags from the visible text, if present
-    name.remove(QRegularExpression("<[^>]*>"));
+    name.remove(
+        REGULAR_EXPRESSION_NESTED_TAGS /*QRegularExpression("<[^>]*>")*/);
 
     QJsonObject optionObj;
+    optionObj.insert("type", line.mid(0, line.indexOf(" ")).trimmed());
+    optionObj.insert(
+        "lineName",
+        line.mid(line.indexOf(" "), line.lastIndexOf("-")).trimmed());
+    optionObj.insert(
+        "info", name.mid(name.lastIndexOf("-") + 1, name.length()).trimmed());
     optionObj.insert("value", value);
-    optionObj.insert("name", name);
+    optionObj.insert("name", name.mid(0, name.lastIndexOf("-")));
     resultArray.append(optionObj);
   }
 
@@ -308,3 +318,6 @@ QJsonObject BackendStuttgart::parseLinienSelectToJson(const QString &html) {
   root.insert("result", resultArray);
   return root;
 }
+
+const QRegularExpression
+    BackendStuttgart::REGULAR_EXPRESSION_NESTED_TAGS("<[^>]*>");

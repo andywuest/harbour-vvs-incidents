@@ -115,21 +115,30 @@
     </message>
 </context>
 <context>
+    <name>StationLinesPage</name>
+    <message>
+        <location filename="../qml/pages/StationLinesPage.qml" line="56"/>
+        <source>Lines</source>
+        <extracomment>StationLinesPage search result header</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>StationSearchPage</name>
     <message>
-        <location filename="../qml/pages/StationSearchPage.qml" line="100"/>
+        <location filename="../qml/pages/StationSearchPage.qml" line="104"/>
         <source>Search Results</source>
         <extracomment>StationSearchPage search result header</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StationSearchPage.qml" line="107"/>
+        <location filename="../qml/pages/StationSearchPage.qml" line="111"/>
         <source>Find your Station...</source>
         <extracomment>StationSearchPage search result input field</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StationSearchPage.qml" line="143"/>
+        <location filename="../qml/pages/StationSearchPage.qml" line="147"/>
         <source>No results found</source>
         <extracomment>StationSearchPage no results label</extracomment>
         <translation type="unfinished"></translation>
@@ -138,17 +147,17 @@
 <context>
     <name>functions</name>
     <message>
-        <location filename="../qml/js/functions.js" line="60"/>
+        <location filename="../qml/js/functions.js" line="72"/>
         <source>On %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/js/functions.js" line="62"/>
+        <location filename="../qml/js/functions.js" line="74"/>
         <source>From %1 until further notice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/js/functions.js" line="64"/>
+        <location filename="../qml/js/functions.js" line="76"/>
         <source>From %1 until %2</source>
         <translation type="unfinished"></translation>
     </message>

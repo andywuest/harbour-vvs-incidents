@@ -43,6 +43,9 @@ public:
 private slots:
   void handleGetIncidentsFinished();
 
+private:
+  static const QRegularExpression REGULAR_EXPRESSION_NESTED_TAGS;
+
 protected:
   QString processSearchResult(QByteArray searchReply);
   QDateTime convertTimestampToLocalTimestamp(const QString &utcDateTimeString,

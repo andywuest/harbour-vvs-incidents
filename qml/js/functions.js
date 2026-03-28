@@ -25,19 +25,27 @@ function resolveIconForLocation(location) {
 function resolveIconForLines(affectedLines) {
     for (var i = 0; i < affectedLines.lines.length; i++) {
         var lineName = affectedLines.lines[i].name;
-        if (containsSubstring(lineName, "Bus")) {
-            return "bus"
-        } else if (containsSubstring(lineName, "Nachtbus")) {
-            return "bus"
-        } else if (containsSubstring(lineName, "Zahnradbahn")) {
-            return "zacke"
-        } else if (containsSubstring(lineName, "S-Bahn")) {
-            return "sbahn"
-        } else if (containsSubstring(lineName, "R-Bahn")) {
-            return "rbahn"
-        } else if (containsSubstring(lineName, "Stadtbahn")) {
-            return "ubahn"
+        var result = resolveIconForLine(lineName);
+        if (result !== "???") {
+            return result;
         }
+    }
+    return "???";
+}
+
+function resolveIconForLine(lineName) {
+    if (containsSubstring(lineName, "Bus")) {
+        return "bus"
+    } else if (containsSubstring(lineName, "Nachtbus")) {
+        return "bus"
+    } else if (containsSubstring(lineName, "Zahnradbahn")) {
+        return "zacke"
+    } else if (containsSubstring(lineName, "S-Bahn")) {
+        return "sbahn"
+    } else if (containsSubstring(lineName, "R-Bahn")) {
+        return "rbahn"
+    } else if (containsSubstring(lineName, "Stadtbahn")) {
+        return "ubahn"
     }
     return "???";
 }
