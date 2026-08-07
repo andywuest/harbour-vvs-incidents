@@ -44,6 +44,11 @@
         <source>Donate with PayPal</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="123"/>
+        <source>Donate with Liberapay</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverLoadingColumn</name>
@@ -81,29 +86,29 @@
 <context>
     <name>OverviewPage</name>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="64"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="62"/>
         <source>Last update: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="82"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="80"/>
         <source>About</source>
         <extracomment>Overview Page about</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="86"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="84"/>
         <source>Reload Incidents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="118"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="116"/>
         <source>Incidents</source>
         <extracomment>OverviewPage page header</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="125"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="122"/>
         <source>Currently there are no incidents to report.</source>
         <translation type="unfinished"></translation>
     </message>

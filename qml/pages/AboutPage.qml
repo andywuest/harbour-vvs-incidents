@@ -118,6 +118,12 @@ Page {
                 targetUrl: "https://www.paypal.com/paypalme/andywuest"
             }
 
+           AboutIconLabel {
+                iconSource: "icons/liberapay.svg"
+                label: qsTr("Donate with Liberapay")
+                targetUrl: "https://liberapay.com/AndyWuest/"
+            }
+
             Item {
                 width: 1
                 height: Theme.paddingSmall

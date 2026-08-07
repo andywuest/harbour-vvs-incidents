@@ -7,42 +7,47 @@
         <location filename="../qml/pages/AboutPage.qml" line="40"/>
         <source>About VVS Incidents</source>
         <extracomment>AboutPage - Header</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Über VVS Störungen</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="62"/>
         <source>VVS Incidents</source>
         <extracomment>AboutPage - Name</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>VVS Störungen</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="78"/>
         <source>Application shows public transportation incidents in the area of Stuttgart/Germany. VVS Incidents is open source and licensed under the GPL v3.</source>
         <extracomment>AboutPage text - about text</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Die Anwendung zeigt Aktuelle Meldungen aus der Verkehrsverbund in Stuttgart und Umgebung. VVS Aktuelle Meldungen ist Open Source und unter der GPL v3 lizensiert.</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="96"/>
         <source>Sources</source>
         <extracomment>AboutPage - sources</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Quellen</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="107"/>
         <source>Donations</source>
         <extracomment>AboutPage - Donations</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Spenden</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="112"/>
         <source>If you like my work why not buy me a beer?</source>
         <extracomment>AboutPage - donations info</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Wenn Du meine Arbeit magst, warum gibst du mir nicht einfach ein Bier aus?</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="117"/>
         <source>Donate with PayPal</source>
-        <translation type="unfinished"></translation>
+        <translation>Spenden via PayPal</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="123"/>
+        <source>Donate with Liberapay</source>
+        <translation>Spenden via Liberapay</translation>
     </message>
 </context>
 <context>
@@ -81,31 +86,31 @@
 <context>
     <name>OverviewPage</name>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="64"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="62"/>
         <source>Last update: %1</source>
-        <translation>Letzte Aktualisierung: </translation>
+        <translation>Letzte Aktualisierung: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="82"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="80"/>
         <source>About</source>
         <extracomment>Overview Page about</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Über</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="86"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="84"/>
         <source>Reload Incidents</source>
         <translation>Störungen neu laden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="118"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="116"/>
         <source>Incidents</source>
         <extracomment>OverviewPage page header</extracomment>
-        <translation type="unfinished">Störungen</translation>
+        <translation>Störungen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="125"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="122"/>
         <source>Currently there are no incidents to report.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuell gibt es keine Störungsmeldungen</translation>
     </message>
 </context>
 <context>
