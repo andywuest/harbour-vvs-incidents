@@ -55,6 +55,7 @@ protected:
 
   QJsonObject parseLinienSelectToJson(const QString &html);
   QString extractLinienSelectBlock(const QString &html) const;
+  QString extractSessionId(const QString &html) const;
 
 #ifdef UNIT_TEST
   friend class BackendStuttgartTests; // to test non public methods

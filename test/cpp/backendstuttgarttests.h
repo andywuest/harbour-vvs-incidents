@@ -41,6 +41,7 @@ private slots:
 
   void testParseLinienSelectToJson_withOptions();
   void testParseLinienSelectToJson_noSelectWithOptions();
+  void testExtractSessionId();
 };
 
 #endif // ING_DIBA_BACKEND_TEST_H

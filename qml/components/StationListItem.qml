@@ -26,8 +26,8 @@ ListItem {
 
             IconLabelRow {
                 id: iconLabelRow
-                lineType: Functions.resolveIconForLocation(anyType)
-                affectedLines: "" + (object ? object : name)
+                lineType: Functions.resolveIconForLocation(type)
+                affectedLines: model.disassembledName ? model.disassembledName : model.name
             }
 
             Row {
@@ -40,7 +40,7 @@ ListItem {
                     width: parent.width
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: Theme.secondaryColor
-                    text: ref.place
+                    text: "" + (model.parent ? model.parent.name : "")
                     textFormat: Text.StyledText
                     elide: Text.ElideRight
                     maximumLineCount: 1

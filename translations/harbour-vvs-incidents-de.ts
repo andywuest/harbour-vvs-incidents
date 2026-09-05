@@ -147,17 +147,17 @@
 <context>
     <name>functions</name>
     <message>
-        <location filename="../qml/js/functions.js" line="72"/>
+        <location filename="../qml/js/functions.js" line="74"/>
         <source>On %1</source>
         <translation>Am %1</translation>
     </message>
     <message>
-        <location filename="../qml/js/functions.js" line="74"/>
+        <location filename="../qml/js/functions.js" line="76"/>
         <source>From %1 until further notice</source>
         <translation>Vom %1 bis auf Weiteres</translation>
     </message>
     <message>
-        <location filename="../qml/js/functions.js" line="76"/>
+        <location filename="../qml/js/functions.js" line="78"/>
         <source>From %1 until %2</source>
         <translation>Vom %1 bis %2</translation>
     </message>

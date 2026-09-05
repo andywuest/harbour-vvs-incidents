@@ -9,17 +9,19 @@ function log(message) {
 }
 
 function resolveIconForLocation(location) {
-    if (containsSubstring(location, "street")) {
-      return "adresse";
-    } else if (containsSubstring(location, "poi")) {
-        return "poi";
-    } else if (containsSubstring(location, "stop")) {
-        return "haltestelle";
-    } else if (containsSubstring(location, "loc")) {
-        return "ort";
-    } else {
-        console.log("unknown type for location");
-    }
+    log(location);
+    return location;
+//    if (containsSubstring(location, "street")) {
+//      return "street";
+//    } else if (containsSubstring(location, "poi")) {
+//        return "poi";
+//    } else if (containsSubstring(location, "stop")) {
+//        return "stop";
+//    } else if (containsSubstring(location, "loc")) {
+//        return "ort";
+//    } else {
+//        console.log("unknown type for location");
+//    }
 }
 
 function resolveIconForLines(affectedLines) {

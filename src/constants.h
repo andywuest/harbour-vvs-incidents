@@ -23,9 +23,10 @@ const char USER_AGENT[] = "Mozilla/5.0 (X11; Linux x86_64; rv:146.0) Gecko/20100
 
 const char INCIDENTS_VVS_URL[] = "https://www3.vvs.de/mngvvs/XML_ADDINFO_REQUEST?AIXMLReduction=removeSourceSystem&SpEncId=0&coordOutputFormat=EPSG:4326&filterMessageSubtype=disruption:lines&filterMessageSubtype=disruption:stops&filterPublicationStatus=current&filterShowLineList=0&filterShowPlaceList=0&filterShowStopList=0&outputFormat=rapidJSON&serverInfo=1&version=10.2.10.139";
 
-const char STATIONS_VVS_URL[] = "https://efa.vvs.de/vvs/XSLT_STOPFINDER_REQUEST?jsonp=func&suggest_macro=vvs&name_sf=%1";
+const char STATIONS_VVS_URL[] = "https://www3.vvs.de/mngvvs/XML_STOPFINDER_REQUEST?SpEncId=0&coordOutputFormat=EPSG:4326&name_sf=%1&outputFormat=rapidJSON&serverInfo=1&suggestApp=vvs&type_sf=any&version=10.2.10.139";
 
 const char LINES_FOR_STATION_URL[] = "https://efa.vvs.de/vvs/XSLT_STT_REQUEST";
 const char LINES_FOR_STATION_POST_DATA[] = "language=de&type_stt=any&nameInfo_stt=%1";
+// const char LINES_FOR_STATION_POST_DATA[] = "language=de&type_stt=any&nameInfo_stt=%1&sessionID=%2&requestID=0&command=&execInst=normal";
 
 #endif // CONSTANTS_H

@@ -33,9 +33,15 @@ Page {
       var jsonResult = JSON.parse(result.toString())
       Functions.log("json result from backend was: " + result)
 
-      for (var i = 0; i < jsonResult.points.length; i++)   {
-          if (jsonResult.points[i]) {
-            searchResultListModel.append(jsonResult.points[i]);
+      for (var i = 0; i < jsonResult.locations.length; i++) {
+          if (jsonResult.locations[i] && jsonResult.locations[i].type === "stop") {
+            if (!jsonResult.locations[i].assignedStops) {
+                searchResultListModel.append(jsonResult.locations[i]);
+            } else {
+                for (var j = 0; j < jsonResult.locations[i].assignedStops.length; j++) {
+                  searchResultListModel.append(jsonResult.locations[i].assignedStops[j]);
+               }
+            }
           }
       }
 

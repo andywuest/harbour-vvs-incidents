@@ -47,6 +47,8 @@ DISTFILES += qml/harbour-vvs-incidents.qml \
     qml/icons/vvs_ubahn.svg \
     qml/icons/vvs_rbahn.svg \
     qml/icons/vvs_zacke.svg \
+    qml/icons/vvs_stop.svg \
+    qml/icons/vvs_street.svg \
     rpm/harbour-vvs-incidents.changes.in \
     rpm/harbour-vvs-incidents.changes.run.in \
     rpm/harbour-vvs-incidents.spec \
