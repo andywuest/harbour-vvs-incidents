@@ -126,19 +126,19 @@
 <context>
     <name>StationSearchPage</name>
     <message>
-        <location filename="../qml/pages/StationSearchPage.qml" line="104"/>
+        <location filename="../qml/pages/StationSearchPage.qml" line="110"/>
         <source>Search Results</source>
         <extracomment>StationSearchPage search result header</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StationSearchPage.qml" line="111"/>
+        <location filename="../qml/pages/StationSearchPage.qml" line="117"/>
         <source>Find your Station...</source>
         <extracomment>StationSearchPage search result input field</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StationSearchPage.qml" line="147"/>
+        <location filename="../qml/pages/StationSearchPage.qml" line="153"/>
         <source>No results found</source>
         <extracomment>StationSearchPage no results label</extracomment>
         <translation type="unfinished"></translation>

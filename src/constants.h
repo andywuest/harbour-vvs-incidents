@@ -25,7 +25,12 @@ const char INCIDENTS_VVS_URL[] = "https://www3.vvs.de/mngvvs/XML_ADDINFO_REQUEST
 
 const char STATIONS_VVS_URL[] = "https://www3.vvs.de/mngvvs/XML_STOPFINDER_REQUEST?SpEncId=0&coordOutputFormat=EPSG:4326&name_sf=%1&outputFormat=rapidJSON&serverInfo=1&suggestApp=vvs&type_sf=any&version=10.2.10.139";
 
-const char LINES_FOR_STATION_URL[] = "https://efa.vvs.de/vvs/XSLT_STT_REQUEST";
+// %1 - e.g. "de:08111:6073" is id response of STATIONS_VVS_URL
+const char LINES_FOR_STATION_URL[] = "https://www3.vvs.de/mngvvs/XML_SERVINGLINES_REQUEST?SpEncId=0&command=direct&coordOutputFormat=EPSG:4326&deleteAssignedStops=1&lineReqType=2&locationServerActive=1&lsShowTrainsExplicit=1&mergeDir=0&mode=odv&name_sl=%1&net=vvs&outputFormat=rapidJSON&serverInfo=1&type_sl=stopID&version=10.2.10.139";
+
+// 08111:6073
+                                      // https://www3.vvs.de/mngvvs/XML_SERVINGLINES_REQUEST?SpEncId=0&command=direct&coordOutputFormat=EPSG:4326&deleteAssignedStops=1&lineReqType=2&locationServerActive=1&lsShowTrainsExplicit=1&mergeDir=0&mode=odv&name_sl=de:08116:2972&net=vvs&outputFormat=rapidJSON&serverInfo=1&type_sl=stopID&version=10.2.10.139
+
 const char LINES_FOR_STATION_POST_DATA[] = "language=de&type_stt=any&nameInfo_stt=%1";
 // const char LINES_FOR_STATION_POST_DATA[] = "language=de&type_stt=any&nameInfo_stt=%1&sessionID=%2&requestID=0&command=&execInst=normal";
 

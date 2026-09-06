@@ -25,8 +25,8 @@ ListItem {
 
             IconLabelRow {
                 id: iconLabelRow
-                lineType: Functions.resolveIconForLine(type)
-                affectedLines: "" + lineName + " " + name
+                lineType: Functions.resolveIconForLine(model.name)
+                affectedLines: "" + model.number + " -> " + model.description
             }
 
             Row {
@@ -39,7 +39,7 @@ ListItem {
                     width: parent.width
                     font.pixelSize: Theme.fontSizeExtraSmall
                     color: Theme.secondaryColor
-                    text: info
+                    text: Functions.createValidityLabel(model.properties.validity)
                     textFormat: Text.StyledText
                     elide: Text.ElideRight
                     maximumLineCount: 1

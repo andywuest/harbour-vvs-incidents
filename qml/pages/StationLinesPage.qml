@@ -12,6 +12,7 @@ Page {
     id: stationLinesPage
 
     property var stationLineList;
+    property var stationName;
 
     allowedOrientations: Orientation.All
 
@@ -25,11 +26,11 @@ Page {
 
     function populateModel() {
         stationLinesListModel.clear()
-        if (stationLineList && stationLineList.result) {
+        if (stationLineList && stationLineList.lines) {
             Functions.log("StationLinesPage - populating model")
-            for (var i = 0; i < stationLineList.result.length; i++) {
-                Functions.log("StationLinesPage - adding : " + stationLineList.result[i])
-                stationLinesListModel.append(stationLineList.result[i]);
+            for (var i = 0; i < stationLineList.lines.length; i++) {
+                Functions.log("StationLinesPage - adding : " + stationLineList.lines[i])
+                stationLinesListModel.append(stationLineList.lines[i]);
             }
         }
     }
@@ -54,7 +55,7 @@ Page {
                 id: searchHeader
                 //: StationLinesPage search result header
                 title: qsTr("Lines");
-                description: "TODO";
+                description: stationName;
             }
 
             SilicaListView {
@@ -74,7 +75,7 @@ Page {
                 delegate: StationLineItem {
                     onClicked: {
                         var selectedItem = stationLinesListModel.get(index)
-                        console.log("selected index : "+ index + ", item : " + selectedItem + ", value " + value)
+                        console.log("selected index : "+ index + ", item : " + JSON.stringify(selectedItem))
                     }
                 }
 

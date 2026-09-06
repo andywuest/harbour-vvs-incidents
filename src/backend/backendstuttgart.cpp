@@ -134,27 +134,46 @@ inline void swap(QJsonValueRef v1, QJsonValueRef v2) {
 }
 
 void BackendStuttgart::getLinesForStation(const QString &stationId) {
-  QUrl url = QUrl(LINES_FOR_STATION_URL);
-  QNetworkRequest request(url);
+  qDebug() << "BackendStuttgart::getLinesForStation";
+  qDebug() << "stationId: " << stationId;
 
-  request.setHeader(QNetworkRequest::UserAgentHeader, USER_AGENT);
+//  QUrl url = QUrl(LINES_FOR_STATION_URL);
+//  QNetworkRequest request(url);
 
-  const QString postData = QString(LINES_FOR_STATION_POST_DATA).arg(stationId);
+//  request.setHeader(QNetworkRequest::UserAgentHeader, USER_AGENT);
 
-  qDebug() << "URL: " << url;
-  qDebug() << "postData: " << postData;
+//  const QString postData = QString(LINES_FOR_STATION_POST_DATA).arg(stationId);
 
-  QNetworkReply *reply = manager->post(request, postData.toUtf8());
+//  qDebug() << "URL: " << url;
+//  qDebug() << "postData: " << postData;
+
+//  QNetworkReply *reply = manager->post(request, postData.toUtf8());
+
+  QNetworkReply *reply =
+      executeGetRequest(QUrl(QString(LINES_FOR_STATION_URL).arg(stationId)));
 
   connect(reply, &QNetworkReply::finished, this, [this, reply]() {
     reply->deleteLater();
     qDebug() << "return code : "
              << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
-                    .toString();
+                    .toString();    
+
+//    QByteArray searchReply = reply->readAll();
 
     QByteArray searchReply = reply->readAll();
+    QString searchJson = QString(searchReply);
+
+    qDebug() << "result : " << searchJson;
+
     QJsonDocument resultDocument;
-    resultDocument.setObject(parseLinienSelectToJson(QString(searchReply)));
+
+    QJsonArray resultArray;
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(searchJson.toUtf8());
+
+    if (jsonDocument.isObject()) {
+      QJsonObject rootObject = jsonDocument.object();
+      resultDocument.setObject(rootObject);
+    }
 
     QString dataToString(resultDocument.toJson());
     emit getLinesForStationResultAvailable(dataToString);

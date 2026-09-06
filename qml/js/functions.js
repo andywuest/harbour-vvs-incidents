@@ -68,6 +68,21 @@ function getListOfAffectedLines(affectedLines) {
     return results.join(', ');
 }
 
+function createValidityLabel(validity) {
+    var from = validity.from;
+    var to = validity.to;
+    var label = "";
+    if (containsSubstring(to, "2500")) {
+        to = "";
+    }
+    if (to === "") {
+        label = qsTr("Valid from %1").arg(from);
+    } else {
+        label = qsTr("Valid from %1 until %2").arg(from).arg(to);
+    }
+    return label;
+}
+
 function createAvailabilityLabel(from, to) {
     var label = "";
     if (from === to) {

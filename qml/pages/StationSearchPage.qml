@@ -11,6 +11,8 @@ import "../components/thirdparty"
 Page {
     id: stationSearchPage
 
+    property string stationName: ""
+
     allowedOrientations: Orientation.All
 
     function connectSlots() {
@@ -60,10 +62,11 @@ Page {
         var jsonResult = JSON.parse(result.toString())
         Functions.log("json result (linesForStation) : " + result)
 
-        if (jsonResult && jsonResult.result && jsonResult.result.length > 0) {
-            console.log("results : " + jsonResult.result.length)
+        if (jsonResult && jsonResult.lines && jsonResult.lines.length > 0) {
+            console.log("line results : " + jsonResult.lines.length)
             pageStack.push(Qt.resolvedUrl("StationLinesPage.qml"), {
-                               stationLineList: jsonResult
+                               stationLineList: jsonResult,
+                               stationName: stationName
                            })
         }
     }
@@ -183,8 +186,9 @@ Page {
                 delegate: StationListItem {
                     onClicked: {
                         var selectedItem = searchResultListModel.get(index)
-                        console.log("selected index : "+ index + ", item : " + selectedItem + " - stateless : " + selectedItem.stateless)
-                        getDataBackend(Constants.BACKEND_STUTTGART).getLinesForStation(selectedItem.stateless);
+                        console.log("selected index : "+ index + ", item : " + JSON.stringify(selectedItem))
+                        stationName = selectedItem.disassembledName;
+                        getDataBackend(Constants.BACKEND_STUTTGART).getLinesForStation(selectedItem.id);
                     }
                 }
 
