@@ -117,7 +117,7 @@
 <context>
     <name>StationLinesPage</name>
     <message>
-        <location filename="../qml/pages/StationLinesPage.qml" line="56"/>
+        <location filename="../qml/pages/StationLinesPage.qml" line="58"/>
         <source>Lines</source>
         <extracomment>StationLinesPage search result header</extracomment>
         <translation type="unfinished"></translation>
@@ -126,19 +126,19 @@
 <context>
     <name>StationSearchPage</name>
     <message>
-        <location filename="../qml/pages/StationSearchPage.qml" line="110"/>
+        <location filename="../qml/pages/StationSearchPage.qml" line="113"/>
         <source>Search Results</source>
         <extracomment>StationSearchPage search result header</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StationSearchPage.qml" line="117"/>
+        <location filename="../qml/pages/StationSearchPage.qml" line="120"/>
         <source>Find your Station...</source>
         <extracomment>StationSearchPage search result input field</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StationSearchPage.qml" line="153"/>
+        <location filename="../qml/pages/StationSearchPage.qml" line="156"/>
         <source>No results found</source>
         <extracomment>StationSearchPage no results label</extracomment>
         <translation type="unfinished"></translation>
@@ -147,17 +147,27 @@
 <context>
     <name>functions</name>
     <message>
-        <location filename="../qml/js/functions.js" line="74"/>
+        <location filename="../qml/js/functions.js" line="79"/>
+        <source>Valid from %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/js/functions.js" line="81"/>
+        <source>Valid from %1 until %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/js/functions.js" line="89"/>
         <source>On %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/js/functions.js" line="76"/>
+        <location filename="../qml/js/functions.js" line="91"/>
         <source>From %1 until further notice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/js/functions.js" line="78"/>
+        <location filename="../qml/js/functions.js" line="93"/>
         <source>From %1 until %2</source>
         <translation type="unfinished"></translation>
     </message>

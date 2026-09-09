@@ -180,6 +180,28 @@ void BackendStuttgart::getLinesForStation(const QString &stationId) {
   });
 }
 
+void BackendStuttgart::getStationPlan(const QString &stationLineId) {
+    qDebug() << "BackendStuttgart::getStationPlan";
+    qDebug() << "stationLineId: " << stationLineId;
+
+    QNetworkReply *reply =
+        executeGetRequest(QUrl(QString(STATION_LINE_PLAN_JSON_URL).arg(stationLineId)));
+
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+        reply->deleteLater();
+        qDebug() << "return code : "
+                 << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
+                        .toString();
+
+        QByteArray searchReply = reply->readAll();
+        QString searchJson = QString(searchReply);
+
+        qDebug() << "result : " << searchJson;
+
+        emit getStationPlanAvailable(searchJson);
+    });
+}
+
 void BackendStuttgart::handleGetIncidentsFinished() {
   qDebug() << "BackendStuttgart::handleGetIncidentsFinished";
   QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());

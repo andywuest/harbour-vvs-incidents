@@ -28,6 +28,11 @@ const char STATIONS_VVS_URL[] = "https://www3.vvs.de/mngvvs/XML_STOPFINDER_REQUE
 // %1 - e.g. "de:08111:6073" is id response of STATIONS_VVS_URL
 const char LINES_FOR_STATION_URL[] = "https://www3.vvs.de/mngvvs/XML_SERVINGLINES_REQUEST?SpEncId=0&command=direct&coordOutputFormat=EPSG:4326&deleteAssignedStops=1&lineReqType=2&locationServerActive=1&lsShowTrainsExplicit=1&mergeDir=0&mode=odv&name_sl=%1&net=vvs&outputFormat=rapidJSON&serverInfo=1&type_sl=stopID&version=10.2.10.139";
 
+// %1 - e.g. "vvs:20007: :R:j26:1"
+const char STATION_LINE_PLAN_JSON_URL[] = "https://www3.vvs.de/mngvvs/XML_STT_REQUEST?SpEncId=0&allStopInfo=1&coordOutputFormat=EPSG:4326&line=%1&mode=direct&name_stt=de:08116:2972&outputFormat=rapidJSON&serverInfo=1&type_stt=stopID";
+
+
+
 // 08111:6073
                                       // https://www3.vvs.de/mngvvs/XML_SERVINGLINES_REQUEST?SpEncId=0&command=direct&coordOutputFormat=EPSG:4326&deleteAssignedStops=1&lineReqType=2&locationServerActive=1&lsShowTrainsExplicit=1&mergeDir=0&mode=odv&name_sl=de:08116:2972&net=vvs&outputFormat=rapidJSON&serverInfo=1&type_sl=stopID&version=10.2.10.139
 

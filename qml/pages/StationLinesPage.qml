@@ -11,6 +11,7 @@ import "../components/thirdparty"
 Page {
     id: stationLinesPage
 
+    property bool showLoadingIndicator : false
     property var stationLineList;
     property var stationName;
 
@@ -76,6 +77,8 @@ Page {
                     onClicked: {
                         var selectedItem = stationLinesListModel.get(index)
                         console.log("selected index : "+ index + ", item : " + JSON.stringify(selectedItem))
+                        showLoadingIndicator = true;
+                        getDataBackend(Constants.BACKEND_STUTTGART).getStationPlan(selectedItem.id);
                     }
                 }
 
@@ -85,16 +88,43 @@ Page {
         }
     }
 
+    LoadingIndicator {
+        visible: showLoadingIndicator
+        Behavior on opacity {
+            NumberAnimation {
+            }
+        }
+        opacity: showLoadingIndicator ? 1 : 0
+        height: parent.height
+        width: parent.width
+    }
+
+    Connections {
+        target: getDataBackend(Constants.BACKEND_STUTTGART)
+
+        onGetStationPlanAvailable: {
+            console.log("[StationLinesPage] onGetStationPlan received");
+            showLoadingIndicator = false;
+        }
+
+        onRequestError: {
+            console.log("[StationLinesPage] - requestError " + errorMessage)
+            showLoadingIndicator = false;
+            menuProblemNotification.show(errorMessage)
+        }
+
+    }
+
     Component.onCompleted: {
         console.log("[StationLinesPage] init");
         populateModel();
-         connectSlots();
+        //connectSlots();
     }
 
     Component.onDestruction: {
         console.log("[StationLinesPage] destroy");
         stationLineList = {};
-         disconnectSlots();
+        //disconnectSlots();
     }
 
 }
