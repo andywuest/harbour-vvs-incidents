@@ -196,9 +196,18 @@ void BackendStuttgart::getStationPlan(const QString &stationLineId) {
         QByteArray searchReply = reply->readAll();
         QString searchJson = QString(searchReply);
 
-        qDebug() << "result : " << searchJson;
+        qDebug() << "server repsonse: " << searchJson;
 
-        emit getStationPlanAvailable(searchJson);
+        QJsonDocument jsonDocument = QJsonDocument::fromJson(searchJson.toUtf8());
+
+        if (jsonDocument.isObject()) {
+            QJsonObject downloadsObject = jsonDocument.object()["download"].toObject();
+            QString pdfUrlSuffix = downloadsObject["url"].toString();
+            qDebug() << "pdfUrlSuffix : " << pdfUrlSuffix;
+            emit getStationPlanAvailable(QString(DOWNLOAD_URL).arg(pdfUrlSuffix));
+        } else {
+            emit getStationPlanAvailable("{}");
+        }
     });
 }
 

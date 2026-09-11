@@ -31,6 +31,8 @@ const char LINES_FOR_STATION_URL[] = "https://www3.vvs.de/mngvvs/XML_SERVINGLINE
 // %1 - e.g. "vvs:20007: :R:j26:1"
 const char STATION_LINE_PLAN_JSON_URL[] = "https://www3.vvs.de/mngvvs/XML_STT_REQUEST?SpEncId=0&allStopInfo=1&coordOutputFormat=EPSG:4326&line=%1&mode=direct&name_stt=de:08116:2972&outputFormat=rapidJSON&serverInfo=1&type_stt=stopID";
 
+// %1 - e.g. "/vvsefaall/AHF/efa12.dc.vvs.de__000135f.pdf"
+const char DOWNLOAD_URL[] = "https://www3.vvs.de//%1";
 
 
 // 08111:6073

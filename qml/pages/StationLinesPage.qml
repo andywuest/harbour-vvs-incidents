@@ -104,7 +104,9 @@ Page {
 
         onGetStationPlanAvailable: {
             console.log("[StationLinesPage] onGetStationPlan received");
+            console.log("url: " + pdfDownloadLink);
             showLoadingIndicator = false;
+            Qt.openUrlExternally(pdfDownloadLink);
         }
 
         onRequestError: {

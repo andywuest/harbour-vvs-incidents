@@ -40,7 +40,7 @@ public:
 
   Q_SIGNAL void searchStationResultAvailable(const QString &reply);
   Q_SIGNAL void getLinesForStationResultAvailable(const QString &reply);
-  Q_SIGNAL void getStationPlanAvailable(const QString &reply);
+  Q_SIGNAL void getStationPlanAvailable(const QString &pdfDownloadLink);
 
 private slots:
   void handleGetIncidentsFinished();
