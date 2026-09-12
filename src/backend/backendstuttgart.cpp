@@ -37,15 +37,6 @@ BackendStuttgart::~BackendStuttgart() {
 
 void BackendStuttgart::getIncidents() {
   qDebug() << "BackendStuttgart::searchName";
-  // QNetworkReply *reply =
-  // executeGetRequest(QUrl("https://api.jsonbin.io/b/619944150ddbee6f8b0f4e93"));
-  // // bus viele
-  // QNetworkReply *reply =
-  // executeGetRequest(QUrl("https://api.jsonbin.io/b/619e946462ed886f91542d82"));
-  // // einzeln
-  //   QNetworkReply *reply =
-  //   executeGetRequest(QUrl("https://api.jsonbin.io/b/61db37872362237a3a35140c"));
-  //   // zacke
 
   QNetworkReply *reply = executeGetRequest(QUrl(INCIDENTS_VVS_URL));
 
@@ -69,8 +60,6 @@ void BackendStuttgart::searchStation(const QString &searchString) {
 
     QByteArray searchReply = reply->readAll();
     QString searchJson = QString(searchReply);
-//                             .replace(QString("func("), QString())
-//                             .replace(QString(");"), QString());
 
     qDebug() << "result : " << searchJson;
 
@@ -83,36 +72,9 @@ void BackendStuttgart::searchStation(const QString &searchString) {
 
       foreach (const QJsonValue &locationEntry, locationsArray) {
         QJsonObject location = locationEntry.toObject();
-
-//        QJsonArray assignedStopsArray = location["assignedStops"].toArray();
-
-//        foreach (const QJsonValue &assignedStopEntry, assignedStopsArray) {
-//            QJsonObject assignedStop = assignedStopEntry.toObject();
-            resultArray.push_back(location);
-//        }
+        resultArray.push_back(location);
       }
     }
-
-//    std::sort(resultArray.begin(), resultArray.end(),
-//              [](const QJsonValue &a, const QJsonValue &b) {
-//                int qualityA = a.toObject()["quality"].toString().toInt();
-//                int qualityB = b.toObject()["quality"].toString().toInt();
-
-//                if (qualityA == qualityB) {
-//                  QString placeA =
-//                      a.toObject()["ref"].toObject()["place"].toString();
-//                  QString placeB =
-//                      b.toObject()["ref"].toObject()["place"].toString();
-
-//                  qDebug() << "place a : " << placeA;
-
-//                  int compareResult =
-//                      QString::compare(placeA, placeB, Qt::CaseInsensitive);
-//                  return compareResult < 0;
-//                }
-
-//                return qualityA > qualityB;
-//              }); p
 
     QJsonDocument resultDocument;
     QJsonObject resultObject;
@@ -127,27 +89,9 @@ void BackendStuttgart::searchStation(const QString &searchString) {
   });
 }
 
-inline void swap(QJsonValueRef v1, QJsonValueRef v2) {
-  QJsonValue tmp(v1);
-  v1 = QJsonValue(v2);
-  v2 = tmp;
-}
-
 void BackendStuttgart::getLinesForStation(const QString &stationId) {
   qDebug() << "BackendStuttgart::getLinesForStation";
   qDebug() << "stationId: " << stationId;
-
-//  QUrl url = QUrl(LINES_FOR_STATION_URL);
-//  QNetworkRequest request(url);
-
-//  request.setHeader(QNetworkRequest::UserAgentHeader, USER_AGENT);
-
-//  const QString postData = QString(LINES_FOR_STATION_POST_DATA).arg(stationId);
-
-//  qDebug() << "URL: " << url;
-//  qDebug() << "postData: " << postData;
-
-//  QNetworkReply *reply = manager->post(request, postData.toUtf8());
 
   QNetworkReply *reply =
       executeGetRequest(QUrl(QString(LINES_FOR_STATION_URL).arg(stationId)));
@@ -156,9 +100,7 @@ void BackendStuttgart::getLinesForStation(const QString &stationId) {
     reply->deleteLater();
     qDebug() << "return code : "
              << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
-                    .toString();    
-
-//    QByteArray searchReply = reply->readAll();
+                    .toString();
 
     QByteArray searchReply = reply->readAll();
     QString searchJson = QString(searchReply);
@@ -166,8 +108,6 @@ void BackendStuttgart::getLinesForStation(const QString &stationId) {
     qDebug() << "result : " << searchJson;
 
     QJsonDocument resultDocument;
-
-    QJsonArray resultArray;
     QJsonDocument jsonDocument = QJsonDocument::fromJson(searchJson.toUtf8());
 
     if (jsonDocument.isObject()) {
@@ -180,35 +120,40 @@ void BackendStuttgart::getLinesForStation(const QString &stationId) {
   });
 }
 
-void BackendStuttgart::getStationPlan(const QString &stationLineId) {
-    qDebug() << "BackendStuttgart::getStationPlan";
-    qDebug() << "stationLineId: " << stationLineId;
+void BackendStuttgart::getStationPlan(const QString &stationId,
+                                      const QString &stationLineId) {
+  qDebug() << "BackendStuttgart::getStationPlan";
+  qDebug() << "stationId: " << stationId;
+  qDebug() << "stationLineId: " << stationLineId;
 
-    QNetworkReply *reply =
-        executeGetRequest(QUrl(QString(STATION_LINE_PLAN_JSON_URL).arg(stationLineId)));
+  QNetworkReply *reply = executeGetRequest(QUrl(
+      QString(STATION_LINE_PLAN_JSON_URL)
+          .arg(QString(stationLineId).replace(" ", "+", Qt::CaseInsensitive),
+               QString(stationId).replace(" ", "+", Qt::CaseInsensitive))));
 
-    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
-        reply->deleteLater();
-        qDebug() << "return code : "
-                 << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
-                        .toString();
+  connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+    reply->deleteLater();
+    qDebug() << "return code : "
+             << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
+                    .toString();
 
-        QByteArray searchReply = reply->readAll();
-        QString searchJson = QString(searchReply);
+    QByteArray searchReply = reply->readAll();
+    QString searchJson = QString(searchReply);
 
-        qDebug() << "server repsonse: " << searchJson;
+    qDebug() << "server response: " << searchJson;
 
-        QJsonDocument jsonDocument = QJsonDocument::fromJson(searchJson.toUtf8());
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(searchJson.toUtf8());
 
-        if (jsonDocument.isObject()) {
-            QJsonObject downloadsObject = jsonDocument.object()["download"].toObject();
-            QString pdfUrlSuffix = downloadsObject["url"].toString();
-            qDebug() << "pdfUrlSuffix : " << pdfUrlSuffix;
-            emit getStationPlanAvailable(QString(DOWNLOAD_URL).arg(pdfUrlSuffix));
-        } else {
-            emit getStationPlanAvailable("{}");
-        }
-    });
+    if (jsonDocument.isObject()) {
+      QJsonObject downloadsObject =
+          jsonDocument.object()["download"].toObject();
+      QString pdfUrlSuffix = downloadsObject["url"].toString();
+      qDebug() << "pdfUrlSuffix : " << pdfUrlSuffix;
+      emit getStationPlanAvailable(QString(DOWNLOAD_URL).arg(pdfUrlSuffix));
+    } else {
+      emit getStationPlanAvailable("{}");
+    }
+  });
 }
 
 void BackendStuttgart::handleGetIncidentsFinished() {
@@ -310,92 +255,3 @@ QString BackendStuttgart::convertToDateFormat(const QDateTime &dateTime) {
   }
   return dateTime.toString("dd.MM.yyyy");
 }
-
-// 1) Reduce to the <select id="linien"> ... </select> block using regex
-QString BackendStuttgart::extractLinienSelectBlock(const QString &html) const {
-  // Pattern that captures the inner HTML of the select
-  QRegularExpression reSelect(
-      "<select[^>]*id\\s*=\\s*\"linien\"[^>]*>([\\s\\S]*?)</select>");
-
-  reSelect.setPatternOptions(QRegularExpression::CaseInsensitiveOption |
-                             QRegularExpression::DotMatchesEverythingOption);
-
-  QRegularExpressionMatch m = reSelect.match(html);
-  if (!m.hasMatch())
-    return QString();
-
-  // Group 1 = content between opening and closing select
-  return m.captured(1);
-}
-
-QString BackendStuttgart::extractSessionId(const QString &html) const {
-    // Static regex for efficiency (Qt 5.6+)
-    static const QRegularExpression re(
-            R"(<input\s+type=\"hidden\"\s+name=\"sessionID\"\s+id=\"sessionID\"\s+value=\"([^\"]+)\"\s*/?>)",
-            QRegularExpression::CaseInsensitiveOption
-        );
-
-        QRegularExpressionMatch match = re.match(html);
-        if (match.hasMatch()) {
-            return match.captured(1);  // Returns the value inside the quotes
-        }
-        return QString();  // Empty if not found
-}
-
-QJsonObject BackendStuttgart::parseLinienSelectToJson(const QString &html) {
-  QJsonArray resultArray;
-
-  qDebug() << "reponse : " << html;
-
-  // Step 0: get session id
-  // const QString sessionId = extractSessionId(html);
-  // qDebug() << "sessionId : " << sessionId;
-
-  // Step 1: keep only the inner HTML of <select id="linien">
-  const QString selectInner = extractLinienSelectBlock(html);
-  if (selectInner.isEmpty()) {
-    QJsonObject root;
-    root.insert("result", resultArray);
-    return root;
-  }
-
-  // Step 2: regex over <option ...>text</option>
-  QRegularExpression reOption(
-      "<option[^>]*value\\s*=\\s*\"([^\"]*)\"[^>]*>(.*?)</option>");
-
-  reOption.setPatternOptions(QRegularExpression::CaseInsensitiveOption |
-                             QRegularExpression::DotMatchesEverythingOption);
-
-  QRegularExpressionMatchIterator it = reOption.globalMatch(selectInner);
-  while (it.hasNext()) {
-    QRegularExpressionMatch match = it.next();
-    QString value = match.captured(1).trimmed();
-    QString name = match.captured(2).trimmed();
-
-    QString line = name.mid(0, name.indexOf("-"));
-    name = name.mid(name.indexOf("-") + 2, name.length());
-
-    // Remove any nested tags from the visible text, if present
-    name.remove(
-        REGULAR_EXPRESSION_NESTED_TAGS /*QRegularExpression("<[^>]*>")*/);
-
-    QJsonObject optionObj;
-    optionObj.insert("type", line.mid(0, line.indexOf(" ")).trimmed());
-    optionObj.insert(
-        "lineName",
-        line.mid(line.indexOf(" "), line.lastIndexOf("-")).trimmed());
-    optionObj.insert(
-        "info", name.mid(name.lastIndexOf("-") + 1, name.length()).trimmed());
-    optionObj.insert("value", value);
-    optionObj.insert("name", name.mid(0, name.lastIndexOf("-")));
-    resultArray.append(optionObj);
-  }
-
-  QJsonObject root;
-  root.insert("result", resultArray);
-  // root.insert("sessionID", sessionId);
-  return root;
-}
-
-const QRegularExpression
-    BackendStuttgart::REGULAR_EXPRESSION_NESTED_TAGS("<[^>]*>");

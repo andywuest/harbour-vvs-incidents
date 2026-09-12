@@ -13,17 +13,10 @@ Page {
 
     property bool showLoadingIndicator : false
     property var stationLineList;
-    property var stationName;
+    property string stationName;
+    property string stationId;
 
     allowedOrientations: Orientation.All
-
-    function connectSlots() {
-        Functions.log("StationLinesPage - connecting - slots")
-    }
-
-    function disconnectSlots() {
-        Functions.log("StationLinesPage - disconnecting - slots")
-    }
 
     function populateModel() {
         stationLinesListModel.clear()
@@ -76,9 +69,9 @@ Page {
                 delegate: StationLineItem {
                     onClicked: {
                         var selectedItem = stationLinesListModel.get(index)
-                        console.log("selected index : "+ index + ", item : " + JSON.stringify(selectedItem))
+                        Functions.log("selected index : "+ index + ", item : " + JSON.stringify(selectedItem))
                         showLoadingIndicator = true;
-                        getDataBackend(Constants.BACKEND_STUTTGART).getStationPlan(selectedItem.id);
+                        getDataBackend(Constants.BACKEND_STUTTGART).getStationPlan(stationId, selectedItem.id);
                     }
                 }
 
@@ -103,30 +96,26 @@ Page {
         target: getDataBackend(Constants.BACKEND_STUTTGART)
 
         onGetStationPlanAvailable: {
-            console.log("[StationLinesPage] onGetStationPlan received");
-            console.log("url: " + pdfDownloadLink);
+            Functions.log("[StationLinesPage] onGetStationPlan received " + pdfDownloadLink);
             showLoadingIndicator = false;
             Qt.openUrlExternally(pdfDownloadLink);
         }
 
         onRequestError: {
-            console.log("[StationLinesPage] - requestError " + errorMessage)
+            Functions.log("[StationLinesPage] - requestError " + errorMessage)
             showLoadingIndicator = false;
             menuProblemNotification.show(errorMessage)
         }
-
     }
 
     Component.onCompleted: {
-        console.log("[StationLinesPage] init");
+        Functions.log("[StationLinesPage] init");
         populateModel();
-        //connectSlots();
     }
 
     Component.onDestruction: {
-        console.log("[StationLinesPage] destroy");
+        Functions.log("[StationLinesPage] destroy");
         stationLineList = {};
-        //disconnectSlots();
     }
 
 }

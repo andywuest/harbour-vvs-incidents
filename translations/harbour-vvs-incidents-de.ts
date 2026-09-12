@@ -117,7 +117,7 @@
 <context>
     <name>StationLinesPage</name>
     <message>
-        <location filename="../qml/pages/StationLinesPage.qml" line="58"/>
+        <location filename="../qml/pages/StationLinesPage.qml" line="51"/>
         <source>Lines</source>
         <extracomment>StationLinesPage search result header</extracomment>
         <translation type="unfinished"></translation>
@@ -126,19 +126,19 @@
 <context>
     <name>StationSearchPage</name>
     <message>
-        <location filename="../qml/pages/StationSearchPage.qml" line="113"/>
+        <location filename="../qml/pages/StationSearchPage.qml" line="115"/>
         <source>Search Results</source>
         <extracomment>StationSearchPage search result header</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StationSearchPage.qml" line="120"/>
+        <location filename="../qml/pages/StationSearchPage.qml" line="122"/>
         <source>Find your Station...</source>
         <extracomment>StationSearchPage search result input field</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/StationSearchPage.qml" line="156"/>
+        <location filename="../qml/pages/StationSearchPage.qml" line="158"/>
         <source>No results found</source>
         <extracomment>StationSearchPage no results label</extracomment>
         <translation type="unfinished"></translation>

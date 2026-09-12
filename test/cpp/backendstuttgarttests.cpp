@@ -49,7 +49,7 @@ void BackendStuttgartTests::testBackendStuttgartProcessSearchResult() {
 }
 
 void BackendStuttgartTests::testExtractSessionId() {
-    QString html = R"(
+  QString html = R"(
         <html>
         <body>
             <input type="hidden" name="sessionID" id="sessionID" value="efa11.dc.vvs.de_3486418515" />
@@ -57,8 +57,8 @@ void BackendStuttgartTests::testExtractSessionId() {
         </html>
     )";
 
-    const QString sessionId = backendStuttgart->extractSessionId(html);
-    QCOMPARE(sessionId, QString("efa11.dc.vvs.de_3486418515"));
+  const QString sessionId = backendStuttgart->extractSessionId(html);
+  QCOMPARE(sessionId, QString("efa11.dc.vvs.de_3486418515"));
 }
 
 void BackendStuttgartTests::testParseLinienSelectToJson_noSelectWithOptions() {

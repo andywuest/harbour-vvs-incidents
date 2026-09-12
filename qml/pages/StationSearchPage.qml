@@ -12,6 +12,7 @@ Page {
     id: stationSearchPage
 
     property string stationName: ""
+    property string stationId: ""
 
     allowedOrientations: Orientation.All
 
@@ -66,6 +67,7 @@ Page {
             console.log("line results : " + jsonResult.lines.length)
             pageStack.push(Qt.resolvedUrl("StationLinesPage.qml"), {
                                stationLineList: jsonResult,
+                               stationId: stationId,
                                stationName: stationName
                            })
         }
@@ -188,6 +190,7 @@ Page {
                         var selectedItem = searchResultListModel.get(index)
                         console.log("selected index : "+ index + ", item : " + JSON.stringify(selectedItem))
                         stationName = selectedItem.disassembledName;
+                        stationId = selectedItem.id;
                         getDataBackend(Constants.BACKEND_STUTTGART).getLinesForStation(selectedItem.id);
                     }
                 }
