@@ -189,7 +189,7 @@ Page {
                     onClicked: {
                         var selectedItem = searchResultListModel.get(index)
                         console.log("selected index : "+ index + ", item : " + JSON.stringify(selectedItem))
-                        stationName = selectedItem.disassembledName;
+                        stationName = (selectedItem.disassembledName ? selectedItem.disassembledName : selectedItem.name);
                         stationId = selectedItem.id;
                         getDataBackend(Constants.BACKEND_STUTTGART).getLinesForStation(selectedItem.id);
                     }

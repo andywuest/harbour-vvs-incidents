@@ -46,6 +46,8 @@ function resolveIconForLine(lineName) {
         return "sbahn"
     } else if (containsSubstring(lineName, "R-Bahn")) {
         return "rbahn"
+    } else if (containsSubstring(lineName, "Museumsverkehr")) {
+        return "rbahn"
     } else if (containsSubstring(lineName, "Stadtbahn")) {
         return "ubahn"
     }

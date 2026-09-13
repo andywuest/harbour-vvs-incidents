@@ -26,7 +26,7 @@ ListItem {
 
             IconLabelRow {
                 id: iconLabelRow
-                lineType: Functions.resolveIconForLocation(type)
+                lineType: model.type
                 affectedLines: model.disassembledName ? model.disassembledName : model.name
             }
 
