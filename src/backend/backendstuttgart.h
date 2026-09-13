@@ -33,6 +33,14 @@ public:
   ~BackendStuttgart() override;
 
   Q_INVOKABLE virtual void getIncidents() override;
+  Q_INVOKABLE virtual void searchStation(const QString &searchString);
+  Q_INVOKABLE virtual void getLinesForStation(const QString &stationId);
+  Q_INVOKABLE virtual void getStationPlan(const QString &stationId,
+                                          const QString &stationLineId);
+
+  Q_SIGNAL void searchStationResultAvailable(const QString &reply);
+  Q_SIGNAL void getLinesForStationResultAvailable(const QString &reply);
+  Q_SIGNAL void getStationPlanAvailable(const QString &pdfDownloadLink);
 
 private slots:
   void handleGetIncidentsFinished();

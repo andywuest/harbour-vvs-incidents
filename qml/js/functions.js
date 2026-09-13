@@ -11,19 +11,29 @@ function log(message) {
 function resolveIconForLines(affectedLines) {
     for (var i = 0; i < affectedLines.lines.length; i++) {
         var lineName = affectedLines.lines[i].name;
-        if (containsSubstring(lineName, "Bus")) {
-            return "bus"
-        } else if (containsSubstring(lineName, "Nachtbus")) {
-            return "bus"
-        } else if (containsSubstring(lineName, "Zahnradbahn")) {
-            return "zacke"
-        } else if (containsSubstring(lineName, "S-Bahn")) {
-            return "sbahn"
-        } else if (containsSubstring(lineName, "R-Bahn")) {
-            return "rbahn"
-        } else if (containsSubstring(lineName, "Stadtbahn")) {
-            return "ubahn"
+        var result = resolveIconForLine(lineName);
+        if (result !== "???") {
+            return result;
         }
+    }
+    return "???";
+}
+
+function resolveIconForLine(lineName) {
+    if (containsSubstring(lineName, "Bus")) {
+        return "bus"
+    } else if (containsSubstring(lineName, "Nachtbus")) {
+        return "bus"
+    } else if (containsSubstring(lineName, "Zahnradbahn")) {
+        return "zacke"
+    } else if (containsSubstring(lineName, "S-Bahn")) {
+        return "sbahn"
+    } else if (containsSubstring(lineName, "R-Bahn")) {
+        return "rbahn"
+    } else if (containsSubstring(lineName, "Museumsverkehr")) {
+        return "rbahn"
+    } else if (containsSubstring(lineName, "Stadtbahn")) {
+        return "ubahn"
     }
     return "???";
 }
@@ -44,6 +54,21 @@ function getListOfAffectedLines(affectedLines) {
     return results.join(', ');
 }
 
+function createValidityLabel(validity) {
+    var from = validity.from;
+    var to = validity.to;
+    var label = "";
+    if (containsSubstring(to, "2500")) {
+        to = "";
+    }
+    if (to === "") {
+        label = qsTr("Valid from %1").arg(from);
+    } else {
+        label = qsTr("Valid from %1 until %2").arg(from).arg(to);
+    }
+    return label;
+}
+
 function createAvailabilityLabel(from, to) {
     var label = "";
     if (from === to) {
@@ -56,3 +81,6 @@ function createAvailabilityLabel(from, to) {
     return label;
 }
 
+function calculateVisibleStringLength(value) {
+   return (value !== undefined) ? value.replace(/\s/g, "").length : 0;
+}

@@ -25,6 +25,8 @@ DEFINES += VERSION_NUMBER=\\\"$$(VERSION_NUMBER)\\\"
 DISTFILES += qml/harbour-vvs-incidents.qml \
     qml/components/CoverLoadingColumn.qml \
     qml/components/IconLabelRow.qml \
+    qml/components/StationLineItem.qml \
+    qml/components/StationListItem.qml \
     qml/components/thirdparty/AboutDescription.qml \
     qml/components/thirdparty/AboutIconLabel.qml \
     qml/components/thirdparty/LoadingIndicator.qml \
@@ -34,9 +36,10 @@ DISTFILES += qml/harbour-vvs-incidents.qml \
     qml/pages/AboutPage.qml \
     qml/pages/DetailsPage.qml \
     qml/pages/OverviewPage.qml \
+    qml/pages/StationLinesPage.qml \
+    qml/pages/StationSearchPage.qml \
     qml/pages/icons/github.svg \
     qml/pages/icons/paypal.svg \
-    qml/pages/icons/liberapay.svg \
     qml/js/functions.js \
     qml/js/constants.js \
     qml/icons/vvs_bus.svg \
@@ -44,6 +47,8 @@ DISTFILES += qml/harbour-vvs-incidents.qml \
     qml/icons/vvs_ubahn.svg \
     qml/icons/vvs_rbahn.svg \
     qml/icons/vvs_zacke.svg \
+    qml/icons/vvs_stop.svg \
+    qml/icons/vvs_street.svg \
     rpm/harbour-vvs-incidents.changes.in \
     rpm/harbour-vvs-incidents.changes.run.in \
     rpm/harbour-vvs-incidents.spec \

@@ -81,6 +81,11 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
             }
             MenuItem {
+                //: Overview Page about
+                text: qsTr("Timetable notice")
+                onClicked: pageStack.push(Qt.resolvedUrl("StationSearchPage.qml"))
+            }
+            MenuItem {
                 text: qsTr("Reload Incidents")
                 onClicked: {
                     showLoadingIndicator = true;

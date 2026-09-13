@@ -97,36 +97,82 @@
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="84"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="85"/>
+        <source>Timetable notice</source>
+        <extracomment>Overview Page about</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/OverviewPage.qml" line="89"/>
         <source>Reload Incidents</source>
         <translation>Störungen neu laden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="116"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="121"/>
         <source>Incidents</source>
         <extracomment>OverviewPage page header</extracomment>
         <translation>Störungen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/OverviewPage.qml" line="122"/>
+        <location filename="../qml/pages/OverviewPage.qml" line="127"/>
         <source>Currently there are no incidents to report.</source>
         <translation>Aktuell gibt es keine Störungsmeldungen</translation>
     </message>
 </context>
 <context>
+    <name>StationLinesPage</name>
+    <message>
+        <location filename="../qml/pages/StationLinesPage.qml" line="51"/>
+        <source>Lines</source>
+        <extracomment>StationLinesPage search result header</extracomment>
+        <translation>Linien</translation>
+    </message>
+</context>
+<context>
+    <name>StationSearchPage</name>
+    <message>
+        <location filename="../qml/pages/StationSearchPage.qml" line="115"/>
+        <source>Search Results</source>
+        <extracomment>StationSearchPage search result header</extracomment>
+        <translation>Suchergebnisse</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StationSearchPage.qml" line="122"/>
+        <source>Find your Station...</source>
+        <extracomment>StationSearchPage search result input field</extracomment>
+        <translation>Haltestelle finden</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/StationSearchPage.qml" line="158"/>
+        <source>No results found</source>
+        <extracomment>StationSearchPage no results label</extracomment>
+        <translation>Keine Ergebnisse gefunden</translation>
+    </message>
+</context>
+<context>
     <name>functions</name>
     <message>
-        <location filename="../qml/js/functions.js" line="50"/>
+        <location filename="../qml/js/functions.js" line="65"/>
+        <source>Valid from %1</source>
+        <translation>Gültig ab %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/js/functions.js" line="67"/>
+        <source>Valid from %1 until %2</source>
+        <translation>Gültig von %1 bis %2</translation>
+    </message>
+    <message>
+        <location filename="../qml/js/functions.js" line="75"/>
         <source>On %1</source>
         <translation>Am %1</translation>
     </message>
     <message>
-        <location filename="../qml/js/functions.js" line="52"/>
+        <location filename="../qml/js/functions.js" line="77"/>
         <source>From %1 until further notice</source>
         <translation>Vom %1 bis auf Weiteres</translation>
     </message>
     <message>
-        <location filename="../qml/js/functions.js" line="54"/>
+        <location filename="../qml/js/functions.js" line="79"/>
         <source>From %1 until %2</source>
         <translation>Vom %1 bis %2</translation>
     </message>

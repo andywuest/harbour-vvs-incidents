@@ -36,20 +36,123 @@ BackendStuttgart::~BackendStuttgart() {
 
 void BackendStuttgart::getIncidents() {
   qDebug() << "BackendStuttgart::searchName";
-  // QNetworkReply *reply =
-  // executeGetRequest(QUrl("https://api.jsonbin.io/b/619944150ddbee6f8b0f4e93"));
-  // // bus viele
-  // QNetworkReply *reply =
-  // executeGetRequest(QUrl("https://api.jsonbin.io/b/619e946462ed886f91542d82"));
-  // // einzeln
-//   QNetworkReply *reply =
-//   executeGetRequest(QUrl("https://api.jsonbin.io/b/61db37872362237a3a35140c"));
-//   // zacke
 
   QNetworkReply *reply = executeGetRequest(QUrl(INCIDENTS_VVS_URL));
 
   connectErrorSlot(reply);
   connect(reply, SIGNAL(finished()), this, SLOT(handleGetIncidentsFinished()));
+}
+
+void BackendStuttgart::searchStation(const QString &searchString) {
+  qDebug() << "BackendStuttgart::searchStation";
+
+  QNetworkReply *reply =
+      executeGetRequest(QUrl(QString(STATIONS_VVS_URL).arg(searchString)));
+
+  connectErrorSlot(reply);
+
+  connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+    reply->deleteLater();
+    qDebug() << "return code : "
+             << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
+                    .toString();
+
+    QByteArray searchReply = reply->readAll();
+    QString searchJson = QString(searchReply);
+
+    qDebug() << "result : " << searchJson;
+
+    QJsonArray resultArray;
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(searchJson.toUtf8());
+    if (jsonDocument.isObject()) {
+      QJsonObject rootObject = jsonDocument.object();
+      // QJsonObject stopFindeObject = rootObject["stopFinder"].toObject();
+      QJsonArray locationsArray = rootObject["locations"].toArray();
+
+      foreach (const QJsonValue &locationEntry, locationsArray) {
+        QJsonObject location = locationEntry.toObject();
+        resultArray.push_back(location);
+      }
+    }
+
+    QJsonDocument resultDocument;
+    QJsonObject resultObject;
+    resultObject.insert("locations", resultArray);
+    resultDocument.setObject(resultObject);
+
+    QString dataToString(resultDocument.toJson());
+
+    qDebug() << "result : " << dataToString;
+
+    emit searchStationResultAvailable(dataToString);
+  });
+}
+
+void BackendStuttgart::getLinesForStation(const QString &stationId) {
+  qDebug() << "BackendStuttgart::getLinesForStation";
+  qDebug() << "stationId: " << stationId;
+
+  QNetworkReply *reply =
+      executeGetRequest(QUrl(QString(LINES_FOR_STATION_URL).arg(stationId)));
+
+  connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+    reply->deleteLater();
+    qDebug() << "return code : "
+             << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
+                    .toString();
+
+    QByteArray searchReply = reply->readAll();
+    QString searchJson = QString(searchReply);
+
+    qDebug() << "result : " << searchJson;
+
+    QJsonDocument resultDocument;
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(searchJson.toUtf8());
+
+    if (jsonDocument.isObject()) {
+      QJsonObject rootObject = jsonDocument.object();
+      resultDocument.setObject(rootObject);
+    }
+
+    QString dataToString(resultDocument.toJson());
+    emit getLinesForStationResultAvailable(dataToString);
+  });
+}
+
+void BackendStuttgart::getStationPlan(const QString &stationId,
+                                      const QString &stationLineId) {
+  qDebug() << "BackendStuttgart::getStationPlan";
+  qDebug() << "stationId: " << stationId;
+  qDebug() << "stationLineId: " << stationLineId;
+
+  QNetworkReply *reply = executeGetRequest(QUrl(
+      QString(STATION_LINE_PLAN_JSON_URL)
+          .arg(QString(stationLineId).replace(" ", "+", Qt::CaseInsensitive),
+               QString(stationId).replace(" ", "+", Qt::CaseInsensitive))));
+
+  connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+    reply->deleteLater();
+    qDebug() << "return code : "
+             << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
+                    .toString();
+
+    QByteArray searchReply = reply->readAll();
+    QString searchJson = QString(searchReply);
+
+    qDebug() << "server response: " << searchJson;
+
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(searchJson.toUtf8());
+
+    if (jsonDocument.isObject()) {
+      QJsonObject downloadsObject =
+          jsonDocument.object()["download"].toObject();
+      QString pdfUrlSuffix = downloadsObject["url"].toString();
+      qDebug() << "pdfUrlSuffix : " << pdfUrlSuffix;
+      emit getStationPlanAvailable(QString(DOWNLOAD_URL).arg(pdfUrlSuffix));
+    } else {
+      emit getStationPlanAvailable("{}");
+    }
+  });
 }
 
 void BackendStuttgart::handleGetIncidentsFinished() {
@@ -105,13 +208,14 @@ QString BackendStuttgart::processSearchResult(QByteArray searchReply) {
 
       currentObject.insert(
           "_timestampFormatted",
-          convertToDateTimeFormat(convertTimestampToLocalTimestamp(creationTimestamp, timezone)));
-      currentObject.insert(
-          "_fromFormatted",
-          convertToDateFormat(convertTimestampToLocalTimestamp(fromTimestamp, timezone)));
-      currentObject.insert(
-          "_toFormatted",
-          convertToDateFormat(convertTimestampToLocalTimestamp(toTimestamp, timezone)));
+          convertToDateTimeFormat(
+              convertTimestampToLocalTimestamp(creationTimestamp, timezone)));
+      currentObject.insert("_fromFormatted",
+                           convertToDateFormat(convertTimestampToLocalTimestamp(
+                               fromTimestamp, timezone)));
+      currentObject.insert("_toFormatted",
+                           convertToDateFormat(convertTimestampToLocalTimestamp(
+                               toTimestamp, timezone)));
 
       resultArray.push_back(currentObject);
     }
