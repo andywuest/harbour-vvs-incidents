@@ -9,6 +9,11 @@
 # the git-change-log command provided with Sailfish OS SDK), create a
 # harbour-vvs-incidents.changes.run script to let mb2 run the required commands for you.
 
+* 02.10.2026 Andreas Wüst <andreas.wuest.freelancer@gmail.com> 0.1.1
+
+- minor rendering updates (for corner cases)
+- added / fixed copyright infos
+
 * 13.09.2026 Andreas Wüst <andreas.wuest.freelancer@gmail.com> 0.1.0
 
 - added search and download for timetables for the various stations

@@ -17,7 +17,7 @@ Licensed under GNU GPLv3
 
 ## Translations
 
-Watchlist was translated to several languages. Thanks to all contributors!
+VVS Incidents was translated to the following languages. Thanks to all contributors!
 - German: me :-)
 
 

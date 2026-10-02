@@ -1,4 +1,3 @@
-
 /*
  * harbour-vvs-incidents - Sailfish OS Version
  * Copyright © 2021 Andreas Wüst (andreas.wuest.freelancer@gmail.com)
